@@ -35,3 +35,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Nested clone of this same project (duplicate, safe to delete)
+/portfolio/
