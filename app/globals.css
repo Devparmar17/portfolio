@@ -1,0 +1,318 @@
+@import "tailwindcss";
+
+/* Dark mode is driven by a `class` on <html>, set by next-themes. */
+@custom-variant dark (&:is(.dark *));
+
+/* -------------------------------------------------------------------------- */
+/* DESIGN TOKENS                                                               */
+/* -------------------------------------------------------------------------- */
+
+:root {
+  --radius: 0.5rem;
+
+  --background: #fdfdfd;
+  --foreground: #09090b;
+  --card: #ffffff;
+  --card-foreground: #09090b;
+  --popover: #ffffff;
+  --popover-foreground: #09090b;
+  --primary: #171717;
+  --primary-foreground: #fafafa;
+  --secondary: #f5f5f5;
+  --secondary-foreground: #171717;
+  --muted: #f5f5f5;
+  --muted-foreground: #737373;
+  --accent: #f5f5f5;
+  --accent-foreground: #171717;
+  --destructive: #ef4444;
+  --border: #e5e5e5;
+  --input: #e5e5e5;
+  --ring: #171717;
+}
+
+.dark {
+  --background: #0c0c0e;
+  --foreground: #ededed;
+  --card: #111113;
+  --card-foreground: #ededed;
+  --popover: #111113;
+  --popover-foreground: #ededed;
+  --primary: #ededed;
+  --primary-foreground: #0c0c0e;
+  --secondary: #1a1a1d;
+  --secondary-foreground: #ededed;
+  --muted: #1a1a1d;
+  --muted-foreground: #a1a1aa;
+  --accent: #1a1a1d;
+  --accent-foreground: #ededed;
+  --destructive: #7f1d1d;
+  --border: #222225;
+  --input: #222225;
+  --ring: #d4d4d8;
+}
+
+/* -------------------------------------------------------------------------- */
+/* TAILWIND THEME MAPPING                                                      */
+/* -------------------------------------------------------------------------- */
+
+@theme inline {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo,
+    monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+/* -------------------------------------------------------------------------- */
+/* BASE                                                                        */
+/* -------------------------------------------------------------------------- */
+
+@layer base {
+  * {
+    border-color: var(--border);
+    outline-color: color-mix(in oklab, var(--ring) 50%, transparent);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Clears the sticky header when jumping to an anchor. */
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    /*
+     * `clip`, not `hidden`: `overflow: hidden` would turn <body> into a
+     * scroll container and break the sticky header. `clip` trims the few
+     * decorative pixels that sit outside the column without doing that.
+     */
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background-color: color-mix(in oklab, var(--primary) 20%, transparent);
+  }
+
+  /* Visible, consistent keyboard focus everywhere. */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* BRAND COLOURS                                                               */
+/* -------------------------------------------------------------------------- */
+
+/*
+ * Each icon carries its own brand colour, revealed on hover. Declared as CSS
+ * variables rather than in JS so the monochrome marks (Next.js, Vercel,
+ * GitHub) can flip with the theme.
+ */
+:root {
+  --brand-neutral: #09090b;
+
+  --brand-linkedin: #0a66c2;
+  --brand-behance: #1769ff;
+  --brand-instagram: #e1306c;
+  --brand-dribbble: #ea4c89;
+  --brand-email: #ea4335;
+  --brand-external: #3b82f6;
+  --brand-live: #22c55e;
+
+  --brand-figma: #f24e1e;
+  --brand-html: #e34f26;
+  --brand-css: #1572b6;
+  --brand-javascript: #eab308;
+  --brand-python: #3776ab;
+  --brand-cpp: #00599c;
+  --brand-vscode: #007acc;
+  --brand-visualstudio: #8b5cf6;
+  --brand-git: #f05032;
+
+  --brand-react: #61dafb;
+  --brand-tailwind: #06b6d4;
+  --brand-framer: #0055ff;
+  --brand-lucide: #f56565;
+
+  --brand-claude: #d97757;
+  --brand-gemini: #4285f4;
+  --brand-google: #4285f4;
+  --brand-ibm: #0f62fe;
+  --brand-coursera: #0056d2;
+
+  /* Monochrome marks track the theme. */
+  --brand-nextjs: var(--brand-neutral);
+  --brand-vercel: var(--brand-neutral);
+  --brand-github: var(--brand-neutral);
+}
+
+.dark {
+  --brand-neutral: #fafafa;
+  --brand-javascript: #f7df1e;
+  --brand-visualstudio: #a78bfa;
+}
+
+/*
+ * Unlayered on purpose: plain CSS outranks anything in Tailwind's
+ * `utilities` layer, so this reliably wins over the `group-hover:text-*`
+ * classes already on the icon wrappers.
+ */
+.brand-icon {
+  transition:
+    color 250ms ease,
+    filter 250ms ease,
+    transform 250ms ease;
+}
+
+/*
+ * Hover scopes are explicit — `.brand-hover` marks the element whose hover
+ * lights up the icons inside it. Deliberately not keyed to Tailwind's
+ * `.group`, which would make one card hover fire every nested icon at once.
+ */
+.brand-icon:hover,
+a:hover .brand-icon,
+button:hover .brand-icon,
+.brand-hover:hover .brand-icon {
+  color: var(--brand, var(--primary));
+  filter: drop-shadow(
+    0 0 10px color-mix(in oklab, var(--brand, var(--primary)) 45%, transparent)
+  );
+  transform: scale(1.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-icon:hover,
+  a:hover .brand-icon,
+  button:hover .brand-icon,
+  .brand-hover:hover .brand-icon {
+    transform: none;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* NAVBAR WORDMARK                                                             */
+/* -------------------------------------------------------------------------- */
+
+/*
+ * A slow highlight travelling left to right across "Dev Parmar". The text
+ * itself is painted by a gradient clipped to the glyphs, so the sweep reads
+ * as a soft sheen rather than a moving block.
+ */
+.wordmark {
+  color: var(--foreground);
+}
+
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .wordmark {
+    --wordmark-base: color-mix(in oklab, var(--foreground) 70%, transparent);
+
+    background-image: linear-gradient(
+      100deg,
+      var(--wordmark-base) 0%,
+      var(--wordmark-base) 38%,
+      var(--foreground) 50%,
+      var(--wordmark-base) 62%,
+      var(--wordmark-base) 100%
+    );
+    background-size: 250% 100%;
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: wordmark-sweep 6s linear infinite;
+  }
+}
+
+/* Travels left to right: the window moves forward through a wider gradient. */
+@keyframes wordmark-sweep {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wordmark {
+    animation: none;
+    background-image: none;
+    color: var(--foreground);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* UTILITIES                                                                   */
+/* -------------------------------------------------------------------------- */
+
+@utility fade-mask-y {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 30%,
+    #000 70%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 30%,
+    #000 70%,
+    transparent 100%
+  );
+}
+
+/* Skip-to-content link: parked off-screen until it receives focus. */
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  transform: translateY(-300%);
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+/* -------------------------------------------------------------------------- */
+/* MOTION PREFERENCES                                                          */
+/* -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
