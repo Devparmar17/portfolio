@@ -8,7 +8,7 @@ import { navLinks } from "@/data/portfolio";
 import { cn, scrollToSection } from "@/lib/utils";
 
 /**
- * The ⌘K jump-to-section dialog. Small on purpose: it navigates the page and
+ * The jump-to-section dialog behind the navbar search box. Small on purpose: it navigates the page and
  * nothing else, so there is no index to build or search library to ship.
  */
 export default function CommandPalette({ open, onOpenChange }) {

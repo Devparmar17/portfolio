@@ -1,12 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, BadgeCheck, Download } from "lucide-react";
 
 import { profile } from "@/data/portfolio";
 import { scrollToSection } from "@/lib/utils";
 import Button from "./ui/Button";
+import MindPhoto from "./ui/MindPhoto";
 import Section from "./ui/Section";
 import SocialLinks from "./ui/SocialLinks";
 
@@ -38,23 +38,11 @@ export default function Hero() {
         <div className="relative w-full flex flex-col md:flex-row rounded-3xl border border-border/80 bg-card overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
           {/* Portrait panel */}
           <div className="relative w-full md:w-[40%] py-12 md:py-16 flex items-center justify-center shrink-0 bg-muted/10 border-b md:border-b-0 md:border-r border-border/50">
-            <motion.div className="relative z-10" {...enter({ scale: 0.9 }, 0.15)}>
-              <div className="relative flex size-48 md:size-56 shrink-0 overflow-hidden rounded-full border border-border/50 bg-background shadow-xl ring-4 ring-background/50">
-                {profile.avatar ? (
-                  <Image
-                    src={profile.avatar}
-                    alt={`Portrait of ${profile.name}`}
-                    fill
-                    sizes="(max-width: 768px) 12rem, 14rem"
-                    className="object-cover"
-                    priority
-                  />
-                ) : (
-                  <span className="flex size-full items-center justify-center text-5xl font-semibold bg-muted text-muted-foreground select-none">
-                    {profile.initials}
-                  </span>
-                )}
-              </div>
+            <motion.div
+              className="relative z-10 flex w-full justify-center px-6"
+              {...enter({ scale: 0.95 }, 0.15)}
+            >
+              <MindPhoto className="max-w-[250px] md:max-w-[300px]" />
             </motion.div>
           </div>
 

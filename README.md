@@ -43,8 +43,6 @@ than guessed at. Each one is marked with a `TODO` in the data file:
 | Project covers | `projects[].cover` | Cards show a blueprint plate + glyph |
 | Education campus locations | `education[].location` | The location line is omitted |
 | Certificate dates / credential URLs | `certifications[].date`, `.url` | "Issued …" and "Verify" are omitted |
-| Portrait photo | `profile.avatar` | The hero shows the "DP" monogram |
-| Deployed URL | `siteUrl` | Used for canonical + OG tags — set after deploy |
 
 Empty values are a supported state, not a broken one. Fill one in and the
 matching UI appears automatically. There is deliberately no `github` field on
@@ -70,7 +68,7 @@ dead link — the button simply isn't rendered.
 | Apna PG | Live | Live app + Behance |
 | Nescafé | Case study | Behance + local board |
 | Competitive App Analysis — 10 Laws of UX | Case study | Local board |
-| KIDD | Case study | Behance |
+| Kid Cab Booking App | Case study | Behance |
 | Campus Shoes | Case study | Behance |
 | History & Culture Map | Case study | In-site detail |
 
@@ -97,18 +95,34 @@ script prints the output dimensions — they should match `fullWidth` /
 Progressive JPEG rather than WebP because WebP caps at 16,383px per side and
 the NESCAFÉ board is taller than that.
 
-### Adding a photo
+### Hero photo
 
-Drop a square image at `public/images/profile.jpg`, then set:
+The hero shows your cut-out photo on a round backdrop, with a thought bubble
+above. Skills from the `workflow` list in `data/portfolio.js` pass through the
+bubble one at a time:
 
-```js
-avatar: "/images/profile.jpg",
+- **Design skills** — the bubble reads "Thinking", with a wireframe, lightbulb
+  and pencil around your head.
+- **Programming skills** — it reads "Computing", with code panels instead.
+
+The backdrop, bubble border and doodles take the brand colour of the skill in
+mind (Figma orange, JavaScript yellow, Python blue, and so on). Skills without
+a brand of their own use Figma orange while thinking and VS Code blue while
+computing. The photo itself is never altered.
+
+To add or replace the photo (it needs a transparent background):
+
+```bash
+node scripts/prepare-photo.mjs "C:/path/to/photo.png"
 ```
+
+That trims the empty space around you and writes `public/images/profile.png`.
 
 ### Adding project covers
 
 Put images in `public/images/projects/` (1200 × 675 works well) and point at
-them from `projects[].image`.
+them from `projects[].cover`. A cover image replaces the drawn cover art on
+that card.
 
 ---
 
@@ -138,8 +152,8 @@ On Vercel, add the same variable under **Settings → Environment Variables**.
 1. Push this folder to a Git repository.
 2. Import it at [vercel.com/new](https://vercel.com/new) — the framework is
    detected automatically, no build settings needed.
-3. Set `siteUrl` in `data/portfolio.js` to your real domain so canonical and
-   Open Graph URLs are correct.
+3. Nothing to set for URLs — `siteUrl` reads Vercel's production URL at build
+   time. Add `NEXT_PUBLIC_SITE_URL` if you attach a custom domain.
 4. Optionally add `NEXT_PUBLIC_FORM_ENDPOINT`.
 
 ---
@@ -151,13 +165,13 @@ app/
   layout.js              Fonts, SEO metadata, JSON-LD, theme provider
   page.js                Section composition
   globals.css            Design tokens + Tailwind theme mapping
-  icon.svg               Favicon
+  icon.png, apple-icon.png  Favicons, from the DEV logo
   opengraph-image.js     Generated OG/Twitter card
   sitemap.js, robots.js  SEO routes
 
 components/
-  Navbar.jsx             Sticky header, scroll spy, ⌘K palette, mobile menu
-  Hero.jsx               Profile card
+  Navbar.jsx             Sticky header, DEV logo + name, scroll spy, search, mobile menu
+  Hero.jsx               Profile card: photo with skills in mind
   About.jsx              01 — intro + toolkit grid
   Skills.jsx             02 — grouped skills
   Experience.jsx         03 — timeline
@@ -165,12 +179,13 @@ components/
   Education.jsx          05 — degrees
   Certifications.jsx     06 — accolades
   Contact.jsx            07 — details + validated form
-  Footer.jsx             Colophon + sign-off
+  Footer.jsx             Sign-off + copyright
   providers/
     ThemeProvider.jsx    next-themes wrapper
   ui/                    Section, SectionHeading, SectionDivider, GridOverlay,
                          Reveal, Button, Badge, TechIcon, SocialLinks,
-                         ProjectCard, ThemeToggle, CommandPalette, MobileNav
+                         ProjectCard, ProjectCover, CaseStudyModal, LogoMark,
+                         MindPhoto, ThemeToggle, CommandPalette, MobileNav
 
 data/portfolio.js        ← all content
 lib/                     cn(), scroll helpers, useActiveSection hook
@@ -231,11 +246,12 @@ persists in `localStorage`.
 
 ---
 
-## Keyboard shortcuts
+## Search
+
+The navbar search box (desktop) opens a jump-to-section palette. Inside it:
 
 | Keys | Action |
 | --- | --- |
-| `⌘K` / `Ctrl+K` | Open the jump-to-section palette |
 | `↑` `↓` | Move through results |
 | `Enter` | Jump to the selected section |
 | `Esc` | Close the palette or mobile menu |

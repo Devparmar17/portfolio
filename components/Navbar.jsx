@@ -7,6 +7,7 @@ import { navLinks, profile } from "@/data/portfolio";
 import { useActiveSection } from "@/lib/useActiveSection";
 import { cn, scrollToSection } from "@/lib/utils";
 import Button from "./ui/Button";
+import LogoMark from "./ui/LogoMark";
 import Section from "./ui/Section";
 import CommandPalette from "./ui/CommandPalette";
 import MobileNav from "./ui/MobileNav";
@@ -29,18 +30,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // ⌘K / Ctrl+K opens the section switcher.
-  useEffect(() => {
-    const onKeyDown = (event) => {
-      if (event.key.toLowerCase() === "k" && (event.metaKey || event.ctrlKey)) {
-        event.preventDefault();
-        setPaletteOpen((open) => !open);
-      }
-    };
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
-  }, []);
-
   const handleNavClick = (event, href) => {
     event.preventDefault();
     scrollToSection(href);
@@ -61,9 +50,11 @@ export default function Navbar() {
             href="#home"
             onClick={(e) => handleNavClick(e, "#home")}
             aria-label={`${profile.name} — back to top`}
-            className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="flex items-center gap-2.5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
-            <span className="wordmark font-semibold text-sm tracking-tight">
+            <LogoMark className="logo-sheen h-7 md:h-8" />
+            <span aria-hidden="true" className="h-4 w-px bg-border" />
+            <span className="wordmark wordmark-follow font-semibold text-sm tracking-tight">
               {profile.name}
             </span>
           </a>
@@ -111,9 +102,6 @@ export default function Navbar() {
             >
               <Search className="w-4 h-4 shrink-0 opacity-70" aria-hidden="true" />
               <span className="text-sm flex-1 text-left opacity-80">Search...</span>
-              <kbd className="inline-flex h-5 items-center gap-1 rounded border border-border/50 bg-background/50 px-1.5 font-sans text-[10px] font-medium text-muted-foreground">
-                <span className="text-xs">⌘</span>K
-              </kbd>
             </button>
 
             <div className="flex items-center gap-1.5">

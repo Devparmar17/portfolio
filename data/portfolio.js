@@ -46,10 +46,10 @@ export const profile = {
   summarySecondary:
     "I currently work on projects spanning travel, culture, transportation, and accommodation — each one starting with real user problems and ending in an interface that gets out of the way.",
   /**
-   * Drop a square photo at /public/images/profile.jpg and set this to
-   * "/images/profile.jpg". Until then the hero shows your initials.
+   * Cut-out photo shown in the hero. Generate it from the original with
+   * `node scripts/prepare-photo.mjs "<photo.png>"`.
    */
-  avatar: "",
+  photo: "/images/profile.png",
   resume: "/Dev-Parmar-Resume.pdf",
 };
 
@@ -116,6 +116,69 @@ export const coreTools = [
   { name: "Visual Studio", icon: "visualstudio" },
   { name: "Claude", icon: "claude" },
   { name: "Google Gemini", icon: "gemini" },
+];
+
+/**
+ * The skills that pass through the hero bubble above Dev's photo, one at a time.
+ *
+ * Every skill listed anywhere in the portfolio appears here exactly once.
+ * `mode` sets what the hero shows while that stage's skills appear: "think"
+ * (Thinking, with design doodles) for research and design, "build"
+ * (Computing, with code panels) for code and tooling. `icon` maps to a glyph
+ * in components/ui/TechIcon.jsx, and its brand colour tints the scene.
+ */
+export const workflow = [
+  {
+    id: "think",
+    label: "Think",
+    verb: "I think",
+    mode: "think",
+    caption: "Understanding people before pixels.",
+    skills: [
+      { name: "User Research", icon: "research" },
+      { name: "Usability Testing", icon: "usability" },
+      { name: "User Flows", icon: "flow" },
+    ],
+  },
+  {
+    id: "design",
+    label: "Design",
+    verb: "I design",
+    mode: "think",
+    caption: "Shaping ideas into interfaces.",
+    skills: [
+      { name: "Wireframing", icon: "wireframe" },
+      { name: "Prototyping", icon: "prototype" },
+      { name: "Figma", icon: "figma" },
+    ],
+  },
+  {
+    id: "code",
+    label: "Code",
+    verb: "I code",
+    mode: "build",
+    caption: "Turning designs into working code.",
+    skills: [
+      { name: "HTML", icon: "html" },
+      { name: "CSS", icon: "css" },
+      { name: "JavaScript", icon: "javascript" },
+      { name: "Python", icon: "python" },
+      { name: "C++", icon: "cpp" },
+    ],
+  },
+  {
+    id: "build",
+    label: "Build",
+    verb: "I build",
+    mode: "build",
+    caption: "Shipping with modern tools and AI.",
+    skills: [
+      { name: "VS Code", icon: "vscode" },
+      { name: "Visual Studio", icon: "visualstudio" },
+      { name: "Claude", icon: "claude" },
+      { name: "Google Gemini", icon: "gemini" },
+    ],
+  },
 ];
 
 /* -------------------------------------------------------------------------- */

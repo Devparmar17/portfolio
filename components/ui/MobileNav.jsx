@@ -6,6 +6,7 @@ import { ArrowUpRight, X } from "lucide-react";
 
 import { contact, navLinks, profile } from "@/data/portfolio";
 import { cn, scrollToSection } from "@/lib/utils";
+import LogoMark from "./LogoMark";
 import SocialLinks from "./SocialLinks";
 
 const EASE = [0.22, 1, 0.36, 1];
@@ -70,8 +71,11 @@ export default function MobileNav({ open, onOpenChange, active }) {
             transition={{ duration: reduceMotion ? 0.15 : 0.3, ease: EASE }}
           >
             <div className="flex items-center justify-between h-14 px-5 border-b border-border/60 shrink-0">
-              <span className="font-semibold text-sm tracking-tight text-foreground">
-                {profile.name}
+              <span className="flex items-center gap-2.5">
+                <LogoMark className="h-6" />
+                <span className="font-semibold text-sm tracking-tight text-foreground">
+                  {profile.name}
+                </span>
               </span>
               <button
                 type="button"

@@ -264,6 +264,209 @@ button:hover .brand-icon,
 }
 
 /* -------------------------------------------------------------------------- */
+/* PORTRAIT                                                                    */
+/* -------------------------------------------------------------------------- */
+
+/*
+ * The hero: Dev's photo with his skills passing through the bubble above.
+ * Design skills read "Thinking" with design doodles; programming skills read
+ * "Computing" with code panels. --mind-accent is the brand colour of the
+ * skill in mind, and every tinted shape eases to the next colour. Only
+ * transform and opacity keyframes, all paused off screen (.is-paused).
+ */
+.mind-hero .mind-tint {
+  transition:
+    fill 600ms ease,
+    stroke 600ms ease,
+    color 600ms ease,
+    background-color 600ms ease,
+    border-color 600ms ease;
+}
+
+/* Thinking and computing doodles cross-fade. */
+.mind-hero .mind-layer {
+  transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mind-hero[data-mode="think"] .mind-build,
+.mind-hero[data-mode="build"] .mind-think {
+  opacity: 0;
+}
+
+/* A small lift of the photo on hover. */
+.mind-hero .mind-photo {
+  transform-origin: 50% 100%;
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mind-hero:hover .mind-photo {
+  transform: scale(1.02);
+}
+
+.mind-float {
+  animation: mind-float 5s ease-in-out infinite;
+}
+
+.mind-pulse {
+  animation: mind-pulse 2.4s ease-in-out infinite;
+}
+
+.mind-dot {
+  animation: mind-dot 1.6s ease-in-out infinite;
+}
+
+.mind-type {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: mind-type 2.8s ease-out infinite;
+}
+
+.mind-hero.is-paused,
+.mind-hero.is-paused * {
+  animation-play-state: paused !important;
+}
+
+@keyframes mind-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes mind-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes mind-dot {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes mind-type {
+  0% {
+    transform: scaleX(0);
+    opacity: 1;
+  }
+  40%,
+  85% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mind-hero .mind-tint,
+  .mind-hero .mind-layer,
+  .mind-hero .mind-photo {
+    transition: none;
+  }
+
+  .mind-hero:hover .mind-photo {
+    transform: none;
+  }
+
+  .mind-hero,
+  .mind-hero * {
+    animation: none !important;
+  }
+}
+
+/* The skill currently in the spotlight shows its brand colour at rest. */
+.brand-lit .brand-icon {
+  color: var(--brand, var(--primary));
+}
+
+/* -------------------------------------------------------------------------- */
+/* LOGO                                                                        */
+/* -------------------------------------------------------------------------- */
+
+/*
+ * The DEV mark from the uploaded artwork, used as a mask and painted with the
+ * text colour: exact shape, theme-aware. `aspect-ratio` is the artwork's own
+ * (640 x 582), so setting a height can never distort it.
+ */
+.logo-mark {
+  display: inline-block;
+  flex-shrink: 0;
+  aspect-ratio: 640 / 582;
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@supports (mask-image: none) or (-webkit-mask-image: none) {
+  .logo-mark {
+    --wordmark-base: color-mix(in oklab, var(--foreground) 70%, transparent);
+
+    background-color: var(--foreground);
+    -webkit-mask: url("/brand/dev-logo-mark.png") center / contain no-repeat;
+    mask: url("/brand/dev-logo-mark.png") center / contain no-repeat;
+  }
+
+  /*
+   * In the navbar the logo carries the same sheen as the wordmark, so the
+   * highlight crosses the mark and then the name as one lockup.
+   */
+  .logo-mark.logo-sheen {
+    background-color: transparent;
+    background-image: linear-gradient(
+      100deg,
+      var(--wordmark-base) 0%,
+      var(--wordmark-base) 38%,
+      var(--foreground) 50%,
+      var(--wordmark-base) 62%,
+      var(--wordmark-base) 100%
+    );
+    background-size: 250% 100%;
+    background-repeat: no-repeat;
+    animation: wordmark-sweep 6s linear infinite;
+  }
+}
+
+/* The name picks the highlight up just after it leaves the logo. */
+.wordmark.wordmark-follow {
+  animation-delay: 0.6s;
+}
+
+a:hover .logo-mark {
+  transform: translateY(-1px) scale(1.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-mark {
+    transition: none;
+  }
+
+  .logo-mark.logo-sheen {
+    animation: none;
+    background-image: none;
+    background-color: var(--foreground);
+  }
+
+  a:hover .logo-mark {
+    transform: none;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
 /* UTILITIES                                                                   */
 /* -------------------------------------------------------------------------- */
 
