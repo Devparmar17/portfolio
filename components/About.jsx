@@ -5,7 +5,7 @@ import TechIcon from "./ui/TechIcon";
 
 export default function About() {
   return (
-    <Section id="about" containerClassName="py-24 md:py-32">
+    <Section id="about" containerClassName="py-16 md:py-24">
       <div className="relative z-10 w-full max-w-5xl mx-auto">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
           {/* Copy */}

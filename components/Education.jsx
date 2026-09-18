@@ -8,7 +8,7 @@ import Badge from "./ui/Badge";
 
 export default function Education() {
   return (
-    <Section id="education" containerClassName="py-24">
+    <Section id="education" containerClassName="py-16 md:py-20">
       <div className="flex flex-col gap-12 relative z-10 w-full max-w-5xl mx-auto">
         <SectionHeading
           index="05"

@@ -104,7 +104,7 @@ export default function CaseStudyModal({ project, onClose }) {
             {/* Sticky bar keeps the close button reachable down a long board. */}
             <div className="sticky top-0 z-20 flex items-center justify-between gap-4 h-14 px-5 md:px-8 border-b border-border/60 bg-card/90 backdrop-blur-md">
               <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground truncate">
-                {project.type === "live" ? "Live App" : "Case Study"}
+                {project.type === "live" ? "Demo App" : "Case Study"}
                 <span className="mx-2 opacity-40">/</span>
                 {project.title}
               </span>
@@ -158,7 +158,7 @@ export default function CaseStudyModal({ project, onClose }) {
                         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--brand-live)] opacity-70" />
                         <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--brand-live)]" />
                       </span>
-                      Live App
+                      Demo App
                       <ArrowUpRight
                         className="brand-icon w-4 h-4"
                         aria-hidden="true"

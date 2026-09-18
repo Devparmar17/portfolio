@@ -7,7 +7,7 @@ import TechIcon from "./ui/TechIcon";
 
 export default function Skills() {
   return (
-    <Section id="skills" containerClassName="py-24">
+    <Section id="skills" containerClassName="py-16 md:py-20">
       <div className="flex flex-col gap-12 relative z-10 w-full max-w-5xl mx-auto">
         <SectionHeading
           index="02"

@@ -136,7 +136,7 @@ export default function Contact() {
   };
 
   return (
-    <Section id="contact" containerClassName="py-24">
+    <Section id="contact" containerClassName="py-16 md:py-20">
       <div className="flex flex-col gap-12 relative z-10 w-full max-w-5xl mx-auto">
         <SectionHeading
           index="07"
@@ -228,25 +228,6 @@ export default function Contact() {
               noValidate
               className="relative h-full flex flex-col gap-5 p-6 md:p-8 rounded-2xl border border-border/80 bg-card shadow-sm overflow-hidden"
             >
-              {/* The side line traces down the card as the message goes out. */}
-              <AnimatePresence>
-                {sentCount > 0 && status === "success" ? (
-                  <motion.span
-                    key={sentCount}
-                    aria-hidden="true"
-                    className="absolute left-0 inset-y-6 w-px origin-top bg-linear-to-b from-transparent via-[var(--brand-live)] to-transparent"
-                    initial={reduceMotion ? { opacity: 0 } : { scaleY: 0, opacity: 0 }}
-                    animate={
-                      reduceMotion
-                        ? { opacity: 0.5 }
-                        : { scaleY: 1, opacity: [0, 1, 0.45] }
-                    }
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: reduceMotion ? 0.2 : 1.1, ease: [0.22, 1, 0.36, 1] }}
-                  />
-                ) : null}
-              </AnimatePresence>
-
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <Field id="name" label="Name" error={errors.name}>
                   <input
@@ -386,7 +367,7 @@ export default function Contact() {
                     </span>
                   ) : (
                     <span className="text-muted-foreground/60">
-                      I usually reply within a couple of days.
+                      I respond as soon as possible.
                     </span>
                   )}
                 </p>

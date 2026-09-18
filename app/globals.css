@@ -502,6 +502,32 @@ a:hover .logo-mark {
 }
 
 /* -------------------------------------------------------------------------- */
+/* CERTIFICATION TILE                                                          */
+/* -------------------------------------------------------------------------- */
+
+/*
+ * Washes the issuer tile in the issuer's own colour, so IBM blue or Coursera
+ * blue reads at a glance instead of a grey square holding a small coloured
+ * mark. `--cert-brand` is set per card in Certifications.jsx.
+ */
+.cert-tile {
+  background-color: color-mix(
+    in oklab,
+    var(--cert-brand, var(--muted-foreground)) 12%,
+    transparent
+  );
+  transition: background-color 300ms ease;
+}
+
+.group:hover .cert-tile {
+  background-color: color-mix(
+    in oklab,
+    var(--cert-brand, var(--muted-foreground)) 22%,
+    transparent
+  );
+}
+
+/* -------------------------------------------------------------------------- */
 /* MOTION PREFERENCES                                                          */
 /* -------------------------------------------------------------------------- */
 

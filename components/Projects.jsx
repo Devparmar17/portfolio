@@ -12,7 +12,7 @@ import CaseStudyModal from "./ui/CaseStudyModal";
 
 /** Maps a filter label onto the project `type` it selects. */
 const FILTER_TYPE = {
-  "Live Apps": "live",
+  "Demo Apps": "live",
   "Case Studies": "case-study",
 };
 
@@ -28,7 +28,7 @@ export default function Projects() {
   const closeDetail = useCallback(() => setActive(null), []);
 
   return (
-    <Section id="projects" containerClassName="py-24">
+    <Section id="projects" containerClassName="py-16 md:py-20">
       <div className="flex flex-col gap-12 relative z-10 w-full max-w-5xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
           <SectionHeading

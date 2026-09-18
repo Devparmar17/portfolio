@@ -8,7 +8,7 @@ export default function SectionDivider({ patternId }) {
   return (
     <div
       aria-hidden="true"
-      className="w-full h-24 relative shrink-0 pointer-events-none flex items-center justify-center"
+      className="w-full h-12 relative shrink-0 pointer-events-none flex items-center justify-center"
     >
       <div className="absolute inset-0 w-full max-w-7xl mx-auto h-full border-x border-border/40" />
 

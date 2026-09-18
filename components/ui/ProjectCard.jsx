@@ -48,7 +48,7 @@ function ProjectMedia({ project }) {
           variant="category"
           className="bg-background/90 backdrop-blur-sm shadow-sm"
         >
-          {isLive ? "Live App" : "Case Study"}
+          {isLive ? "Demo App" : "Case Study"}
         </Badge>
 
         {isLive ? (
@@ -73,7 +73,7 @@ function ProjectMedia({ project }) {
 /**
  * Call-to-action rules, derived entirely from the data:
  *
- *   liveUrl        → "● Live App ↗"        (primary, opens the running app)
+ *   liveUrl        → "● Demo App ↗"        (primary, opens the running app)
  *   behanceUrl     → "View Case Study ↗"   (opens the Behance gallery)
  *   no behanceUrl  → "View Case Study ↗"   (opens the in-site detail view)
  *
@@ -137,7 +137,7 @@ export default function ProjectCard({ project, onOpenDetail }) {
               className="inline-flex items-center justify-center gap-2 h-10 px-5 rounded-full bg-foreground text-background text-sm font-semibold shadow-sm transition-all duration-200 hover:bg-foreground/90 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               <LiveDot />
-              Live App
+              Demo App
               <ArrowUpRight className="brand-icon w-4 h-4" aria-hidden="true" />
               <span className="sr-only">— opens {project.title} in a new tab</span>
             </a>

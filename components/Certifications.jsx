@@ -16,7 +16,7 @@ const LOGOS = {
 
 export default function Certifications() {
   return (
-    <Section containerClassName="py-24">
+    <Section containerClassName="py-16 md:py-20">
       <div className="flex flex-col gap-12 relative z-10 w-full max-w-5xl mx-auto">
         <SectionHeading
           index="06"
@@ -38,8 +38,9 @@ export default function Certifications() {
               <article className="group brand-hover relative h-full flex flex-col p-6 md:p-8 rounded-2xl bg-card border border-border/80 transition-all duration-300 hover:shadow-md hover:border-border hover:-translate-y-1">
                 <div className="mb-6 flex justify-between items-start gap-3">
                   <span
-                    className="w-12 h-12 rounded-xl bg-muted/40 group-hover:bg-primary/10 transition-colors duration-300 flex items-center justify-center shrink-0"
+                    className="cert-tile w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
                     style={{
+                      "--cert-brand": `var(--brand-${cert.brand}, var(--muted-foreground))`,
                       color: `var(--brand-${cert.brand}, var(--muted-foreground))`,
                     }}
                   >

@@ -265,14 +265,14 @@ export const experience = [
 /* PROJECTS                                                                    */
 /* -------------------------------------------------------------------------- */
 
-export const projectFilters = ["All", "Live Apps", "Case Studies"];
+export const projectFilters = ["All", "Demo Apps", "Case Studies"];
 
 /**
  * Project shape
  * -------------
  * `type`        "live" for a working application, "case-study" for UX/design
  *               work. Drives the call to action — nothing else.
- * `liveUrl`     Real, working URL only. Blank hides the "Live App" button.
+ * `liveUrl`     Real, working URL only. Blank hides the "Demo App" button.
  * `behanceUrl`  Real Behance gallery URL. When present, "View Case Study ↗"
  *               opens it; when blank, that button opens the in-site detail
  *               view instead.
@@ -324,7 +324,7 @@ export const projects = [
     subtitle: "PG-Finding Platform",
     type: "live",
     role: "Working Product / Live Application",
-    category: "UX Research • Product Design • Live App",
+    category: "UX Research • Product Design • Demo App",
     featured: true,
     status: "",
     icon: "home",
