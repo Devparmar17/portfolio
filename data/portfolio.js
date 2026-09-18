@@ -75,7 +75,7 @@ export const socials = [
     label: "LinkedIn",
     url: "https://www.linkedin.com/in/devparmar17/",
   },
-  { id: "behance", label: "Behance", url: "" }, // TODO: add your Behance profile URL
+  { id: "behance", label: "Behance", url: "https://www.behance.net/devparmar28" },
   { id: "email", label: "Email", url: `mailto:${contact.email}` },
 ];
 
@@ -556,7 +556,7 @@ export const certifications = [
     brand: "google",
     monogram: "GOOG",
     date: "",
-    url: "",
+    url: "https://coursera.org/share/12dfae26c9dfe8614fd07a22e324f557",
   },
   {
     title: "IBM UI/UX Designer",
@@ -564,7 +564,15 @@ export const certifications = [
     brand: "ibm",
     monogram: "IBM",
     date: "",
-    url: "",
+    url: "https://coursera.org/share/63627a06353379e2e9f31a79c5164a1f",
+  },
+  {
+    title: "Generative AI: Introduction and Applications",
+    issuer: "IBM",
+    brand: "ibm",
+    monogram: "IBM",
+    date: "",
+    url: "https://coursera.org/share/676efed9dc9f82d01ff50e021e7e9963",
   },
   {
     title: "Google AI Essentials",
@@ -580,7 +588,7 @@ export const certifications = [
     brand: "google",
     monogram: "GOOG",
     date: "",
-    url: "",
+    url: "https://coursera.org/share/f6e461e2ec98e9c270d810215e30e911",
   },
   {
     title: "Programming for Everybody (Python)",
@@ -588,7 +596,7 @@ export const certifications = [
     brand: "coursera",
     monogram: "UMICH",
     date: "",
-    url: "",
+    url: "https://www.coursera.org/account/accomplishments/verify/UAJUTN9AA5ZT",
   },
 ];
 

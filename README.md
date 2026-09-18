@@ -128,22 +128,38 @@ that card.
 
 ## Contact form
 
-The form validates on the client, then:
+Messages are delivered by email through [Resend](https://resend.com).
 
-- **With `NEXT_PUBLIC_FORM_ENDPOINT` set** — POSTs `{ name, email, message }`
-  as JSON to that URL. Works with Formspree, a Resend-backed API route, or
-  anything else that accepts JSON.
-- **With nothing set** (the default) — opens the visitor's mail client with
-  the message pre-filled, addressed to you.
+The form validates in the browser, then POSTs to `app/api/contact/route.js`.
+That route runs on the server, so `RESEND_API_KEY` is never sent to the
+browser. It validates again, drops bot submissions via a hidden honeypot
+field, throttles to 5 messages per IP per 10 minutes, and sends the email with
+`replyTo` set to the visitor — so replying in your mail client answers them.
 
-To wire up Formspree:
+The visitor sees success **only** when the email service has accepted the
+message. If anything fails they see "Something went wrong. Please try again."
+
+### Setting it up
 
 ```bash
 cp .env.example .env.local
-# then set NEXT_PUBLIC_FORM_ENDPOINT=https://formspree.io/f/xxxxxxx
+# then paste a key from https://resend.com/api-keys into RESEND_API_KEY
 ```
 
-On Vercel, add the same variable under **Settings → Environment Variables**.
+The default sender is Resend's shared test address, which can only deliver to
+the address that owns the Resend account — so sign up with the inbox you want
+the messages in, and it works with no domain setup. To send from your own
+domain, verify it at [resend.com/domains](https://resend.com/domains) and set
+`CONTACT_FROM_EMAIL`.
+
+On Vercel, add `RESEND_API_KEY` under **Settings → Environment Variables** and
+redeploy.
+
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `RESEND_API_KEY` | yes | Nothing is sent without it |
+| `CONTACT_TO_EMAIL` | no | Defaults to the address in `data/portfolio.js` |
+| `CONTACT_FROM_EMAIL` | no | Defaults to Resend's shared test sender |
 
 ---
 
@@ -154,7 +170,7 @@ On Vercel, add the same variable under **Settings → Environment Variables**.
    detected automatically, no build settings needed.
 3. Nothing to set for URLs — `siteUrl` reads Vercel's production URL at build
    time. Add `NEXT_PUBLIC_SITE_URL` if you attach a custom domain.
-4. Optionally add `NEXT_PUBLIC_FORM_ENDPOINT`.
+4. Add `RESEND_API_KEY` so the contact form can deliver email.
 
 ---
 

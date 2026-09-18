@@ -30,8 +30,10 @@ const iconFor = {
  * Each icon fades to its own brand colour on hover — see `.brand-icon`
  * in globals.css.
  */
-export default function SocialLinks({ className, size = "default" }) {
-  const active = socials.filter((s) => s.url);
+export default function SocialLinks({ className, size = "default", exclude = [] }) {
+  // `exclude` drops icons that would be redundant where the row is used — the
+  // contact section already lists the email address in full above it.
+  const active = socials.filter((s) => s.url && !exclude.includes(s.id));
 
   if (active.length === 0) return null;
 

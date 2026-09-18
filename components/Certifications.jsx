@@ -6,6 +6,13 @@ import Section from "./ui/Section";
 import SectionHeading from "./ui/SectionHeading";
 import Reveal from "./ui/Reveal";
 import Badge from "./ui/Badge";
+import TechIcon from "./ui/TechIcon";
+
+/** Issuers whose official mark is available; anything else uses its wordmark. */
+const LOGOS = {
+  google: "googleLogo",
+  coursera: "courseraLogo",
+};
 
 export default function Certifications() {
   return (
@@ -30,13 +37,25 @@ export default function Certifications() {
             >
               <article className="group brand-hover relative h-full flex flex-col p-6 md:p-8 rounded-2xl bg-card border border-border/80 transition-all duration-300 hover:shadow-md hover:border-border hover:-translate-y-1">
                 <div className="mb-6 flex justify-between items-start gap-3">
-                  <span className="w-12 h-12 rounded-xl bg-muted/40 text-muted-foreground group-hover:bg-primary/10 transition-colors duration-300 flex items-center justify-center shrink-0">
-                    <span
-                      className="brand-icon font-mono font-bold text-xs tracking-tighter"
-                      style={brandStyle(cert.brand)}
-                    >
-                      {cert.monogram}
-                    </span>
+                  <span
+                    className="w-12 h-12 rounded-xl bg-muted/40 group-hover:bg-primary/10 transition-colors duration-300 flex items-center justify-center shrink-0"
+                    style={{
+                      color: `var(--brand-${cert.brand}, var(--muted-foreground))`,
+                    }}
+                  >
+                    {LOGOS[cert.brand] ? (
+                      <TechIcon
+                        name={LOGOS[cert.brand]}
+                        brand={null}
+                        className="w-6 h-6"
+                      />
+                    ) : (
+                      // IBM asked to be removed from the icon set, so its
+                      // wordmark stands in rather than a hand-drawn imitation.
+                      <span className="font-mono text-sm font-bold tracking-tight">
+                        {cert.monogram}
+                      </span>
+                    )}
                   </span>
                   <Badge variant="pill">Certified</Badge>
                 </div>

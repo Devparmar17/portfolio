@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { AlertCircle, CheckCircle2, Loader2, Mail, Phone, Send } from "lucide-react";
 
 import { contact } from "@/data/portfolio";
@@ -13,18 +14,18 @@ import Reveal from "./ui/Reveal";
 import SocialLinks from "./ui/SocialLinks";
 
 /**
- * Where the form posts.
- *
- * Set NEXT_PUBLIC_FORM_ENDPOINT in .env.local (or in the Vercel dashboard) to
- * a Formspree / Resend / custom API route URL and submissions are POSTed there
- * as JSON. With nothing configured the form falls back to opening the
- * visitor's mail client with everything pre-filled, so it is never a dead end.
+ * Submissions go to our own server route, which holds the email credentials —
+ * nothing secret is shipped to the browser. See app/api/contact/route.js.
  */
-const FORM_ENDPOINT = process.env.NEXT_PUBLIC_FORM_ENDPOINT ?? "";
+const ENDPOINT = "/api/contact";
+
+/** How long the success panel stays before the form goes quiet again. */
+const SUCCESS_MS = 9000;
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-const EMPTY = { name: "", email: "", message: "" };
+/** `company` is the honeypot: hidden from people, tempting to bots. */
+const EMPTY = { name: "", email: "", message: "", company: "" };
 
 function validate(values) {
   const errors = {};
@@ -80,6 +81,16 @@ export default function Contact() {
   const [values, setValues] = useState(EMPTY);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle");
+  /** Bumped on every delivery, so the line and dot replay each time. */
+  const [sentCount, setSentCount] = useState(0);
+  const reduceMotion = useReducedMotion();
+
+  // Let the success panel settle back to the resting state on its own.
+  useEffect(() => {
+    if (status !== "success") return undefined;
+    const id = window.setTimeout(() => setStatus("idle"), SUCCESS_MS);
+    return () => window.clearTimeout(id);
+  }, [status]);
 
   const update = (field) => (event) => {
     const { value } = event.target;
@@ -89,45 +100,40 @@ export default function Contact() {
     if (status !== "idle") setStatus("idle");
   };
 
+  const submitting = status === "submitting";
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+    // Guard against a second submit while the first is still in flight.
+    if (submitting) return;
 
     const nextErrors = validate(values);
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
 
-    if (!FORM_ENDPOINT) {
-      const subject = encodeURIComponent(
-        `Portfolio enquiry from ${values.name.trim()}`,
-      );
-      const body = encodeURIComponent(
-        `${values.message.trim()}\n\n— ${values.name.trim()}\n${values.email.trim()}`,
-      );
-      window.location.href = `mailto:${contact.email}?subject=${subject}&body=${body}`;
-      setStatus("success");
-      setValues(EMPTY);
-      return;
-    }
-
     setStatus("submitting");
 
     try {
-      const response = await fetch(FORM_ENDPOINT, {
+      const response = await fetch(ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify(values),
       });
 
-      if (!response.ok) throw new Error(`Request failed: ${response.status}`);
+      const result = await response.json().catch(() => ({}));
+      // Success only when the email service actually accepted the message.
+      if (!response.ok || !result.ok) {
+        throw new Error(result.error ?? `Request failed: ${response.status}`);
+      }
 
       setStatus("success");
       setValues(EMPTY);
-    } catch {
+      setSentCount((count) => count + 1);
+    } catch (cause) {
+      console.error("Contact form:", cause);
       setStatus("error");
     }
   };
-
-  const submitting = status === "submitting";
 
   return (
     <Section id="contact" containerClassName="py-24">
@@ -146,8 +152,28 @@ export default function Contact() {
             <div className="flex flex-col gap-4">
               <a
                 href={`mailto:${contact.email}`}
-                className="group flex items-center gap-4 p-5 rounded-2xl border border-border/80 bg-card hover:border-border hover:shadow-md transition-all duration-300"
+                className="group relative flex items-center gap-4 p-5 rounded-2xl border border-border/80 bg-card hover:border-border hover:shadow-md transition-all duration-300"
               >
+                {/* A message just landed in this inbox. */}
+                <AnimatePresence>
+                  {sentCount > 0 && status === "success" ? (
+                    <motion.span
+                      key={sentCount}
+                      aria-hidden="true"
+                      className="absolute right-4 top-4 flex h-2.5 w-2.5"
+                      initial={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.4 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                      {!reduceMotion ? (
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--brand-live)] opacity-70" />
+                      ) : null}
+                      <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--brand-live)]" />
+                    </motion.span>
+                  ) : null}
+                </AnimatePresence>
+
                 <span className="w-12 h-12 rounded-xl bg-muted/40 text-muted-foreground group-hover:bg-primary/10 transition-colors flex items-center justify-center shrink-0">
                   <Mail
                     className="brand-icon w-5 h-5"
@@ -190,7 +216,7 @@ export default function Contact() {
                 <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground/70 mb-4">
                   Elsewhere
                 </p>
-                <SocialLinks />
+                <SocialLinks exclude={["email"]} />
               </div>
             </div>
           </Reveal>
@@ -200,8 +226,27 @@ export default function Contact() {
             <form
               onSubmit={handleSubmit}
               noValidate
-              className="h-full flex flex-col gap-5 p-6 md:p-8 rounded-2xl border border-border/80 bg-card shadow-sm"
+              className="relative h-full flex flex-col gap-5 p-6 md:p-8 rounded-2xl border border-border/80 bg-card shadow-sm overflow-hidden"
             >
+              {/* The side line traces down the card as the message goes out. */}
+              <AnimatePresence>
+                {sentCount > 0 && status === "success" ? (
+                  <motion.span
+                    key={sentCount}
+                    aria-hidden="true"
+                    className="absolute left-0 inset-y-6 w-px origin-top bg-linear-to-b from-transparent via-[var(--brand-live)] to-transparent"
+                    initial={reduceMotion ? { opacity: 0 } : { scaleY: 0, opacity: 0 }}
+                    animate={
+                      reduceMotion
+                        ? { opacity: 0.5 }
+                        : { scaleY: 1, opacity: [0, 1, 0.45] }
+                    }
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: reduceMotion ? 0.2 : 1.1, ease: [0.22, 1, 0.36, 1] }}
+                  />
+                ) : null}
+              </AnimatePresence>
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <Field id="name" label="Name" error={errors.name}>
                   <input
@@ -248,6 +293,50 @@ export default function Contact() {
                 />
               </Field>
 
+              {/* Honeypot: hidden from people and from the tab order; bots fill it in. */}
+              <div className="hidden" aria-hidden="true">
+                <label htmlFor="company">Company</label>
+                <input
+                  id="company"
+                  name="company"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={values.company}
+                  onChange={update("company")}
+                />
+              </div>
+
+              <AnimatePresence>
+                {status === "success" ? (
+                  <motion.div
+                    key="sent"
+                    className="flex items-start gap-3 rounded-xl border border-[var(--brand-live)]/30 bg-[var(--brand-live)]/10 px-4 py-3"
+                    initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -6 }}
+                    transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <motion.span
+                      className="shrink-0 text-[var(--brand-live)]"
+                      initial={reduceMotion ? false : { scale: 0.4, rotate: -20 }}
+                      animate={{ scale: 1, rotate: 0 }}
+                      transition={{ type: "spring", stiffness: 380, damping: 18, delay: 0.1 }}
+                    >
+                      <CheckCircle2 className="h-5 w-5" aria-hidden="true" />
+                    </motion.span>
+                    <span className="flex flex-col gap-0.5">
+                      <span className="text-sm font-semibold text-foreground">
+                        Message Sent Successfully! ✓
+                      </span>
+                      <span className="text-xs text-muted-foreground">
+                        Thanks for reaching out. I&apos;ll get back to you soon.
+                      </span>
+                    </span>
+                  </motion.div>
+                ) : null}
+              </AnimatePresence>
+
               <div className="flex flex-col sm:flex-row sm:items-center gap-4 mt-auto pt-2">
                 <Button
                   type="submit"
@@ -255,6 +344,7 @@ export default function Contact() {
                   variant="primary"
                   className="group"
                   disabled={submitting}
+                  aria-busy={submitting}
                 >
                   {submitting ? (
                     <>
@@ -282,12 +372,9 @@ export default function Contact() {
                   className="text-xs leading-relaxed"
                 >
                   {status === "success" ? (
-                    <span className="flex items-center gap-1.5 text-foreground">
-                      <CheckCircle2
-                        className="w-3.5 h-3.5 shrink-0"
-                        aria-hidden="true"
-                      />
-                      Thanks — your message is on its way.
+                    <span className="sr-only">
+                      Message sent successfully. Thanks for reaching out. I&apos;ll
+                      get back to you soon.
                     </span>
                   ) : status === "error" ? (
                     <span className="flex items-center gap-1.5 text-destructive">
@@ -295,7 +382,7 @@ export default function Contact() {
                         className="w-3.5 h-3.5 shrink-0"
                         aria-hidden="true"
                       />
-                      Something went wrong. Email {contact.email} instead?
+                      Something went wrong. Please try again.
                     </span>
                   ) : (
                     <span className="text-muted-foreground/60">
