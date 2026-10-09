@@ -22,6 +22,144 @@ const ENDPOINT = "/api/contact";
 /** How long the success panel stays before the form goes quiet again. */
 const SUCCESS_MS = 9000;
 
+/** Where the hosted voice is synthesised, when one is configured. */
+const SPEAK_ENDPOINT = "/api/speak";
+
+/**
+ * Plays a hosted AI voice if the server has one configured.
+ *
+ * Resolves true when audio actually played, so the caller knows whether to
+ * fall back. A 503 here is the normal, expected answer when no provider key
+ * is set - it is not a failure, just an absence.
+ */
+async function playHostedVoice(name) {
+  try {
+    const response = await fetch(SPEAK_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name }),
+    });
+
+    if (!response.ok) return false;
+
+    const blob = await response.blob();
+    if (!blob.size) return false;
+
+    const url = URL.createObjectURL(blob);
+    const audio = new Audio(url);
+    audio.volume = 0.9;
+    // Release the object URL however playback ends.
+    audio.addEventListener("ended", () => URL.revokeObjectURL(url), {
+      once: true,
+    });
+    audio.addEventListener("error", () => URL.revokeObjectURL(url), {
+      once: true,
+    });
+
+    await audio.play();
+    return true;
+  } catch {
+    // Offline, blocked autoplay, or no provider - the browser voice covers it.
+    return false;
+  }
+}
+
+/**
+ * Picks the best available voice.
+ *
+ * Modern browsers ship neural voices alongside the old formant ones -
+ * "Microsoft Aria Natural", "Google UK English" and friends. They are the
+ * AI-generated ones and sound markedly better, but they are never the
+ * default, so they have to be asked for by name.
+ */
+function pickVoice(voices) {
+  if (!voices.length) return null;
+
+  const english = voices.filter((v) => /^en(-|_|$)/i.test(v.lang));
+  const pool = english.length ? english : voices;
+
+  return (
+    pool.find((v) => /natural|neural/i.test(v.name)) ??
+    pool.find((v) => /google/i.test(v.name)) ??
+    // Remote voices are synthesised server-side and are usually the better ones.
+    pool.find((v) => v.localService === false) ??
+    pool[0]
+  );
+}
+
+/**
+ * Speaks a short thank-you once a message is confirmed sent.
+ *
+ * Uses the browser's own speech synthesis, so there is no audio file to ship,
+ * nothing to download, and any visitor's name can be said without it having
+ * been recorded. Deliberately best-effort: speech is blocked by some
+ * browsers, missing in others, and silent on a muted device. None of that
+ * should affect whether the form reports success, so failures are swallowed.
+ */
+function speakThankYou(name) {
+  if (typeof window === "undefined") return;
+
+  const synth = window.speechSynthesis;
+  if (!synth || typeof window.SpeechSynthesisUtterance !== "function") return;
+
+  // First name only, letters and marks, short enough to say aloud.
+  const first = String(name ?? "")
+    .trim()
+    .split(/\s+/)[0]
+    .replace(/[^\p{L}\p{M}'-]/gu, "")
+    .slice(0, 24);
+
+  const line = first
+    ? `Thank you for your message, ${first}.`
+    : "Thank you for your message.";
+
+  const say = () => {
+    try {
+      // Drop anything still queued from a previous send.
+      synth.cancel();
+
+      const utterance = new window.SpeechSynthesisUtterance(line);
+      utterance.rate = 0.95;
+      utterance.pitch = 1.05;
+      utterance.volume = 0.9;
+
+      const voice = pickVoice(synth.getVoices());
+      if (voice) {
+        utterance.voice = voice;
+        utterance.lang = voice.lang;
+      }
+
+      synth.speak(utterance);
+    } catch {
+      // Muted device, blocked autoplay, unsupported engine - none of it is
+      // worth surfacing to someone who has just sent a message successfully.
+    }
+  };
+
+  // getVoices() is empty until the list loads, which is the common case on a
+  // first visit. Speaking immediately would get the default robotic voice, so
+  // wait for the list - but never longer than a moment.
+  if (synth.getVoices().length > 0) {
+    say();
+    return;
+  }
+
+  let spoken = false;
+  const once = () => {
+    if (spoken) return;
+    spoken = true;
+    say();
+  };
+
+  try {
+    synth.addEventListener("voiceschanged", once, { once: true });
+  } catch {
+    // Older engines expose the handler as a property instead.
+    synth.onvoiceschanged = once;
+  }
+  window.setTimeout(once, 600);
+}
+
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 /** `company` is the honeypot: hidden from people, tempting to bots. */
@@ -127,6 +265,12 @@ export default function Contact() {
       }
 
       setStatus("success");
+      // Read the name before the form is cleared. The hosted voice wins when
+      // one is configured; otherwise the browser's own neural voice speaks.
+      const spokenName = values.name;
+      playHostedVoice(spokenName).then((played) => {
+        if (!played) speakThankYou(spokenName);
+      });
       setValues(EMPTY);
       setSentCount((count) => count + 1);
     } catch (cause) {
