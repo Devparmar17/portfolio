@@ -39,10 +39,13 @@ export default async function CaseStudyPage({ params }) {
   const i = viewable.findIndex((p) => p.slug === slug);
   const next = viewable[(i + 1) % viewable.length];
 
-  return (
-    <CaseStudyView
-      project={project}
-      next={next.slug === project.slug ? null : next}
-    />
-  );
+  // Only the three fields the closing section prints. Passing the whole
+  // project would serialise its entire case study - personas, journey and
+  // all - into this page's payload for the sake of a title.
+  const nextLink =
+    next.slug === project.slug
+      ? null
+      : { slug: next.slug, title: next.title, subtitle: next.subtitle };
+
+  return <CaseStudyView project={project} next={nextLink} />;
 }
