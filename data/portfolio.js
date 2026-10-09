@@ -39,12 +39,12 @@ export const profile = {
   eyebrow: "Portfolio",
   /** Short hero intro, condensed from the resume summary. */
   intro:
-    "UI/UX Designer and M.Des student with a Computer Engineering background. I turn user research into simple, intuitive interfaces — from user flows and wireframes through to polished, responsive UI.",
+    "UI/UX Designer and M.Des student with a Computer Engineering background. I turn user research into simple, intuitive interfaces - from user flows and wireframes through to polished, responsive UI.",
   /** Full professional summary, used in the About section and SEO description. */
   summary:
     "UI/UX Designer and M.Des student with a Computer Engineering background, skilled in user research, user flows, wireframing, prototyping, and UI design. Experienced in designing user-centered digital experiences using Figma and translating research insights into simple, intuitive interfaces.",
   summarySecondary:
-    "I currently work on projects spanning travel, culture, transportation, and accommodation — each one starting with real user problems and ending in an interface that gets out of the way.",
+    "I currently work on projects spanning travel, culture, transportation, and accommodation - each one starting with real user problems and ending in an interface that gets out of the way.",
   /**
    * Cut-out photo shown in the hero. Generate it from the original with
    * `node scripts/prepare-photo.mjs "<photo.png>"`.
