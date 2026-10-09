@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
  * `public/brand/dev-logo-mark.png` is used as a mask and painted with the
  * text colour (`.logo-mark` in globals.css), so the mark keeps its exact
  * shape and proportions while following the light/dark theme. Size it by
- * height — the width follows from the artwork's own aspect ratio.
+ * height - the width follows from the artwork's own aspect ratio.
  *
  * Decorative by default; pass `label` when the logo stands on its own.
  */

@@ -2,7 +2,7 @@
  * The crosshatch gutter that separates two sections: a repeating "+" grid,
  * faded out at the top and bottom, bounded by the column rails.
  *
- * `patternId` must be unique per instance — SVG pattern ids are global.
+ * `patternId` must be unique per instance - SVG pattern ids are global.
  */
 export default function SectionDivider({ patternId }) {
   return (

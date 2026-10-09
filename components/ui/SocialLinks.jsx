@@ -27,11 +27,11 @@ const iconFor = {
  * skipped, so adding a GitHub or Behance link there makes it appear here,
  * in the hero, and in the footer at once.
  *
- * Each icon fades to its own brand colour on hover — see `.brand-icon`
+ * Each icon fades to its own brand colour on hover - see `.brand-icon`
  * in globals.css.
  */
 export default function SocialLinks({ className, size = "default", exclude = [] }) {
-  // `exclude` drops icons that would be redundant where the row is used — the
+  // `exclude` drops icons that would be redundant where the row is used - the
   // contact section already lists the email address in full above it.
   const active = socials.filter((s) => s.url && !exclude.includes(s.id));
 

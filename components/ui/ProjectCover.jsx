@@ -2,8 +2,8 @@
  * Per-project cover artwork.
  *
  * Each scene is drawn as vector art rather than shipped as a bitmap: it stays
- * sharp at any density, weighs almost nothing, and — because it paints with
- * the site's own CSS variables — follows the light/dark theme instead of
+ * sharp at any density, weighs almost nothing, and - because it paints with
+ * the site's own CSS variables - follows the light/dark theme instead of
  * sitting in a fixed-colour rectangle.
  *
  * Every cover is built on the same 600×384 stage with the same blueprint
@@ -29,7 +29,7 @@ const INK = "var(--muted-foreground)";
 /* SCENES                                                                      */
 /* -------------------------------------------------------------------------- */
 
-/** Apna PG — a listings browser: search, verified listing, price breakdown. */
+/** Apna PG - a listings browser: search, verified listing, price breakdown. */
 function ApnaPg({ accent }) {
   return (
     <g>
@@ -123,7 +123,7 @@ function ApnaPg({ accent }) {
   );
 }
 
-/** Nescafé — a canteen self-service kiosk mid-order. */
+/** Nescafé - a canteen self-service kiosk mid-order. */
 function Nescafe({ accent }) {
   return (
     <g>
@@ -217,7 +217,7 @@ function Nescafe({ accent }) {
   );
 }
 
-/** 10 Laws of UX — three streaming apps annotated side by side. */
+/** 10 Laws of UX - three streaming apps annotated side by side. */
 function UxLaws({ accent }) {
   const phones = [78, 234, 390];
   return (
@@ -296,7 +296,7 @@ function UxLaws({ accent }) {
   );
 }
 
-/** Kid Cab — live route tracking with a verified driver sheet. */
+/** Kid Cab - live route tracking with a verified driver sheet. */
 function KidCab({ accent }) {
   return (
     <g>
@@ -368,7 +368,7 @@ function KidCab({ accent }) {
   );
 }
 
-/** Campus Shoes — a campaign set: key poster plus social crops. */
+/** Campus Shoes - a campaign set: key poster plus social crops. */
 function CampusShoes({ accent }) {
   return (
     <g>
@@ -429,7 +429,7 @@ function CampusShoes({ accent }) {
   );
 }
 
-/** History & Culture Map — heritage pins over a contoured map. */
+/** History & Culture Map - heritage pins over a contoured map. */
 function HistoryMap({ accent }) {
   return (
     <g>

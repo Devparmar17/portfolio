@@ -22,7 +22,7 @@ export default function Section({
       >
         <div className="absolute inset-0 border-y border-border/40" />
 
-        {/* Corner dots — kept inside the column so they never widen the page
+        {/* Corner dots - kept inside the column so they never widen the page
             on viewports narrower than the container. */}
         <span className="absolute top-0 left-0 w-[3px] h-[3px] rounded-full bg-muted-foreground/60" />
         <span className="absolute top-0 right-0 w-[3px] h-[3px] rounded-full bg-muted-foreground/60" />

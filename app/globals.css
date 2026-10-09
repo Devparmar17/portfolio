@@ -57,6 +57,8 @@
 
 @theme inline {
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-poppins), var(--font-geist-sans), ui-sans-serif,
+    system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo,
     monospace;
 
@@ -187,7 +189,7 @@
 }
 
 /*
- * Hover scopes are explicit — `.brand-hover` marks the element whose hover
+ * Hover scopes are explicit - `.brand-hover` marks the element whose hover
  * lights up the icons inside it. Deliberately not keyed to Tailwind's
  * `.group`, which would make one card hover fire every nested icon at once.
  */

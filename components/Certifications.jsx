@@ -97,7 +97,7 @@ export default function Certifications() {
                     </a>
                   ) : (
                     <span className="text-xs font-mono tracking-tight text-muted-foreground/50">
-                      —
+                      -
                     </span>
                   )}
                 </div>

@@ -14,7 +14,7 @@ import Reveal from "./ui/Reveal";
 import SocialLinks from "./ui/SocialLinks";
 
 /**
- * Submissions go to our own server route, which holds the email credentials —
+ * Submissions go to our own server route, which holds the email credentials -
  * nothing secret is shipped to the browser. See app/api/contact/route.js.
  */
 const ENDPOINT = "/api/contact";
@@ -37,7 +37,7 @@ function validate(values) {
     errors.email = "Please enter a valid email address.";
   }
   if (values.message.trim().length < 10) {
-    errors.message = "Tell me a little more — at least 10 characters.";
+    errors.message = "Tell me a little more - at least 10 characters.";
   }
 
   return errors;

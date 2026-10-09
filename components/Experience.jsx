@@ -21,7 +21,7 @@ export default function Experience() {
         <ol className="relative">
           {experience.map((job, i) => (
             <li key={`${job.company}-${job.period}`} className="relative pl-8 sm:pl-12">
-              {/* Timeline rail — hidden on the final entry so it ends cleanly. */}
+              {/* Timeline rail - hidden on the final entry so it ends cleanly. */}
               {i < experience.length - 1 ? (
                 <span
                   aria-hidden="true"

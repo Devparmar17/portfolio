@@ -37,7 +37,7 @@ const CARD = "var(--card)";
 const LINE = "var(--border)";
 const MONO = { fontFamily: "var(--font-mono), ui-monospace, monospace" };
 
-/** x, y, width, lit — lines of code typing into the panel. */
+/** x, y, width, lit - lines of code typing into the panel. */
 const CODE_LINES = [
   [220, 44, 34, true],
   [220, 54, 24, false],
@@ -109,7 +109,7 @@ export default function MindPhoto({ className }) {
         className,
       )}
     >
-      {/* Thought bubble — echoes the Skills section, so hidden from assistive tech */}
+      {/* Thought bubble - echoes the Skills section, so hidden from assistive tech */}
       <div
         aria-hidden="true"
         className="mind-tint relative z-10 w-full rounded-2xl border bg-background/85 px-4 py-3 shadow-sm backdrop-blur-sm"
@@ -189,7 +189,7 @@ export default function MindPhoto({ className }) {
           />
         </svg>
 
-        {/* The photo — untouched, body inside the circle, head above it */}
+        {/* The photo - untouched, body inside the circle, head above it */}
         {photoMissing ? null : (
           <div className="absolute inset-0" style={{ clipPath: "url(#mind-photo-clip)" }}>
             <div className="mind-photo absolute inset-x-[12%] top-[2%] bottom-0">
@@ -231,7 +231,7 @@ export default function MindPhoto({ className }) {
             />
           ))}
 
-          {/* THINKING — design doodles */}
+          {/* THINKING - design doodles */}
           <g className="mind-layer mind-think">
             <g className="mind-float">
               <rect className="mind-tint" x="8" y="34" width="62" height="46" rx="9" fill={CARD} stroke={ACCENT} strokeWidth="1.5" />
@@ -249,7 +249,7 @@ export default function MindPhoto({ className }) {
             </g>
           </g>
 
-          {/* COMPUTING — code panels */}
+          {/* COMPUTING - code panels */}
           <g className="mind-layer mind-build">
             <g className="mind-float">
               <rect className="mind-tint" x="8" y="34" width="62" height="42" rx="9" fill={CARD} stroke={ACCENT} strokeWidth="1.5" />

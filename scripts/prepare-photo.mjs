@@ -5,7 +5,7 @@
  *
  * Trims the empty transparent margin around him, keeps head to waist, and
  * writes a transparent PNG to public/images/profile.png. The photo itself is
- * not retouched — only cropped and resized.
+ * not retouched - only cropped and resized.
  *
  * The photo needs a transparent background (a cut-out). A photo with a solid
  * background will show that background as a box inside the hero circle.

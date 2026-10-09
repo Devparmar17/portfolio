@@ -1,7 +1,7 @@
 /**
  * Prepares the case-study boards for the web.
  *
- * The source exports are tall (~30,000px) and heavy (8–18MB) — fine as design
+ * The source exports are tall (~30,000px) and heavy (8-18MB) - fine as design
  * files, far too heavy to ship. This produces, for each board:
  *
  *   <name>-cover.webp   1400 x 900, cropped from the top, for the project card
@@ -24,8 +24,8 @@ const TARGET_WIDTH = 1400;
 const COVER_HEIGHT = 900;
 
 const BOARDS = [
-  { source: "dd.png", name: "nescafe", label: "NESCAFÉ — Campus Canteen Kiosk" },
-  { source: "kk.png", name: "ux-laws", label: "Competitive App Analysis — 10 Laws of UX" },
+  { source: "dd.png", name: "nescafe", label: "NESCAFÉ - Campus Canteen Kiosk" },
+  { source: "kk.png", name: "ux-laws", label: "Competitive App Analysis - 10 Laws of UX" },
 ];
 
 const sourceDir = process.argv[2] ?? path.join(homedir(), "Downloads");

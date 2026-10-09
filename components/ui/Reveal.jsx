@@ -8,7 +8,7 @@ const EASE = [0.22, 1, 0.36, 1];
  * Scroll-triggered entrance animation.
  *
  * When the visitor prefers reduced motion this degrades to a short opacity
- * fade with no movement, rather than being disabled outright — the content
+ * fade with no movement, rather than being disabled outright - the content
  * still arrives, it just stops sliding.
  */
 export default function Reveal({

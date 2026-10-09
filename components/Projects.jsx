@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import { projectFilters, projects } from "@/data/portfolio";
 import { cn } from "@/lib/utils";
@@ -8,24 +8,21 @@ import Section from "./ui/Section";
 import SectionHeading from "./ui/SectionHeading";
 import Reveal from "./ui/Reveal";
 import ProjectCard from "./ui/ProjectCard";
-import CaseStudyModal from "./ui/CaseStudyModal";
 
 /** Maps a filter label onto the project `type` it selects. */
 const FILTER_TYPE = {
-  "Demo Apps": "live",
+  "MVP Apps": "live",
   "Case Studies": "case-study",
 };
 
 export default function Projects() {
   const [filter, setFilter] = useState(projectFilters[0]);
-  const [active, setActive] = useState(null);
 
   const visible = useMemo(() => {
     const type = FILTER_TYPE[filter];
     return type ? projects.filter((p) => p.type === type) : projects;
   }, [filter]);
 
-  const closeDetail = useCallback(() => setActive(null), []);
 
   return (
     <Section id="projects" containerClassName="py-16 md:py-20">
@@ -84,7 +81,7 @@ export default function Projects() {
         {/* Keying on the filter remounts the grid so cards animate back in. */}
         <div
           key={filter}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
         >
           {visible.map((project, i) => (
             <Reveal
@@ -95,13 +92,12 @@ export default function Projects() {
               amount={0.1}
               className="h-full"
             >
-              <ProjectCard project={project} onOpenDetail={setActive} />
+              <ProjectCard project={project} />
             </Reveal>
           ))}
         </div>
       </div>
 
-      <CaseStudyModal project={active} onClose={closeDetail} />
     </Section>
   );
 }

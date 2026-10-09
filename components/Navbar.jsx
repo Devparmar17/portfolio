@@ -1,15 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Menu, Search } from "lucide-react";
+import { Menu } from "lucide-react";
 
 import { navLinks, profile } from "@/data/portfolio";
 import { useActiveSection } from "@/lib/useActiveSection";
 import { cn, scrollToSection } from "@/lib/utils";
-import Button from "./ui/Button";
 import LogoMark from "./ui/LogoMark";
 import Section from "./ui/Section";
-import CommandPalette from "./ui/CommandPalette";
 import MobileNav from "./ui/MobileNav";
 import ThemeToggle from "./ui/ThemeToggle";
 
@@ -19,14 +17,13 @@ const REVEAL_ABOVE = 96;
 /** How long a click-driven scroll may run without retracting the header. */
 const NAV_SCROLL_GRACE_MS = 900;
 
-/** Stable reference — the scroll spy depends on this array identity. */
+/** Stable reference - the scroll spy depends on this array identity. */
 const SECTION_IDS = navLinks.map((link) => link.href.replace("#", ""));
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [paletteOpen, setPaletteOpen] = useState(false);
   const active = useActiveSection(SECTION_IDS);
 
   // Set when a nav link starts a scroll, so the header does not retract out
@@ -96,7 +93,7 @@ export default function Navbar() {
         className={cn(
           "fixed top-0 inset-x-0 z-50 pt-3",
           "transition-[transform,background-color] duration-300 ease-out",
-          hidden && !menuOpen && !paletteOpen
+          hidden && !menuOpen
             ? "-translate-y-full"
             : "translate-y-0",
           // Covers the padding strip as well, so nothing scrolls through it.
@@ -113,7 +110,7 @@ export default function Navbar() {
             <a
               href="#home"
               onClick={(e) => handleNavClick(e, "#home")}
-              aria-label={`${profile.name} — back to top`}
+              aria-label={`${profile.name} - back to top`}
               className="flex items-center gap-2.5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <LogoMark className="logo-sheen h-7 md:h-8" />
@@ -158,32 +155,8 @@ export default function Navbar() {
                 aria-hidden="true"
               />
 
-              <button
-                type="button"
-                onClick={() => setPaletteOpen(true)}
-                aria-label="Jump to a section"
-                className="hidden xl:flex items-center gap-2 h-9 px-3 rounded-md bg-muted/40 hover:bg-muted/80 text-muted-foreground hover:text-foreground transition-colors border border-border/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring w-[200px]"
-              >
-                <Search className="w-4 h-4 shrink-0 opacity-70" aria-hidden="true" />
-                <span className="text-sm flex-1 text-left opacity-80">Search...</span>
-              </button>
-
               <div className="flex items-center gap-1.5">
                 <ThemeToggle />
-
-                {/* Wrapped rather than given `hidden` directly, so the
-                    responsive display rule can't collide with the button's
-                    own `inline-flex`. */}
-                <span className="hidden sm:block">
-                  <Button
-                    href="#contact"
-                    variant="solid"
-                    size="sm"
-                    onClick={(e) => handleNavClick(e, "#contact")}
-                  >
-                    Hire Me
-                  </Button>
-                </span>
 
                 <button
                   type="button"
@@ -204,7 +177,6 @@ export default function Navbar() {
       <div aria-hidden="true" className="h-[68px]" />
 
       <MobileNav open={menuOpen} onOpenChange={setMenuOpen} active={active} />
-      <CommandPalette open={paletteOpen} onOpenChange={setPaletteOpen} />
     </>
   );
 }

@@ -7,7 +7,7 @@ import { contact } from "@/data/portfolio";
  * Contact form delivery.
  *
  * This runs on the server, so RESEND_API_KEY never reaches the browser. The
- * browser only ever sees whether the send succeeded — the form shows success
+ * browser only ever sees whether the send succeeded - the form shows success
  * solely when the email service has accepted the message.
  *
  * Environment (see .env.example):
@@ -80,7 +80,7 @@ export async function POST(request) {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     console.error(
-      "Contact form: RESEND_API_KEY is not set — the message was NOT sent. Add it to .env.local (local) or the Vercel project settings.",
+      "Contact form: RESEND_API_KEY is not set - the message was NOT sent. Add it to .env.local (local) or the Vercel project settings.",
     );
     return NextResponse.json({ error: "not_configured" }, { status: 503 });
   }

@@ -7,7 +7,7 @@ import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 
 /**
- * Renders a same-sized placeholder until mounted — the resolved theme isn't
+ * Renders a same-sized placeholder until mounted - the resolved theme isn't
  * known during SSR, and swapping the icon after hydration would otherwise
  * shift the navbar.
  */

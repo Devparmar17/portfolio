@@ -2,8 +2,8 @@
  * ---------------------------------------------------------------------------
  * SINGLE SOURCE OF TRUTH FOR ALL PORTFOLIO CONTENT
  * ---------------------------------------------------------------------------
- * Every section of the site reads from this file. Edit here — never in the
- * components — and the whole site updates.
+ * Every section of the site reads from this file. Edit here - never in the
+ * components - and the whole site updates.
  *
  * Fields left as an empty string ("") are intentionally blank: the components
  * detect them and hide the related UI. Fill one in and the UI appears
@@ -65,7 +65,7 @@ export const contact = {
 
 /**
  * `url: ""` hides the icon entirely. GitHub and Behance were not on the
- * resume — paste your profile URLs in and they will show up everywhere
+ * resume - paste your profile URLs in and they will show up everywhere
  * (hero, contact, footer) at once.
  */
 export const socials = [
@@ -84,17 +84,14 @@ export const socials = [
 /* -------------------------------------------------------------------------- */
 
 export const navLinks = [
-  { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
   { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
-  { label: "Education", href: "#education" },
   { label: "Contact", href: "#contact" },
 ];
 
 /* -------------------------------------------------------------------------- */
-/* ABOUT — the icon tile grid                                                  */
+/* ABOUT - the icon tile grid                                                  */
 /* -------------------------------------------------------------------------- */
 
 export const aboutHeading = {
@@ -182,11 +179,11 @@ export const workflow = [
 ];
 
 /* -------------------------------------------------------------------------- */
-/* SKILLS — grouped exactly as on the resume, plus AI tooling                  */
+/* SKILLS - grouped exactly as on the resume, plus AI tooling                  */
 /* -------------------------------------------------------------------------- */
 
 /**
- * `itemIcons` is optional — where an item has a glyph, the badge shows it and
+ * `itemIcons` is optional - where an item has a glyph, the badge shows it and
  * picks up that brand's hover colour.
  */
 export const skillGroups = [
@@ -250,7 +247,7 @@ export const experience = [
     role: "UI/UX & Web Development Intern",
     company: "WR Team",
     location: "Bhuj-Kutch, India",
-    period: "January 2025 — June 2025",
+    period: "January 2025 - June 2025",
     description:
       "Designed and built responsive web interfaces, pairing UI/UX principles with hands-on frontend development.",
     points: [
@@ -265,28 +262,28 @@ export const experience = [
 /* PROJECTS                                                                    */
 /* -------------------------------------------------------------------------- */
 
-export const projectFilters = ["All", "Demo Apps", "Case Studies"];
+export const projectFilters = ["All", "MVP Apps", "Case Studies"];
 
 /**
  * Project shape
  * -------------
  * `type`        "live" for a working application, "case-study" for UX/design
- *               work. Drives the call to action — nothing else.
- * `liveUrl`     Real, working URL only. Blank hides the "Demo App" button.
+ *               work. Drives the call to action - nothing else.
+ * `liveUrl`     Real, working URL only. Blank hides the "MVP App" button.
  * `behanceUrl`  Real Behance gallery URL. When present, "View Case Study ↗"
  *               opens it; when blank, that button opens the in-site detail
  *               view instead.
  * `cover`       Card artwork. Blank falls back to the blueprint plate.
  * `full`        Full case-study board shown inside the detail view.
  * `stages`      Process stages listed in the detail view.
- * `description` Optional. Left blank where the real copy isn't known yet —
+ * `description` Optional. Left blank where the real copy isn't known yet -
  *               the card simply omits the paragraph.
  *
- * There is deliberately no `github` field — repository links are not shown
+ * There is deliberately no `github` field - repository links are not shown
  * anywhere in this portfolio.
  *
  * ---------------------------------------------------------------------------
- * ADDING A PROJECT — copy this block, fill in what you know, delete the rest.
+ * ADDING A PROJECT - copy this block, fill in what you know, delete the rest.
  * Only `slug`, `title`, `type` and `icon` are required.
  * ---------------------------------------------------------------------------
  *
@@ -324,7 +321,8 @@ export const projects = [
     subtitle: "PG-Finding Platform",
     type: "live",
     role: "Working Product / Live Application",
-    category: "UX Research • Product Design • Demo App",
+    timeline: "3 months",
+    category: "UX Research • Product Design • MVP App",
     featured: true,
     status: "",
     icon: "home",
@@ -339,6 +337,37 @@ export const projects = [
     stages: ["User Research", "Pain Points", "User Flows", "Wireframes", "UI"],
     tech: ["User Research", "User Flows", "Wireframing", "Figma"],
     contribution: "Research · Flows · Wireframes",
+    /**
+     * Only what the project record already states. The three features below
+     * are the solution elements named in `description` and `points`.
+     *
+     * Missing, and not inventable: the problem statement, the research
+     * findings behind "key pain points", personas, a journey map and UI
+     * screens. The Behance gallery holds them; it blocks automated reading,
+     * and the live app keeps its screens behind a demo sign-in.
+     */
+    caseStudy: {
+      overview: {
+        goal: "Make finding paying-guest accommodation transparent, so the real cost and quality of a listing are clear before anyone commits.",
+        role: "Working Product / Live Application",
+        timeline: "3 months",
+        tools: ["Figma", "User Research", "User Flows", "Wireframing"],
+      },
+      features: [
+        {
+          title: "Verified listings",
+          body: "Listings are verified, so what is advertised is what exists.",
+        },
+        {
+          title: "Honest reviews",
+          body: "Reviews from people who actually stayed, rather than marketing copy.",
+        },
+        {
+          title: "Clear cost breakdowns",
+          body: "The full cost is broken down up front, with no charges surfacing later.",
+        },
+      ],
+    },
     liveUrl: "https://pg-finder-booking.vercel.app/",
     behanceUrl:
       "https://www.behance.net/gallery/255609371/APNA-PG-UIUX-Case-Study",
@@ -349,6 +378,7 @@ export const projects = [
     subtitle: "Redesigning the Nescafé Campus Experience",
     type: "case-study",
     role: "UX Research / UX Design",
+    timeline: "3 months",
     category: "UX Research • UI/UX Design • Case Study",
     featured: true,
     status: "",
@@ -362,9 +392,9 @@ export const projects = [
     fullWidth: 1400,
     fullHeight: 29552,
     fullAlt:
-      "NESCAFÉ Campus Canteen Kiosk case study board — problem framing, observations, user personas, comparison tables, service blueprint, user flow, wireframes and final UI screens.",
+      "NESCAFÉ Campus Canteen Kiosk case study board - problem framing, observations, user personas, comparison tables, service blueprint, user flow, wireframes and final UI screens.",
     description:
-      "A self-service kiosk concept for a campus canteen, worked end to end — from framing the problem and observing real ordering behaviour through to a complete set of UI screens.",
+      "A self-service kiosk concept for a campus canteen, worked end to end - from framing the problem and observing real ordering behaviour through to a complete set of UI screens.",
     points: [
       "Framed the problem around campus canteen ordering and captured first-hand observations of how people queue and order.",
       "Built user personas and comparison tables, then mapped the experience as a service blueprint and user flow.",
@@ -390,16 +420,257 @@ export const projects = [
       "Figma",
     ],
     contribution: "Research · UX · UI",
+    /**
+     * Condensed walkthrough shown by the animated case-study view. Every
+     * string here is taken from the board itself - problem statement,
+     * observation quote, interview findings and both personas are verbatim.
+     * Nothing is written for the portfolio.
+     */
+    caseStudy: {
+      /**
+       * Goal, role and tools come from the board and the project record.
+       * `timeline` is deliberately null: the board does not state one, and a
+       * case study is not the place to guess at dates.
+       */
+      overview: {
+        goal: "Reduce peak-hour queues at a campus Nescafé by moving ordering and pickup onto a self-service kiosk.",
+        role: "UX Research / UX Design",
+        timeline: null,
+        tools: ["Figma", "User Research", "Personas", "Service Blueprint"],
+      },
+      /** The four interview findings, in the board's own shorthand. */
+      insights: [
+        {
+          label: "Lunch break",
+          body: "The rush concentrates into the short break between classes.",
+        },
+        {
+          label: "Order confusion",
+          body: "Orders blur together when many customers order at once.",
+        },
+        {
+          label: "Long queue",
+          body: "Waiting during rush time is what irritates customers most.",
+        },
+        {
+          label: "Out of stock",
+          body: "Maggie, coffee and snacks run out with no warning on the menu.",
+        },
+      ],
+      /**
+       * The eight-stage journey as mapped on the board. (The board's two
+       * tables carry swapped headings - these rows are the student's day,
+       * so they are labelled by their content.)
+       */
+      journey: {
+        label: "The student's journey",
+        stages: [
+          {
+            stage: "Hunger Trigger",
+            feeling: "Feeling hungry - should I go now or later?",
+            pain: "Short break time",
+            opportunity: "Live food-availability alerts at meal times",
+          },
+          {
+            stage: "Decide to Eat",
+            feeling: "Imagining the food; Nescafé is nearby",
+            pain: "Confusion in choosing what to eat",
+            opportunity: "Digital menu, combo offers, price comparison",
+          },
+          {
+            stage: "Travel to Canteen",
+            feeling: "Excited and rushed",
+            pain: "Takes time to reach the canteen",
+            opportunity: "Directional signage with estimated walking time",
+          },
+          {
+            stage: "Arrive & Queue",
+            feeling: "How long will I wait? What should I order?",
+            pain: "No queue system, chaotic ordering",
+            opportunity: "Token system, digital queue display, more counters",
+          },
+          {
+            stage: "Place Order",
+            feeling: "Uncertain - the item I wanted is unavailable",
+            pain: "Unclear menu, staff miscommunication",
+            opportunity: "QR ordering and a kiosk that shows real availability",
+          },
+          {
+            stage: "Pay",
+            feeling: "Relieved, now waiting",
+            pain: "Limited seating, payment delays",
+            opportunity: "Cashless fast payment, seating availability indicator",
+          },
+          {
+            stage: "Wait for Food",
+            feeling: "Impatient, checking phone",
+            pain: "No order tracking, overcrowded and unclear pickup",
+            opportunity: "Order tracking screen, notifications, separate waiting zone",
+          },
+          {
+            stage: "Finish & Leave",
+            feeling: "Satisfied but rushed",
+            pain: "Overflowing dustbins, time pressure, cleanup inconvenience",
+            opportunity: "Smart dustbin placement, loyalty points for repeat users",
+          },
+        ],
+      },
+      /** Drawn from the board's DFV (desirability / feasibility / viability). */
+      features: [
+        {
+          title: "Digital token queue",
+          body: "A token system with a display replaces the single service window.",
+        },
+        {
+          title: "Digital menu board",
+          body: "A clear menu speeds up decisions and shows what is actually available.",
+        },
+        {
+          title: "Popular item tracking",
+          body: "Surfacing popular items builds trust and improves stock planning.",
+        },
+        {
+          title: "Loyalty & coupons",
+          body: "Loyalty points and digital coupons bring repeat customers into slow hours.",
+        },
+        {
+          title: "Inventory tracking",
+          body: "Real-time stock reduces losses and prevents out-of-stock surprises.",
+        },
+      ],
+      /**
+       * Expectations the board itself argues for under viability - written as
+       * expected impact, not measured results. No metrics are claimed.
+       */
+      outcome: {
+        decisions: [
+          "Start small: a digital menu plus a token system first.",
+          "Design for both sides of the counter, not just the customer.",
+          "Keep inventory visible so unavailable items never reach the order screen.",
+        ],
+        impact: [
+          "A loyalty system should increase repeat customers.",
+          "Digital coupons should lift sales in slow hours.",
+          "Popular-item tracking should improve stock planning.",
+          "Inventory tracking should reduce losses.",
+        ],
+        learnings: [
+          "The queue is a service-design problem before it is an interface problem.",
+          "The stall owner's pain points shaped the product as much as the student's.",
+        ],
+      },
+      chapters: [
+        {
+          kind: "problem",
+          label: "The Problem",
+          title: "Peak-hour queues at the campus Nescafé",
+          body: "Students experience long queues and overcrowding at Nescafé outlets during peak campus hours due to slow manual ordering, limited staff handling high demand, and inefficient service flow causing delays and frustration.",
+        },
+        {
+          kind: "quote",
+          label: "What I Observed",
+          quote:
+            "During class breaks, students gather at campus canteens, especially Nescafe, a popular social spot. Its prime location, Maggie, coffee, and shaded space attract groups. Easy menu access and interactive elements enhance experience. However, limited seating, single service window, and stock shortages affect convenience. It serves as a lively student hangout.",
+          tags: ["Lunch break", "Order confusion", "Long queue", "Out of stock"],
+        },
+        {
+          kind: "personas",
+          label: "Who It Is For",
+          title: "Two sides of the same counter",
+          personas: [
+            {
+              name: "Ramila Patel",
+              role: "Stall owner - Nescafe Hut",
+              meta: "Daily estimated ₹3,000 - ₹5,000",
+              pains: [
+                "Sudden crowd rush during lunch break",
+                "No queue management system",
+                "Order confusion when many customers order together",
+                "UPI delays or payment confirmation issues",
+                "Manual inventory checking and end-of-day sales counting",
+              ],
+              needs: [
+                "Digital token system to manage queues",
+                "Live order display screen",
+                "Pre-order system to prepare items earlier",
+                "Real-time inventory tracking",
+                "Automatic payment confirmation",
+              ],
+            },
+            {
+              name: "Rahul Shah",
+              role: "College student",
+              meta: "Budget ₹100 per day",
+              pains: [
+                "Slow serving during rush hours",
+                "Long queues at lunch time",
+                "Order confusion when many people order",
+                "Items often out of stock (Maggie, coffee, snacks)",
+                "Limited space to wait",
+              ],
+              needs: [
+                "Pre-order option to save time",
+                "Token system with display",
+                "Clear digital menu showing what is available",
+                "Fast service during rush hours",
+              ],
+            },
+          ],
+        },
+        {
+          kind: "solution",
+          label: "The Solution",
+          title: "A self-service kiosk on both sides of the counter",
+          body: "A smart self-service kiosk for a campus environment, designed to streamline ordering and pickup so the queue stops forming in the first place.",
+          bullets: [
+            "Digital token queue replaces the single service window",
+            "Live order display so nobody has to ask what is ready",
+            "Pre-ordering lets the stall start preparing before the break",
+            "Real-time inventory hides what is out of stock before it is ordered",
+            "Automatic payment confirmation removes the UPI wait",
+          ],
+        },
+        {
+          kind: "screens",
+          label: "The Screens",
+          title: "Ordering kiosk",
+          shots: [
+            {
+              src: "/images/projects/nescafe-ui-order.webp",
+              width: 1400,
+              height: 700,
+              alt: "Three kiosk ordering screens: coffee, sandwich and Maggie categories with a running order panel and total.",
+              caption: "Browse by category, with the order and total always in view.",
+            },
+            {
+              src: "/images/projects/nescafe-ui-pay.webp",
+              width: 1400,
+              height: 600,
+              alt: "Kiosk checkout screens showing an itemised order, UPI and pay-at-counter options, and a QR confirmation.",
+              caption: "Checkout: itemised order, UPI or pay at counter, QR to confirm.",
+            },
+            {
+              src: "/images/projects/nescafe-ui-shop.webp",
+              width: 1400,
+              height: 1040,
+              alt: "Shopkeeper app screens: live orders queue, sales dashboard with today's total and trend, and inventory management with stock toggles.",
+              caption: "The stall side: live orders, a sales dashboard, and stock control.",
+            },
+          ],
+        },
+      ],
+    },
     liveUrl: "",
     behanceUrl:
       "https://www.behance.net/gallery/252366823/Redesigning-the-Nescaf-Campus-Experience",
   },
   {
     slug: "competitive-app-analysis-10-laws-of-ux",
-    title: "Competitive App Analysis — 10 Laws of UX",
+    title: "Competitive App Analysis - 10 Laws of UX",
     subtitle: "Streaming Apps Compared",
     type: "case-study",
     role: "UX Research / Competitive Analysis",
+    timeline: "3 months",
     category: "UX Research • Competitive Analysis • 10 Laws of UX",
     featured: true,
     status: "",
@@ -411,10 +682,10 @@ export const projects = [
     fullAlt:
       "Competitive app analysis board comparing JioHotstar, SonyLIV and Netflix screen by screen against each of the 10 Laws of UX.",
     description:
-      "A screen-by-screen teardown of three streaming apps — JioHotstar, SonyLIV and Netflix — measured against each of the 10 Laws of UX, with side-by-side UI comparisons and the observations behind each verdict.",
+      "A screen-by-screen teardown of three streaming apps - JioHotstar, SonyLIV and Netflix - measured against each of the 10 Laws of UX, with side-by-side UI comparisons and the observations behind each verdict.",
     points: [
       "Compared JioHotstar, SonyLIV and Netflix interface by interface across ten established UX principles.",
-      "Documented how each app applies — or misses — each law, supported by annotated screen comparisons.",
+      "Documented how each app applies - or misses - each law, supported by annotated screen comparisons.",
     ],
     stagesLabel: "The 10 Laws analysed",
     stages: [
@@ -446,6 +717,7 @@ export const projects = [
     subtitle: "A Safer Ride for Kids",
     type: "case-study",
     role: "UX/UI Design",
+    timeline: "3 months",
     category: "UX Research • UI/UX Design • Case Study",
     featured: false,
     status: "",
@@ -465,66 +737,19 @@ export const projects = [
     behanceUrl:
       "https://www.behance.net/gallery/254733255/A-Safer-Ride-for-Kids-UXUI-Case-Study",
   },
-  {
-    slug: "campus-shoes-marketing-campaign",
-    title: "Campus Shoes",
-    subtitle: "Marketing Campaign",
-    type: "case-study",
-    role: "Marketing Campaign",
-    category: "Marketing Campaign",
-    featured: false,
-    status: "",
-    icon: "shoe",
-    cover: "",
-    full: "",
-    // Left blank on purpose — the campaign copy wasn't supplied, and the
-    // Behance gallery is the real content. Fill these in any time.
-    description: "",
-    points: [],
-    stages: [],
-    tech: [],
-    contribution: "",
-    liveUrl: "",
-    behanceUrl:
-      "https://www.behance.net/gallery/252861599/Campus-Shoes-Campus-Shoes-Marketing-Campaign",
-  },
-  {
-    slug: "history-and-culture-map",
-    title: "History & Culture Map",
-    subtitle: "Heritage Travel App",
-    type: "case-study",
-    role: "UX Research / UX Design",
-    category: "UX Design • Travel • Ongoing",
-    featured: false,
-    status: "Ongoing",
-    icon: "map",
-    cover: "",
-    full: "",
-    description:
-      "A map-based travel app that folds navigation, historical context, and nearby heritage sites into one exploratory journey — so discovering a place and understanding it happen in the same gesture.",
-    points: [
-      "Designing a map-based travel app combining navigation, historical information, and nearby heritage sites.",
-      "Integrating cultural discovery features into one seamless, exploratory user experience.",
-    ],
-    stages: ["Research", "User Flows", "Prototyping"],
-    tech: ["UX Design", "User Flows", "Prototyping", "Figma"],
-    contribution: "Research · UX · UI",
-    liveUrl: "",
-    behanceUrl: "",
-  },
 ];
 
 /* -------------------------------------------------------------------------- */
 /* EDUCATION                                                                   */
 /* -------------------------------------------------------------------------- */
 
-/** `location` was not on the resume — fill it in and it will render. */
+/** `location` was not on the resume - fill it in and it will render. */
 export const education = [
   {
     degree: "Master of Design (M.Des)",
     institution: "Indus University",
     location: "", // TODO: add campus location if you want it shown
-    period: "2026 — 2027",
+    period: "2026 - 2027",
     score: "CGPA 9.17",
     current: true,
     note: "Design research, interaction design, and product thinking.",

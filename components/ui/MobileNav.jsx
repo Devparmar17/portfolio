@@ -109,7 +109,7 @@ export default function MobileNav({ open, onOpenChange, active }) {
                         onClick={() => go(link.href)}
                         aria-current={isActive ? "true" : undefined}
                         className={cn(
-                          // 48px tall — comfortable touch target.
+                          // 48px tall - comfortable touch target.
                           "w-full flex items-center justify-between gap-3 min-h-12 px-4 rounded-lg text-base font-medium transition-colors",
                           isActive
                             ? "bg-muted text-foreground"

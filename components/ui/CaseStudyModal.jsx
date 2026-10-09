@@ -9,6 +9,8 @@ import { brandStyle } from "@/lib/brandColors";
 import { cn } from "@/lib/utils";
 import Badge from "./Badge";
 import TechIcon from "./TechIcon";
+import CaseStudyStory from "./CaseStudyStory";
+import { chaptersFor } from "@/lib/caseStudyChapters";
 
 const EASE = [0.22, 1, 0.36, 1];
 
@@ -33,11 +35,16 @@ function Block({ children, delay = 0, reduceMotion, className }) {
  */
 export default function CaseStudyModal({ project, onClose }) {
   const panelRef = useRef(null);
-  /** "loading" | "loaded" | "error" — an absent board must not hang on a skeleton. */
+  /** "loading" | "loaded" | "error" - an absent board must not hang on a skeleton. */
   const [imageState, setImageState] = useState("loading");
   const [mounted, setMounted] = useState(false);
   const reduceMotion = useReducedMotion();
   const open = Boolean(project);
+  // Authored chapters when they exist, otherwise derived from the project's
+  // own description, points and stages. The walkthrough replaces the embedded
+  // board rather than sitting on top of it.
+  const chapters = chaptersFor(project);
+  const hasBrief = chapters.length > 0;
 
   // Portalled to <body> so the page's `z-10` wrapper and the decorative grid
   // overlay can't paint over the dialog.
@@ -104,7 +111,7 @@ export default function CaseStudyModal({ project, onClose }) {
             {/* Sticky bar keeps the close button reachable down a long board. */}
             <div className="sticky top-0 z-20 flex items-center justify-between gap-4 h-14 px-5 md:px-8 border-b border-border/60 bg-card/90 backdrop-blur-md">
               <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground truncate">
-                {project.type === "live" ? "Demo App" : "Case Study"}
+                {project.type === "live" ? "MVP App" : "Case Study"}
                 <span className="mx-2 opacity-40">/</span>
                 {project.title}
               </span>
@@ -158,7 +165,7 @@ export default function CaseStudyModal({ project, onClose }) {
                         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--brand-live)] opacity-70" />
                         <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--brand-live)]" />
                       </span>
-                      Demo App
+                      MVP App
                       <ArrowUpRight
                         className="brand-icon w-4 h-4"
                         aria-hidden="true"
@@ -197,8 +204,24 @@ export default function CaseStudyModal({ project, onClose }) {
                 </div>
               </Block>
 
-              {/* What I did */}
-              {project.points?.length ? (
+              {/* Condensed walkthrough - the few points that carry the story.
+                  Only projects with authored chapters get one; everything
+                  else falls through to the board below. */}
+              {hasBrief ? (
+                <Block
+                  reduceMotion={reduceMotion}
+                  delay={0.04}
+                  className="space-y-4"
+                >
+                  <h3 className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+                    Walkthrough
+                  </h3>
+                  <CaseStudyStory chapters={chapters} />
+                </Block>
+              ) : null}
+
+              {/* What I did - only when the walkthrough isn't already saying it. */}
+              {!hasBrief && project.points?.length ? (
                 <Block
                   reduceMotion={reduceMotion}
                   delay={0.06}
@@ -273,7 +296,7 @@ export default function CaseStudyModal({ project, onClose }) {
               ) : null}
 
               {/* The board itself */}
-              {project.full ? (
+              {project.full && !hasBrief ? (
                 <Block
                   reduceMotion={reduceMotion}
                   delay={0.24}
@@ -324,7 +347,7 @@ export default function CaseStudyModal({ project, onClose }) {
                       </div>
 
                       <p className="text-xs text-muted-foreground/60">
-                        Long board — scroll to read, or open it full size above.
+                        Long board - scroll to read, or open it full size above.
                       </p>
                     </>
                   )}

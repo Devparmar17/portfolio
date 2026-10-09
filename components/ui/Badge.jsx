@@ -6,7 +6,7 @@ const variants = {
   /* Mono category label. */
   category:
     "font-mono text-[10px] uppercase tracking-wider text-muted-foreground font-medium bg-muted px-2 py-1 rounded",
-  /* Accented marker — "Featured", "Ongoing". */
+  /* Accented marker - "Featured", "Ongoing". */
   accent:
     "inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-primary/10 text-primary text-[10px] font-mono uppercase font-semibold",
   /* Pill used on cards, e.g. a CGPA or "Verified". */

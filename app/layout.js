@@ -1,12 +1,13 @@
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
+import { Poppins } from "next/font/google";
 
 import ThemeProvider from "@/components/providers/ThemeProvider";
 import { contact, profile, siteUrl, socials } from "@/data/portfolio";
 import "./globals.css";
 
 const description =
-  "Dev Parmar is a UI/UX Designer and Frontend Developer with a Computer Engineering background — user research, user flows, wireframing, prototyping, and UI design in Figma, HTML, CSS, and JavaScript.";
+  "Dev Parmar is a UI/UX Designer and Frontend Developer with a Computer Engineering background - user research, user flows, wireframing, prototyping, and UI design in Figma, HTML, CSS, and JavaScript.";
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
@@ -15,7 +16,7 @@ export const metadata = {
     template: "%s | Dev Parmar",
   },
   description,
-  applicationName: "Dev Parmar — Portfolio",
+  applicationName: "Dev Parmar - Portfolio",
   authors: [{ name: profile.name }],
   creator: profile.name,
   publisher: profile.name,
@@ -35,7 +36,7 @@ export const metadata = {
     type: "website",
     locale: "en_US",
     url: siteUrl,
-    siteName: "Dev Parmar — Portfolio",
+    siteName: "Dev Parmar - Portfolio",
     title: "Dev Parmar | UI/UX Designer & Frontend Developer",
     description,
   },
@@ -76,12 +77,20 @@ const personSchema = {
     .map((s) => s.url),
 };
 
+/* Case-study pages are set in Poppins; the rest of the site keeps Geist. */
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-poppins",
+  display: "swap",
+});
+
 export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${GeistSans.variable} ${GeistMono.variable}`}
+      className={`${GeistSans.variable} ${GeistMono.variable} ${poppins.variable}`}
     >
       <body className="font-sans antialiased">
         {/*
@@ -101,7 +110,7 @@ export default function RootLayout({ children }) {
         <ThemeProvider>{children}</ThemeProvider>
         <script
           type="application/ld+json"
-          // Static, locally-authored object — no user input reaches this.
+          // Static, locally-authored object - no user input reaches this.
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
         />
       </body>

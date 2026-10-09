@@ -1,8 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 import { brandStyle } from "@/lib/brandColors";
 import { cn } from "@/lib/utils";
+import { chaptersFor } from "@/lib/caseStudyChapters";
 import Badge from "./Badge";
 import ProjectCover from "./ProjectCover";
 import TechIcon from "./TechIcon";
@@ -19,7 +21,7 @@ function LiveDot({ className }) {
 
 /**
  * Card artwork. Uses the cover image when one exists, otherwise draws a
- * blueprint plate with the project glyph — so a project without artwork
+ * blueprint plate with the project glyph - so a project without artwork
  * still reads as deliberate.
  */
 function ProjectMedia({ project }) {
@@ -31,7 +33,7 @@ function ProjectMedia({ project }) {
         /* A real screenshot, if one is ever supplied, wins over the artwork. */
         <Image
           src={project.cover}
-          alt={`${project.title} — ${project.subtitle}`}
+          alt={`${project.title} - ${project.subtitle}`}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105"
@@ -48,7 +50,7 @@ function ProjectMedia({ project }) {
           variant="category"
           className="bg-background/90 backdrop-blur-sm shadow-sm"
         >
-          {isLive ? "Demo App" : "Case Study"}
+          {isLive ? "MVP App" : "Case Study"}
         </Badge>
 
         {isLive ? (
@@ -73,16 +75,19 @@ function ProjectMedia({ project }) {
 /**
  * Call-to-action rules, derived entirely from the data:
  *
- *   liveUrl        → "● Demo App ↗"        (primary, opens the running app)
+ *   liveUrl        → "● MVP App ↗"        (primary, opens the running app)
  *   behanceUrl     → "View Case Study ↗"   (opens the Behance gallery)
  *   no behanceUrl  → "View Case Study ↗"   (opens the in-site detail view)
  *
  * The first button in that order is the primary one. No repository links.
  */
-export default function ProjectCard({ project, onOpenDetail }) {
+export default function ProjectCard({ project }) {
   const isLive = project.type === "live";
   const hasLive = isLive && Boolean(project.liveUrl);
   const hasBehance = Boolean(project.behanceUrl);
+  // The study is viewable in-site whenever the project has content of its
+  // own. Campus Shoes has none, so its Behance gallery stays the only route.
+  const hasStudy = chaptersFor(project).length > 0;
   // The case-study button is primary unless a running app outranks it.
   const caseStudyIsPrimary = !hasLive;
 
@@ -137,14 +142,28 @@ export default function ProjectCard({ project, onOpenDetail }) {
               className="inline-flex items-center justify-center gap-2 h-10 px-5 rounded-full bg-foreground text-background text-sm font-semibold shadow-sm transition-all duration-200 hover:bg-foreground/90 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               <LiveDot />
-              Demo App
+              MVP App
               <ArrowUpRight className="brand-icon w-4 h-4" aria-hidden="true" />
-              <span className="sr-only">— opens {project.title} in a new tab</span>
+              <span className="sr-only">- opens {project.title} in a new tab</span>
             </a>
           ) : null}
 
-          {hasBehance ? (
-            /* The case study lives on Behance — send people straight there. */
+          {hasStudy ? (
+            /* The study has a page of its own. */
+            <Link
+              href={`/work/${project.slug}`}
+              className={cn(
+                ctaBase,
+                caseStudyIsPrimary ? primaryClasses : secondaryClasses,
+              )}
+            >
+              View Case Study
+              <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
+              <span className="sr-only">- {project.title}</span>
+            </Link>
+          ) : hasBehance ? (
+            /* Nothing to show in-site for this one, so its gallery is the
+               only honest route to the work. */
             <a
               href={project.behanceUrl}
               target="_blank"
@@ -158,23 +177,10 @@ export default function ProjectCard({ project, onOpenDetail }) {
               View Case Study
               <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
               <span className="sr-only">
-                — {project.title}, opens Behance in a new tab
+                - {project.title}, opens Behance in a new tab
               </span>
             </a>
-          ) : (
-            <button
-              type="button"
-              onClick={() => onOpenDetail(project)}
-              className={cn(
-                ctaBase,
-                caseStudyIsPrimary ? primaryClasses : secondaryClasses,
-              )}
-            >
-              View Case Study
-              <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
-              <span className="sr-only">— {project.title}</span>
-            </button>
-          )}
+          ) : null}
 
         </div>
       </div>

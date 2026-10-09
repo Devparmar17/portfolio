@@ -7,17 +7,17 @@ const base =
   "focus-visible:ring-offset-2 focus-visible:ring-offset-background";
 
 const variants = {
-  /* Filled pill — the primary call to action. */
+  /* Filled pill - the primary call to action. */
   primary:
     "rounded-full bg-foreground text-background hover:bg-foreground/90 border-0 px-6 shadow-sm active:scale-95",
-  /* Outlined pill — secondary actions sitting next to a primary. */
+  /* Outlined pill - secondary actions sitting next to a primary. */
   outline:
     "rounded-full border border-border/80 bg-background text-muted-foreground " +
     "hover:text-foreground hover:bg-muted/50 px-6 shadow-sm active:scale-95",
-  /* Square solid button — used in the navbar. */
+  /* Square solid button - used in the navbar. */
   solid:
     "rounded-md bg-primary text-primary-foreground hover:bg-primary/90 px-4 shadow-sm active:scale-[0.98]",
-  /* Bare button — theme toggle, menu trigger. */
+  /* Bare button - theme toggle, menu trigger. */
   ghost:
     "rounded-md text-muted-foreground hover:text-foreground hover:bg-accent",
 };
