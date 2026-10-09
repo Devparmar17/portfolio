@@ -21,7 +21,7 @@ import {
 /* Sections                                                                    */
 /* -------------------------------------------------------------------------- */
 
-function Hero({ project }) {
+function Hero({ project, boardInline }) {
   const reduceMotion = useReducedMotion();
   const cs = project.caseStudy;
 
@@ -54,7 +54,7 @@ function Hero({ project }) {
           </Rise>
         ) : null}
 
-        {project.behanceUrl || project.liveUrl ? (
+        {project.behanceUrl || project.liveUrl || (project.full && !boardInline) ? (
           <Rise delay={0.2} className="mt-9 flex flex-wrap gap-3">
             {project.behanceUrl ? (
               <a
@@ -65,6 +65,18 @@ function Hero({ project }) {
               >
                 <TechIcon name="behance" className="w-4 h-4" strokeWidth={2} />
                 Full case study on Behance
+                <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
+              </a>
+            ) : null}
+
+            {project.full && !boardInline ? (
+              <a
+                href={project.full}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-full border border-border/80 bg-background text-sm font-medium text-muted-foreground shadow-sm transition-all duration-200 hover:text-foreground hover:bg-muted/50 active:scale-95"
+              >
+                Full board
                 <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
               </a>
             ) : null}
@@ -594,7 +606,7 @@ export default function CaseStudyView({ project, next }) {
   return (
     <div className="font-display">
       <ScrollProgress />
-      <Hero project={project} />
+      <Hero project={project} boardInline={Boolean(project.full) && !screens?.length} />
 
       <Overview index={step()} project={project} />
 

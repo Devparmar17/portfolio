@@ -5,7 +5,6 @@ import Image from "next/image";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "framer-motion";
 
 import { profile, workflow } from "@/data/portfolio";
-import { BRAND_COLORS } from "@/lib/brandColors";
 import { cn } from "@/lib/utils";
 import TechIcon from "./TechIcon";
 
@@ -18,17 +17,34 @@ const STAGE_BEAT_MS = 700;
 /** Rest after the last skill before starting over. */
 const REST_MS = 3200;
 
-/** Skills without a brand of their own borrow a colour for the stage. */
-const STAGE_ACCENT = { think: "var(--brand-figma)", build: "var(--brand-vscode)" };
+/**
+ * Four accents in rotation: orange, blue, purple, yellow.
+ *
+ * Taking the colour from the skill's own brand looked right in theory but
+ * read as a fault in practice - several skills share a hue (CSS, VS Code and
+ * Figma are all blues), so the bubble kept showing the same colour twice in a
+ * row. Rotating by position guarantees neighbours always differ.
+ */
+const ACCENT_CYCLE = [
+  "var(--brand-figma)", // orange
+  "var(--brand-external)", // blue
+  "var(--brand-visualstudio)", // purple
+  "var(--brand-javascript)", // yellow
+];
 
-/** Every skill in the portfolio, in order, with its mode and brand colour. */
-const SEQUENCE = workflow.flatMap((stage) =>
-  stage.skills.map((skill) => ({
-    ...skill,
-    mode: stage.mode,
-    accent: BRAND_COLORS[skill.icon] ?? STAGE_ACCENT[stage.mode],
-  })),
-);
+/** Every skill in the portfolio, in order, with its mode and accent. */
+const SEQUENCE = workflow
+  .flatMap((stage) =>
+    stage.skills.map((skill) => ({ ...skill, mode: stage.mode })),
+  )
+  .map((skill, i, all) => {
+    let accent = ACCENT_CYCLE[i % ACCENT_CYCLE.length];
+    // The list loops, so the last entry must not match the first either.
+    if (i === all.length - 1 && accent === ACCENT_CYCLE[0]) {
+      accent = ACCENT_CYCLE[1];
+    }
+    return { ...skill, accent };
+  });
 
 /** The brand colour of the skill currently in mind. */
 const ACCENT = "var(--mind-accent)";

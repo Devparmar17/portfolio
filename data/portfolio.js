@@ -327,7 +327,11 @@ export const projects = [
     status: "",
     icon: "home",
     cover: "",
-    full: "",
+    full: "/images/projects/apna-pg-full.jpg",
+    fullWidth: 785,
+    fullHeight: 32768,
+    fullAlt:
+      "APNA PG case study board - project overview, problem statement, stakeholders, design process, timeline, secondary and primary research, personas, empathy map, journey map, card sorting, user flows, design system and final screens.",
     description:
       "A transparent way to find paying-guest accommodation. I ran user research to surface the real pain points in the PG search process, then designed flows around verified listings, honest reviews, and clear cost breakdowns.",
     points: [
@@ -338,20 +342,171 @@ export const projects = [
     tech: ["User Research", "User Flows", "Wireframing", "Figma"],
     contribution: "Research · Flows · Wireframes",
     /**
-     * Only what the project record already states. The three features below
-     * are the solution elements named in `description` and `points`.
-     *
-     * Missing, and not inventable: the problem statement, the research
-     * findings behind "key pain points", personas, a journey map and UI
-     * screens. The Behance gallery holds them; it blocks automated reading,
-     * and the live app keeps its screens behind a demo sign-in.
+     * Taken from the uploaded APNA PG board: the problem statement, the five
+     * primary-research findings (percentages included), both personas, the
+     * five-stage journey map and the final screens are all the board's own.
      */
     caseStudy: {
       overview: {
-        goal: "Make finding paying-guest accommodation transparent, so the real cost and quality of a listing are clear before anyone commits.",
-        role: "Working Product / Live Application",
+        goal: "Make finding a paying-guest room transparent: real listings, the full cost up front, and enough proof of the place to decide without a broker.",
+        role: "UX Research / UI Design",
         timeline: "3 months",
-        tools: ["Figma", "User Research", "User Flows", "Wireframing"],
+        tools: ["Figma", "Surveys", "Interviews", "Empathy Mapping", "Wireframing"],
+      },
+      chapters: [
+        {
+          kind: "problem",
+          label: "The Problem",
+          title: "Finding a PG in a new city is guesswork",
+          body: "Finding a PG in a new state can be hard due to high rent, poor facilities, safety issues, hidden charges, and sharing problems with strangers who have different habits or food preferences.",
+        },
+        {
+          kind: "quote",
+          label: "What I Set Out To Do",
+          quote:
+            "Truly understanding the everyday struggles of students and professionals, like high rent, unhealthy food, and safety concerns, and creating solutions that directly ease those pain points.",
+          tags: ["Discover", "Empathize", "Define", "Ideate", "Design & Test"],
+        },
+        {
+          kind: "personas",
+          label: "Who It Is For",
+          title: "Two residents, two budgets",
+          personas: [
+            {
+              name: "Avasar Savalia",
+              role: "21 - lives in a 2-sharing PG near Bopal",
+              meta: "Rent around Rs 14,000 - stayed 8 months",
+              pains: [
+                "Wrong rent information",
+                "Lack of transparency about extra charges",
+              ],
+              needs: [
+                "Furnished room",
+                "Reliable Wi-Fi",
+                "Strong security",
+                "24/7 water supply",
+                "Near to office",
+              ],
+            },
+            {
+              name: "Dhruvil",
+              role: "20 - student, found his PG through brokers",
+              meta: "Budget Rs 12,000 - Rs 15,000 a month",
+              pains: [
+                "Often spends more than the planned budget",
+                "Meal timings were not informed clearly",
+                "Food preferences not considered",
+                "Hard to trust a PG without proper visuals or proof",
+              ],
+              needs: [
+                "Clear PG options within budget range",
+                "Offers and discounts to reduce cost",
+                "Proper security system",
+                "360 degree room tour to decide faster",
+                "Nearby transport facilities",
+              ],
+            },
+          ],
+        },
+        {
+          kind: "solution",
+          label: "The Solution",
+          title: "Answer the questions a broker currently answers",
+          body: "Every opportunity in the journey map points the same way: show what is really there, and show what it really costs, before anyone pays a deposit.",
+          bullets: [
+            "Verified listings with real photos and resident reviews",
+            "360 degree room tours, the feature 96% of respondents asked for",
+            "The full cost shown up front, including what is and is not included",
+            "Clear house rules and contracts before the deposit, not after",
+            "Service guarantees and maintenance tracking once moved in",
+            "Fast answers and simple refunds on the way out",
+          ],
+        },
+        {
+          kind: "screens",
+          label: "The Screens",
+          title: "Apna PG",
+          shots: [
+            {
+              src: "/images/projects/apna-ui-onboarding.webp",
+              width: 785,
+              height: 485,
+              tab: "Onboarding",
+              alt: "Apna PG splash screen and two onboarding screens reading 'Find your best stay with Apna PG' with a Let's Explore button.",
+              caption: "Splash and onboarding.",
+            },
+            {
+              src: "/images/projects/apna-ui-auth.webp",
+              width: 785,
+              height: 480,
+              tab: "Sign in",
+              alt: "Login screen with email and password, a four-digit phone verification screen, and a create-account form.",
+              caption: "Login, phone verification, and account creation.",
+            },
+            {
+              src: "/images/projects/apna-ui-browse.webp",
+              width: 785,
+              height: 535,
+              tab: "Browse",
+              alt: "Home screen with featured stays and a map, a notifications screen showing rent and maintenance alerts, and a filtered listing view with prices per month.",
+              caption: "Finding a stay: search, alerts, and filtered listings.",
+            },
+          ],
+        },
+      ],
+      /** Primary research. The percentages are the board's, not estimates. */
+      insights: [
+        {
+          label: "80% live in a PG",
+          body: "Most respondents currently live in a PG, so the survey reflects real residents rather than prospective ones.",
+        },
+        {
+          label: "86% hit fake ads",
+          body: "Fake advertisements and misleading information are the most reported problem when searching for a PG.",
+        },
+        {
+          label: "Rent leads the pain",
+          body: "High rent is the biggest challenge, followed by fake ads, safety, hidden charges, food quality and roommate problems.",
+        },
+        {
+          label: "96% want a 360 tour",
+          body: "A 360 degree room tour would help them trust and choose a PG faster - transparency beats persuasion.",
+        },
+      ],
+      journey: {
+        label: "From arriving in the city to moving out",
+        stages: [
+          {
+            stage: "Arrival in City",
+            feeling: "Confused - searching for a PG",
+            pain: "Misleading information",
+            opportunity: "Verified listings, real photos, user reviews",
+          },
+          {
+            stage: "Viewing / Shortlisting",
+            feeling: "Easy and done fast - visiting PGs",
+            pain: "Hidden charges, false promises",
+            opportunity: "Show all costs up front",
+          },
+          {
+            stage: "Finalizing / Moving In",
+            feeling: "Nervous - paying the deposit",
+            pain: "Unexpected costs, unclear rules",
+            opportunity: "A list of what is included, and clear rules",
+          },
+          {
+            stage: "Daily Living",
+            feeling: "Disappointed, frustrated",
+            pain: "Poor food, unclean rooms, Wi-Fi and safety",
+            opportunity: "Service guarantees and maintenance",
+          },
+          {
+            stage: "Long-Term / Exit",
+            feeling: "Angry, helpless",
+            pain: "No help, and hard to get money back",
+            opportunity: "Fast answers, simple refunds",
+          },
+        ],
       },
       features: [
         {
@@ -366,7 +521,31 @@ export const projects = [
           title: "Clear cost breakdowns",
           body: "The full cost is broken down up front, with no charges surfacing later.",
         },
+        {
+          title: "360 degree room tours",
+          body: "See the actual room before travelling to it, or before paying for it.",
+        },
+        {
+          title: "Support and maintenance",
+          body: "Raise a ticket, track a complaint, and reach emergency contacts from the app.",
+        },
       ],
+      outcome: {
+        decisions: [
+          "Lead with proof - photos, tours and reviews - because trust is the thing that is missing.",
+          "Put the whole cost on the listing, since hidden charges were the most common complaint.",
+          "Carry the experience past move-in, where the journey map showed the sharpest drop in mood.",
+        ],
+        impact: [
+          "Verified listings should cut the wasted visits caused by fake ads.",
+          "Up-front costs should reduce the budget overruns the secondary research describes.",
+          "A 360 degree tour should shorten the time it takes to commit to a room.",
+        ],
+        learnings: [
+          "Residents did not ask for more listings - they asked to believe the ones they saw.",
+          "The worst moments came after moving in, not while searching.",
+        ],
+      },
     },
     liveUrl: "https://pg-finder-booking.vercel.app/",
     behanceUrl:
@@ -723,7 +902,11 @@ export const projects = [
     status: "",
     icon: "bus",
     cover: "",
-    full: "",
+    full: "/images/projects/kid-cab-full.jpg",
+    fullWidth: 1400,
+    fullHeight: 22205,
+    fullAlt:
+      "Uber App For Kids case study board - project overview, design process, problem statement, competitive analysis, primary research, personas, empathy mapping, information architecture, user flow and final screens.",
     description:
       "A booking app built around one question: can a parent trust this ride? Live tracking and driver verification sit at the centre of the experience, keeping the interface calm and the safety signals loud.",
     points: [
@@ -733,6 +916,177 @@ export const projects = [
     stages: ["Concept", "UI Design", "Prototyping", "Build"],
     tech: ["UI Design", "Prototyping", "Figma", "Frontend"],
     contribution: "Design · Prototype · Build",
+    /**
+     * Taken from the uploaded "Uber App For Kids" board: the problem
+     * statement, the 30-response survey numbers, both personas and the
+     * annotated screens are all the board's own.
+     */
+    caseStudy: {
+      overview: {
+        goal: "A ride-booking app a child can actually use, with the control and visibility a parent needs to allow it.",
+        role: "UX/UI Design",
+        timeline: "3 months",
+        tools: ["Figma", "Surveys", "Empathy Mapping", "Wireframing"],
+      },
+      chapters: [
+        {
+          kind: "problem",
+          label: "The Problem",
+          title: "Ride apps are not built for children",
+          body: "Children face problems using transport booking apps because the UI is not simple, navigation is confusing, and there is too much unnecessary information. They struggle to understand the app, track their ride, and get important details. There is a need for a simple, easy-to-use, child-friendly app with parental control for safe booking and clear tracking.",
+        },
+        {
+          kind: "quote",
+          label: "The Brief",
+          quote:
+            "This project designs a child-friendly ride-booking app to solve issues like complex UI, confusing navigation, and lack of safety in existing apps. It focuses on simple design, clear tracking, and parental controls, ensuring easy use for children while providing safety, trust, and real-time monitoring features for parents.",
+          tags: ["Discover", "Define", "Design", "Develop", "Deliver"],
+        },
+        {
+          kind: "personas",
+          label: "Who It Is For",
+          title: "A child and a parent, on the same ride",
+          personas: [
+            {
+              name: "Yug Parmar",
+              role: "11 - 6th standard",
+              meta: "Goals: book a ride easily, track it clearly, feel safe",
+              pains: [
+                "Confusing app interface",
+                "Too many options and buttons",
+                "Hard to understand instructions",
+                "Cannot track the ride properly",
+              ],
+              needs: [
+                "Simple UI - big buttons, less text",
+                "Clear instructions",
+                "Easy tracking system",
+              ],
+            },
+            {
+              name: "Mitali Parmar",
+              role: "36 - mother",
+              meta: "Goals: ensure safety, track in real time, get alerts",
+              pains: [
+                "Lack of trust in transport apps",
+                "No proper tracking updates",
+                "Hard to control the child's bookings",
+                "Safety concerns",
+              ],
+              needs: [
+                "Real-time GPS tracking",
+                "Notifications for pickup and drop",
+                "Parental control features",
+                "Emergency contact system",
+              ],
+            },
+          ],
+        },
+        {
+          kind: "solution",
+          label: "The Solution",
+          title: "Simple for the child, accountable to the parent",
+          body: "The child gets a screen with almost nothing on it. The parent gets the OTP, the tracking and the payment. Neither has to use the other's version.",
+          bullets: [
+            "Pick a ride by picture and price, not by menu",
+            "Search by typing or by voice",
+            "A security OTP the parent confirms before the ride starts",
+            "SOS and call-parent on every screen during the ride",
+            "Live tracking from school to home",
+            "Payment only the parent can approve",
+            "Ride confirmation sent to both of them",
+          ],
+        },
+        {
+          kind: "screens",
+          label: "The Screens",
+          title: "Kid Cab",
+          shots: [
+            {
+              src: "/images/projects/kid-ui-home.webp",
+              width: 1400,
+              height: 1423,
+              tab: "Choose a ride",
+              alt: "Home screen titled Pick Your Ride with a search field and cards for Red Cab, Auto Rickshaw, Bike Ride and Big Van, each showing price and seats.",
+              caption: "One screen, four choices, each with its price and seat count.",
+            },
+            {
+              src: "/images/projects/kid-ui-track.webp",
+              width: 1400,
+              height: 1254,
+              tab: "Verify & track",
+              alt: "Booking status screen showing a four-digit security OTP and driver details, a live map tracking the ride with SOS and Call Parent buttons, and the parent's authorise-and-start-ride screen.",
+              caption: "The OTP goes to the parent; the child sees the driver and the map.",
+            },
+            {
+              src: "/images/projects/kid-ui-done.webp",
+              width: 1400,
+              height: 1220,
+              tab: "Arrive & pay",
+              alt: "Arrival screen showing the route and fare summary with an approve-and-pay action, and a ride-completed screen reading You've Arrived with a rating prompt and payment confirmed by parent.",
+              caption: "Only the parent pays; both of them get the confirmation.",
+            },
+          ],
+        },
+      ],
+      /** From the 30-response survey on the board. Counts, not percentages. */
+      insights: [
+        {
+          label: "20 of 30 have used a cab",
+          body: "Most children surveyed had already ridden in an Uber or Ola, so the app is not introducing the idea, only the independence.",
+        },
+        {
+          label: "13 of 30 travel alone",
+          body: "Nearly half already make journeys without an adult, which is exactly where the safety gap sits.",
+        },
+        {
+          label: "Tracking beats everything",
+          body: "Asked what matters most in the app, real-time tracking took 13 of 30 - ahead of easy booking (7), safety features (6) and cost (4).",
+        },
+        {
+          label: "Pay per ride, not monthly",
+          body: "Parents preferred paying per ride (13) over a subscription (7), a prepaid wallet (5) or cash (5).",
+        },
+      ],
+      features: [
+        {
+          title: "Pick by picture",
+          body: "Red cab, auto, bike or van - chosen visually, with the price on the card.",
+        },
+        {
+          title: "Security OTP",
+          body: "A four-digit code the parent authorises before the ride can start.",
+        },
+        {
+          title: "Live tracking",
+          body: "The route from school to home, visible to both child and parent.",
+        },
+        {
+          title: "SOS and call parent",
+          body: "Both reachable on the ride screen without leaving it.",
+        },
+        {
+          title: "Parent-only payment",
+          body: "The fare summary is approved by the parent, never by the child.",
+        },
+      ],
+      outcome: {
+        decisions: [
+          "Split the product in two: the child books, the parent authorises.",
+          "Put safety controls on the ride screen itself rather than in a menu.",
+          "Lead the interface with pictures and price, since the audience is eleven.",
+        ],
+        impact: [
+          "Parent-confirmed OTP should close the gap the survey found around trust.",
+          "Live tracking answers the feature parents ranked highest.",
+          "A simplified booking screen should reduce the confusion the personas describe.",
+        ],
+        learnings: [
+          "The child and the parent want opposite things - simplicity and control - and the design has to serve both without compromising either.",
+          "Competitive analysis of YouTube Kids and Netflix Kids showed the pattern: a strong parent setup is what makes a kids mode trustworthy.",
+        ],
+      },
+    },
     liveUrl: "",
     behanceUrl:
       "https://www.behance.net/gallery/254733255/A-Safer-Ride-for-Kids-UXUI-Case-Study",
