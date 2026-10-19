@@ -113,6 +113,7 @@ export const coreTools = [
   { name: "Visual Studio", icon: "visualstudio" },
   { name: "Claude", icon: "claude" },
   { name: "Google Gemini", icon: "gemini" },
+  { name: "Vibe Coding", icon: "vibe" },
 ];
 
 /**
@@ -174,6 +175,7 @@ export const workflow = [
       { name: "Visual Studio", icon: "visualstudio" },
       { name: "Claude", icon: "claude" },
       { name: "Google Gemini", icon: "gemini" },
+      { name: "Vibe Coding", icon: "vibe" },
     ],
   },
 ];
@@ -233,8 +235,12 @@ export const skillGroups = [
     title: "AI Tools",
     icon: "claude",
     description: "AI woven into research, synthesis, and day-to-day build work.",
-    items: ["Claude", "Google Gemini"],
-    itemIcons: { Claude: "claude", "Google Gemini": "gemini" },
+    items: ["Claude", "Google Gemini", "Vibe Coding"],
+    itemIcons: {
+      Claude: "claude",
+      "Google Gemini": "gemini",
+      "Vibe Coding": "vibe",
+    },
   },
 ];
 
