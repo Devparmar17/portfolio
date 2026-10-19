@@ -97,10 +97,12 @@ function pickVoice(voices) {
  * should affect whether the form reports success, so failures are swallowed.
  */
 function speakThankYou(name) {
-  if (typeof window === "undefined") return;
+  if (typeof window === "undefined") return false;
 
   const synth = window.speechSynthesis;
-  if (!synth || typeof window.SpeechSynthesisUtterance !== "function") return;
+  if (!synth || typeof window.SpeechSynthesisUtterance !== "function") {
+    return false;
+  }
 
   // First name only, letters and marks, short enough to say aloud.
   const first = String(name ?? "")
@@ -141,7 +143,7 @@ function speakThankYou(name) {
   // wait for the list - but never longer than a moment.
   if (synth.getVoices().length > 0) {
     say();
-    return;
+    return true;
   }
 
   let spoken = false;
@@ -158,6 +160,7 @@ function speakThankYou(name) {
     synth.onvoiceschanged = once;
   }
   window.setTimeout(once, 600);
+  return true;
 }
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -251,6 +254,19 @@ export default function Contact() {
 
     setStatus("submitting");
 
+    /*
+     * Spoken on submit rather than on the response, so it lands with the
+     * click instead of a second or two later. The browser voice is instant
+     * because nothing has to be fetched; the hosted voice only stands in
+     * when the browser has no speech engine at all, where a short delay
+     * beats silence.
+     *
+     * This does mean the thank-you is for sending the message, not proof it
+     * arrived - if delivery fails the form still says so, plainly, in view.
+     */
+    const spokenName = values.name;
+    if (!speakThankYou(spokenName)) playHostedVoice(spokenName);
+
     try {
       const response = await fetch(ENDPOINT, {
         method: "POST",
@@ -265,12 +281,6 @@ export default function Contact() {
       }
 
       setStatus("success");
-      // Read the name before the form is cleared. The hosted voice wins when
-      // one is configured; otherwise the browser's own neural voice speaks.
-      const spokenName = values.name;
-      playHostedVoice(spokenName).then((played) => {
-        if (!played) speakThankYou(spokenName);
-      });
       setValues(EMPTY);
       setSentCount((count) => count + 1);
     } catch (cause) {
