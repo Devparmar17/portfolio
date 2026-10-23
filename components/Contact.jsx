@@ -214,8 +214,10 @@ function Field({ id, label, error, children, hint }) {
 
 const inputClasses =
   "w-full rounded-lg border border-border/80 bg-background px-4 py-3 text-sm text-foreground " +
-  "placeholder:text-muted-foreground/60 transition-colors " +
-  "focus:outline-none focus:border-ring focus-visible:outline-none " +
+  "placeholder:text-muted-foreground/60 " +
+  "transition-[color,background-color,border-color,box-shadow] duration-200 ease-out " +
+  "focus:outline-none focus:border-ring focus:ring-2 focus:ring-ring/20 " +
+  "focus-visible:outline-none " +
   "aria-[invalid=true]:border-destructive";
 
 export default function Contact() {
@@ -454,9 +456,13 @@ export default function Contact() {
                   >
                     <motion.span
                       className="shrink-0 text-[var(--brand-live)]"
-                      initial={reduceMotion ? false : { scale: 0.4, rotate: -20 }}
-                      animate={{ scale: 1, rotate: 0 }}
-                      transition={{ type: "spring", stiffness: 380, damping: 18, delay: 0.1 }}
+                      initial={reduceMotion ? false : { scale: 0.6, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{
+                        duration: 0.4,
+                        delay: 0.1,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
                     >
                       <CheckCircle2 className="h-5 w-5" aria-hidden="true" />
                     </motion.span>

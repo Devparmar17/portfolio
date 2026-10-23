@@ -98,6 +98,9 @@ export default function ProjectCard({ project }) {
   const ctaBase = cn(
     "inline-flex items-center justify-center gap-2 h-10 px-5 rounded-full text-sm font-medium",
     "transition-all duration-200 active:scale-95",
+    // The arrow leans the way it points when the button is hovered.
+    "[&>svg]:transition-transform [&>svg]:duration-200 [&>svg]:ease-out",
+    "hover:[&>svg]:translate-x-0.5 hover:[&>svg]:-translate-y-0.5",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
     "focus-visible:ring-offset-2 focus-visible:ring-offset-background",
   );

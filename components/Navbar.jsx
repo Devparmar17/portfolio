@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { Menu } from "lucide-react";
 
 import { navLinks, profile } from "@/data/portfolio";
@@ -25,6 +26,7 @@ export default function Navbar() {
   const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const active = useActiveSection(SECTION_IDS);
+  const reduceMotion = useReducedMotion();
 
   // Set when a nav link starts a scroll, so the header does not retract out
   // from under the control that was just clicked.
@@ -139,8 +141,16 @@ export default function Navbar() {
                       )}
                     >
                       {isActive ? (
-                        <span
+                        /*
+                         * One pill, shared across the links by layoutId, so it
+                         * travels to the section you scroll into rather than
+                         * blinking out of one link and into the next. Eased,
+                         * not sprung - it arrives and stops.
+                         */
+                        <motion.span
+                          layoutId={reduceMotion ? undefined : "nav-active"}
                           className="absolute inset-0 bg-muted/60 rounded-md -z-10"
+                          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                           aria-hidden="true"
                         />
                       ) : null}

@@ -1,3 +1,7 @@
+"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
+
 import { cn } from "@/lib/utils";
 import Reveal from "./Reveal";
 
@@ -13,10 +17,19 @@ export default function SectionHeading({
   className,
   titleClassName,
 }) {
+  const reduceMotion = useReducedMotion();
+
   return (
     <Reveal className={cn("space-y-4", className)}>
       <div className="flex items-center gap-3">
-        <span className="w-8 h-px bg-primary/50" />
+        {/* The rule draws out from the left as the heading settles. */}
+        <motion.span
+          className="w-8 h-px bg-primary/50 origin-left"
+          initial={reduceMotion ? false : { scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true, amount: 0.6 }}
+          transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+        />
         <span className="font-mono text-xs md:text-sm text-primary uppercase tracking-widest font-medium">
           {index}. / {label}
         </span>
