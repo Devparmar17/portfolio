@@ -193,10 +193,6 @@ const glyphs = {
       <path d="m5.3 5.3 4.2 4.2M14.5 14.5l4.2 4.2M18.7 5.3l-4.2 4.2M9.5 14.5l-4.2 4.2" />
     </>
   ),
-  /* Gemini's four-pointed spark. */
-  gemini: (
-    <path d="M12 2c0 5.5 4.5 10 10 10-5.5 0-10 4.5-10 10 0-5.5-4.5-10-10-10 5.5 0 10-4.5 10-10Z" />
-  ),
   /* Vibe coding: code brackets with a prompt spark where the typing used to be. */
   vibe: (
     <>

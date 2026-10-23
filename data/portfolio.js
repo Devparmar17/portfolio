@@ -112,7 +112,6 @@ export const coreTools = [
   { name: "VS Code", icon: "vscode" },
   { name: "Visual Studio", icon: "visualstudio" },
   { name: "Claude", icon: "claude" },
-  { name: "Google Gemini", icon: "gemini" },
   { name: "Vibe Coding", icon: "vibe" },
 ];
 
@@ -174,7 +173,6 @@ export const workflow = [
       { name: "VS Code", icon: "vscode" },
       { name: "Visual Studio", icon: "visualstudio" },
       { name: "Claude", icon: "claude" },
-      { name: "Google Gemini", icon: "gemini" },
       { name: "Vibe Coding", icon: "vibe" },
     ],
   },
@@ -235,12 +233,8 @@ export const skillGroups = [
     title: "AI Tools",
     icon: "claude",
     description: "AI woven into research, synthesis, and day-to-day build work.",
-    items: ["Claude", "Google Gemini", "Vibe Coding"],
-    itemIcons: {
-      Claude: "claude",
-      "Google Gemini": "gemini",
-      "Vibe Coding": "vibe",
-    },
+    items: ["Claude", "Vibe Coding"],
+    itemIcons: { Claude: "claude", "Vibe Coding": "vibe" },
   },
 ];
 
@@ -318,7 +312,7 @@ export const projectFilters = ["All", "MVP Apps", "Case Studies"];
  *
  * Available icon keys: home, bus, map, coffee, play, shoe, figma, research,
  * wireframe, prototype, html, css, javascript, python, cpp, vscode,
- * visualstudio, git, react, nextjs, tailwind, framer, lucide, claude, gemini.
+ * visualstudio, git, react, nextjs, tailwind, framer, lucide, claude, vibe.
  */
 export const projects = [
   {
