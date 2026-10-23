@@ -14,6 +14,8 @@
 /** One accent per project, used sparingly so the grid stays neutral. */
 const ACCENTS = {
   "apna-pg": "#10b981",
+  "virasa-heritage-ai": "#9a4e36",
+  "unigo-campus-carpool": "#2563eb",
   "nescafe-campus-canteen-kiosk": "#d97706",
   "competitive-app-analysis-10-laws-of-ux": "#e11d48",
   "kidd-safer-ride-for-kids": "#f59e0b",
@@ -513,8 +515,192 @@ function HistoryMap({ accent }) {
   );
 }
 
+/** Virasa - a place on screen, its jali motif, and the lens pointed at it. */
+function Virasa({ accent }) {
+  return (
+    <g>
+      {/* Phone */}
+      <rect x="52" y="30" width="196" height="324" rx="20" fill={SURFACE} stroke={LINE} />
+      <rect x="64" y="44" width="172" height="296" rx="12" fill={INK} opacity="0.05" />
+
+      {/* Location chip */}
+      <rect x="92" y="60" width="96" height="14" rx="7" fill={INK} opacity="0.12" />
+      <circle cx="102" cy="67" r="3" fill={accent} opacity="0.8" />
+
+      {/* Greeting */}
+      <rect x="92" y="86" width="120" height="10" rx="5" fill={INK} opacity="0.4" />
+      <rect x="92" y="104" width="84" height="8" rx="4" fill={INK} opacity="0.2" />
+
+      {/* Hero place, drawn as an arched monument */}
+      <rect x="92" y="124" width="140" height="96" rx="10" fill={accent} opacity="0.14" />
+      <rect x="92" y="124" width="140" height="96" rx="10" stroke={accent} fill="none" opacity="0.45" />
+      <path
+        d="M132 200v-30a30 30 0 0 1 60 0v30"
+        stroke={accent}
+        strokeWidth="3"
+        fill="none"
+        opacity="0.85"
+      />
+      <path d="M124 200h76" stroke={accent} strokeWidth="3" opacity="0.85" />
+
+      {/* Audio story, playing */}
+      <rect x="92" y="238" width="140" height="30" rx="8" fill={INK} opacity="0.07" />
+      <rect x="92" y="238" width="140" height="30" rx="8" stroke={LINE} fill="none" />
+      <path d="M106 247l12 8-12 8z" fill={accent} opacity="0.9" />
+      <path d="M128 255h92" stroke={LINE} />
+      <path d="M128 255h40" stroke={accent} strokeWidth="3" opacity="0.8" />
+
+      {/* Rest of the feed */}
+      <rect x="92" y="282" width="140" height="22" rx="6" fill={INK} opacity="0.06" />
+      <rect x="92" y="312" width="140" height="22" rx="6" fill={INK} opacity="0.06" />
+
+      {/* Jali lattice - the motif the interface is built on */}
+      <rect x="280" y="30" width="132" height="132" rx="12" fill={INK} opacity="0.04" />
+      <rect x="280" y="30" width="132" height="132" rx="12" stroke={LINE} fill="none" />
+      <rect x="316" y="54" width="84" height="84" stroke={accent} fill="none" opacity="0.4" />
+      <rect
+        x="316"
+        y="54"
+        width="84"
+        height="84"
+        stroke={accent}
+        fill="none"
+        opacity="0.4"
+        transform="rotate(45 358 96)"
+      />
+      <circle cx="358" cy="96" r="18" stroke={accent} fill="none" opacity="0.5" />
+      <circle cx="316" cy="54" r="3" fill={accent} opacity="0.6" />
+      <circle cx="400" cy="54" r="3" fill={accent} opacity="0.6" />
+      <circle cx="316" cy="138" r="3" fill={accent} opacity="0.6" />
+      <circle cx="400" cy="138" r="3" fill={accent} opacity="0.6" />
+
+      {/* AI lens, framing what it is pointed at */}
+      <g stroke={accent} strokeWidth="3" fill="none" opacity="0.65">
+        <path d="M288 214v-16a8 8 0 0 1 8-8h16" />
+        <path d="M380 190h16a8 8 0 0 1 8 8v16" />
+        <path d="M404 306v16a8 8 0 0 1-8 8h-16" />
+        <path d="M312 330h-16a8 8 0 0 1-8-8v-16" />
+      </g>
+      <path
+        d="M346 244c0 8.8 7.2 16 16 16-8.8 0-16 7.2-16 16 0-8.8-7.2-16-16-16 8.8 0 16-7.2 16-16Z"
+        fill={accent}
+        opacity="0.5"
+      />
+
+      {/* Nearby places */}
+      {[30, 146, 262].map((y) => (
+        <g key={y}>
+          <rect x="440" y={y} width="120" height="92" rx="10" stroke={LINE} fill="none" />
+          <rect x="452" y={y + 12} width="96" height="44" rx="7" fill={INK} opacity="0.1" />
+          <rect x="452" y={y + 64} width="72" height="8" rx="4" fill={INK} opacity="0.35" />
+          <rect x="452" y={y + 78} width="48" height="6" rx="3" fill={INK} opacity="0.18" />
+        </g>
+      ))}
+    </g>
+  );
+}
+
+/** UniGo - two routes merging into one, and the verified seat at the end. */
+function UniGo({ accent }) {
+  return (
+    <g>
+      {/* Map field */}
+      <rect x="40" y="30" width="320" height="324" rx="14" fill={INK} opacity="0.06" />
+      <rect x="40" y="30" width="320" height="324" rx="14" stroke={LINE} fill="none" />
+      <path d="M40 138h320M40 246h320M148 30v324M256 30v324" stroke={LINE} opacity="0.7" />
+
+      {/* Two separate commutes */}
+      <path
+        d="M80 310c46 4 56-54 92-76"
+        stroke={accent}
+        strokeWidth="3"
+        strokeDasharray="7 6"
+        fill="none"
+        strokeLinecap="round"
+        opacity="0.55"
+      />
+      <path
+        d="M156 344c20-34 8-74 16-110"
+        stroke={accent}
+        strokeWidth="3"
+        strokeDasharray="7 6"
+        fill="none"
+        strokeLinecap="round"
+        opacity="0.55"
+      />
+
+      {/* Matched, they become one */}
+      <path
+        d="M172 234c46-22 58-66 134-104"
+        stroke={accent}
+        strokeWidth="4"
+        fill="none"
+        strokeLinecap="round"
+      />
+
+      <circle cx="80" cy="310" r="8" fill={SURFACE} stroke={accent} strokeWidth="3" />
+      <circle cx="156" cy="344" r="8" fill={SURFACE} stroke={accent} strokeWidth="3" />
+
+      {/* The match itself */}
+      <circle cx="172" cy="234" r="20" fill={accent} opacity="0.14" />
+      <circle cx="172" cy="234" r="11" fill={SURFACE} stroke={accent} strokeWidth="2.5" />
+      <path d="m166 234 4 4 8-9" stroke={accent} strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+
+      {/* Campus */}
+      <path
+        d="M286 128c0-11 9-20 20-20s20 9 20 20c0 15-20 34-20 34s-20-19-20-34z"
+        fill={accent}
+        opacity="0.22"
+      />
+      <path
+        d="M286 128c0-11 9-20 20-20s20 9 20 20c0 15-20 34-20 34s-20-19-20-34z"
+        stroke={accent}
+        strokeWidth="2.5"
+        fill="none"
+      />
+      <path d="M297 136v-13l9-6 9 6v13z" fill={accent} opacity="0.9" />
+
+      {/* Rider card: verified, with seats left */}
+      <rect x="380" y="112" width="180" height="160" rx="14" fill={SURFACE} stroke={LINE} />
+      <rect x="400" y="134" width="44" height="44" rx="12" fill={INK} opacity="0.12" />
+      <circle cx="422" cy="150" r="7" stroke={INK} strokeWidth="2" fill="none" opacity="0.5" />
+      <path d="M410 170a12 12 0 0 1 24 0" stroke={INK} strokeWidth="2" fill="none" opacity="0.5" />
+      <rect x="458" y="140" width="84" height="9" rx="4.5" fill={INK} opacity="0.4" />
+      <rect x="458" y="158" width="56" height="7" rx="3.5" fill={INK} opacity="0.2" />
+
+      {/* University verified */}
+      <rect x="400" y="196" width="140" height="30" rx="8" fill={accent} opacity="0.14" />
+      <path
+        d="m414 211 5 5 9-11"
+        stroke={accent}
+        strokeWidth="3"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <rect x="438" y="207" width="74" height="8" rx="4" fill={accent} opacity="0.7" />
+
+      {/* Seats - two taken, one open */}
+      {[0, 1, 2].map((i) => (
+        <rect
+          key={i}
+          x={400 + i * 48}
+          y="240"
+          width="36"
+          height="20"
+          rx="6"
+          fill={i < 2 ? accent : INK}
+          opacity={i < 2 ? 0.6 : 0.12}
+        />
+      ))}
+    </g>
+  );
+}
+
 const SCENES = {
   "apna-pg": ApnaPg,
+  "virasa-heritage-ai": Virasa,
+  "unigo-campus-carpool": UniGo,
   "nescafe-campus-canteen-kiosk": Nescafe,
   "competitive-app-analysis-10-laws-of-ux": UxLaws,
   "kidd-safer-ride-for-kids": KidCab,

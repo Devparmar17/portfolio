@@ -550,8 +550,7 @@ export const projects = [
     liveUrl: "https://pg-finder-booking.vercel.app/",
     behanceUrl:
       "https://www.behance.net/gallery/255609371/APNA-PG-UIUX-Case-Study",
-  },
-  {
+  },  {
     slug: "nescafe-campus-canteen-kiosk",
     title: "Nescafé",
     subtitle: "Redesigning the Nescafé Campus Experience",
@@ -842,142 +841,110 @@ export const projects = [
     liveUrl: "",
     behanceUrl:
       "https://www.behance.net/gallery/252366823/Redesigning-the-Nescaf-Campus-Experience",
-  },
-  {
-    slug: "competitive-app-analysis-10-laws-of-ux",
-    title: "Competitive App Analysis - 10 Laws of UX",
-    subtitle: "Streaming Apps Compared",
-    type: "case-study",
-    role: "UX Research / Competitive Analysis",
+  },  {
+    slug: "virasa-heritage-ai",
+    title: "Virasa",
+    subtitle: "Heritage AI",
+    type: "live",
+    role: "UX Research / UI Design",
     timeline: "3 months",
-    category: "UX Research • Competitive Analysis • 10 Laws of UX",
+    category: "UX Research • Product Design • MVP App",
     featured: true,
     status: "",
-    icon: "play",
+    icon: "map",
     cover: "",
-    full: "/images/projects/ux-laws-full.jpg",
-    fullWidth: 1400,
-    fullHeight: 16513,
-    fullAlt:
-      "Competitive app analysis board comparing JioHotstar, SonyLIV and Netflix screen by screen against each of the 10 Laws of UX.",
     description:
-      "A screen-by-screen teardown of three streaming apps - JioHotstar, SonyLIV and Netflix - measured against each of the 10 Laws of UX, with side-by-side UI comparisons and the observations behind each verdict.",
+      "A heritage guide for Indian cities, built on the finding that travellers juggle Google Maps, Search, YouTube and Instagram to understand one place. Thirty-four screens carry someone from discovery to an audio story, an AI guide and a walking route, in one app.",
     points: [
-      "Compared JioHotstar, SonyLIV and Netflix interface by interface across ten established UX principles.",
-      "Documented how each app applies - or misses - each law, supported by annotated screen comparisons.",
+      "Ran a fifteen-question bilingual survey, then built affinity maps, two personas, empathy maps and a six-stage journey map to locate where the travel experience actually breaks.",
+      "Plotted every idea on an impact-effort matrix and shipped the high-impact, low-effort end first: nearby discovery, short histories and audio stories ahead of AR and VR.",
+      "Designed and built a working 34-screen prototype, starting with Ahmedabad's old city and opening out to Jaipur, Varanasi, Hampi and Kolkata.",
     ],
-    stagesLabel: "The 10 Laws analysed",
+    stagesLabel: "Screens in the flow",
     stages: [
-      "Fitts's Law",
-      "Miller's Law",
-      "Jakob's Law",
-      "Hick's Law",
-      "Tesler's Law",
-      "Doherty Threshold",
-      "Weber's Law",
-      "Von Restorff Effect",
-      "Peak-End Rule",
-      "Aesthetic-Usability Effect",
+      "UI foundations",
+      "Welcome & personalise",
+      "Home & search",
+      "Map navigation",
+      "Place detail",
+      "Audio story",
+      "AI Lens",
+      "Heritage walk",
+      "AR time travel",
+      "Play & learn",
+      "Heritage passport",
+      "Saved & offline",
     ],
-    tech: [
-      "Competitive Analysis",
-      "Heuristic Evaluation",
-      "UX Principles",
-      "UI Comparison",
-      "Figma",
-    ],
-    contribution: "Research · Analysis",
-    liveUrl: "",
-    behanceUrl: "",
-  },
-  {
-    slug: "kidd-safer-ride-for-kids",
-    title: "Kid Cab Booking App",
-    subtitle: "A Safer Ride for Kids",
-    type: "case-study",
-    role: "UX/UI Design",
-    timeline: "3 months",
-    category: "UX Research • UI/UX Design • Case Study",
-    featured: false,
-    status: "",
-    icon: "bus",
-    cover: "",
-    full: "/images/projects/kid-cab-full.jpg",
-    fullWidth: 1400,
-    fullHeight: 22205,
-    fullAlt:
-      "Uber App For Kids case study board - project overview, design process, problem statement, competitive analysis, primary research, personas, empathy mapping, information architecture, user flow and final screens.",
-    description:
-      "A booking app built around one question: can a parent trust this ride? Live tracking and driver verification sit at the centre of the experience, keeping the interface calm and the safety signals loud.",
-    points: [
-      "Designed and developed a safe, user-friendly kids transportation app centered on secure travel.",
-      "Built features for live tracking and driver verification to increase parent trust and safety.",
-    ],
-    stages: ["Concept", "UI Design", "Prototyping", "Build"],
-    tech: ["UI Design", "Prototyping", "Figma", "Frontend"],
-    contribution: "Design · Prototype · Build",
+    tech: ["User Research", "Affinity Mapping", "Journey Mapping", "Figma", "Prototyping"],
+    contribution: "Research · Flows · UI · Prototype",
     /**
-     * Taken from the uploaded "Uber App For Kids" board: the problem
-     * statement, the 30-response survey numbers, both personas and the
-     * annotated screens are all the board's own.
+     * From the MAP research board and the live prototype. The problem
+     * statement, design opportunity, nine insights, both personas and the
+     * six-stage journey map are the board's own.
      */
     caseStudy: {
       overview: {
-        goal: "A ride-booking app a child can actually use, with the control and visibility a parent needs to allow it.",
-        role: "UX/UI Design",
+        goal: "Put navigation, nearby discovery, history and culture in one place, so understanding where you are standing does not require four apps.",
+        role: "UX Research / UI Design",
         timeline: "3 months",
-        tools: ["Figma", "Surveys", "Empathy Mapping", "Wireframing"],
+        tools: ["Figma", "FigJam", "Survey", "Affinity Mapping", "Empathy Mapping", "Journey Mapping"],
       },
       chapters: [
         {
           kind: "problem",
           label: "The Problem",
-          title: "Ride apps are not built for children",
-          body: "Children face problems using transport booking apps because the UI is not simple, navigation is confusing, and there is too much unnecessary information. They struggle to understand the app, track their ride, and get important details. There is a need for a simple, easy-to-use, child-friendly app with parental control for safe booking and clear tracking.",
+          title: "The story of a place is scattered across four apps",
+          body: "Travellers who want to explore historical and cultural places struggle to discover, navigate, and understand them because information is scattered across multiple apps such as Google Maps, Google Search, YouTube, and Instagram. This makes trip planning time-consuming and cultural information difficult to access while traveling.",
         },
         {
           kind: "quote",
-          label: "The Brief",
+          label: "The Design Opportunity",
           quote:
-            "This project designs a child-friendly ride-booking app to solve issues like complex UI, confusing navigation, and lack of safety in existing apps. It focuses on simple design, clear tracking, and parental controls, ensuring easy use for children while providing safety, trust, and real-time monitoring features for parents.",
-          tags: ["Discover", "Define", "Design", "Develop", "Deliver"],
+            "How might we create a simple, location-based travel experience that helps travellers discover hidden cultural places, navigate to them, and learn their history through short, engaging, and personalized content - all in one app?",
+          tags: ["Survey", "Affinity Mapping", "Personas", "Journey Map", "Impact / Effort"],
         },
         {
           kind: "personas",
           label: "Who It Is For",
-          title: "A child and a parent, on the same ride",
+          title: "The young explorer and the cultural traveller",
           personas: [
             {
-              name: "Yug Parmar",
-              role: "11 - 6th standard",
-              meta: "Goals: book a ride easily, track it clearly, feel safe",
+              name: "Darshan Shah",
+              role: "23 - student in Ahmedabad, weekend trips with friends",
+              meta: "High tech confidence - explores independently",
               pains: [
-                "Confusing app interface",
-                "Too many options and buttons",
-                "Hard to understand instructions",
-                "Cannot track the ride properly",
+                "Switching between many apps is frustrating",
+                "Historical information is often too long and difficult to understand",
+                "It is difficult to imagine how a place looked in the past",
+                "Hidden historical places are difficult to discover",
+                "YouTube has too much information, making the right video hard to find",
               ],
               needs: [
-                "Simple UI - big buttons, less text",
-                "Clear instructions",
-                "Easy tracking system",
+                "One app for travel, history and culture",
+                "Short and simple historical stories",
+                "A past versus present view of the same place",
+                "An AI guide that explains through conversation",
+                "Audio stories for hands-free learning while walking",
+                "Games, quizzes and badges at historical locations",
               ],
             },
             {
-              name: "Mitali Parmar",
-              role: "36 - mother",
-              meta: "Goals: ensure safety, track in real time, get alerts",
+              name: "Amit Patel",
+              role: "35 - Vadodara, travels with his family",
+              meta: "Limited vacation time, so the trip has to be planned",
               pains: [
-                "Lack of trust in transport apps",
-                "No proper tracking updates",
-                "Hard to control the child's bookings",
-                "Safety concerns",
+                "Information is spread across different platforms",
+                "It takes time to compare different places",
+                "Historical information is sometimes too detailed",
+                "Local transportation can be confusing",
+                "Authentic food recommendations are difficult to trust",
               ],
               needs: [
-                "Real-time GPS tracking",
-                "Notifications for pickup and drop",
-                "Parental control features",
-                "Emergency contact system",
+                "Complete trip planning in one place",
+                "Family-friendly recommendations",
+                "Easy historical and cultural information",
+                "Reliable local food suggestions",
+                "Simple transportation guidance",
               ],
             },
           ],
@@ -985,112 +952,327 @@ export const projects = [
         {
           kind: "solution",
           label: "The Solution",
-          title: "Simple for the child, accountable to the parent",
-          body: "The child gets a screen with almost nothing on it. The parent gets the OTP, the tracking and the payment. Neither has to use the other's version.",
+          title: "One place that answers where, how and why",
+          body: "Every insight pointed at the same gap: people do not lack information, they lack it in one place, in a form short enough to read while standing in front of the thing it describes.",
           bullets: [
-            "Pick a ride by picture and price, not by menu",
-            "Search by typing or by voice",
-            "A security OTP the parent confirms before the ride starts",
-            "SOS and call-parent on every screen during the ride",
-            "Live tracking from school to home",
-            "Payment only the parent can approve",
-            "Ride confirmation sent to both of them",
-          ],
-        },
-        {
-          kind: "screens",
-          label: "The Screens",
-          title: "Kid Cab",
-          shots: [
-            {
-              src: "/images/projects/kid-ui-home.webp",
-              width: 1400,
-              height: 1423,
-              tab: "Choose a ride",
-              alt: "Home screen titled Pick Your Ride with a search field and cards for Red Cab, Auto Rickshaw, Bike Ride and Big Van, each showing price and seats.",
-              caption: "One screen, four choices, each with its price and seat count.",
-            },
-            {
-              src: "/images/projects/kid-ui-track.webp",
-              width: 1400,
-              height: 1254,
-              tab: "Verify & track",
-              alt: "Booking status screen showing a four-digit security OTP and driver details, a live map tracking the ride with SOS and Call Parent buttons, and the parent's authorise-and-start-ride screen.",
-              caption: "The OTP goes to the parent; the child sees the driver and the map.",
-            },
-            {
-              src: "/images/projects/kid-ui-done.webp",
-              width: 1400,
-              height: 1220,
-              tab: "Arrive & pay",
-              alt: "Arrival screen showing the route and fare summary with an approve-and-pay action, and a ride-completed screen reading You've Arrived with a rating prompt and payment confirmed by parent.",
-              caption: "Only the parent pays; both of them get the confirmation.",
-            },
+            "Smart navigation to the site, then short histories once you arrive",
+            "An audio tour that starts narrating on arrival, hands-free",
+            "An AI guide that answers questions in conversation, in multiple languages",
+            "Nearby and hidden-place discovery, so nothing is missed by accident",
+            "Offline maps and content, because connectivity fails at the sites themselves",
           ],
         },
       ],
-      /** From the 30-response survey on the board. Counts, not percentages. */
       insights: [
         {
-          label: "20 of 30 have used a cab",
-          body: "Most children surveyed had already ridden in an Uber or Ola, so the app is not introducing the idea, only the independence.",
+          title: "Too many apps and platforms",
+          body: "Maps for navigation, Google for history, YouTube for video. Switching between them makes the experience confusing and time-consuming.",
         },
         {
-          label: "13 of 30 travel alone",
-          body: "Nearly half already make journeys without an adult, which is exactly where the safety gap sits.",
+          title: "Missing nearby places",
+          body: "People do not know what is close by, so they miss historical and cultural attractions they would have wanted to see.",
         },
         {
-          label: "Tracking beats everything",
-          body: "Asked what matters most in the app, real-time tracking took 13 of 30 - ahead of easy booking (7), safety features (6) and cost (4).",
+          title: "Personalised trip planning",
+          body: "Interests, budgets and available time differ, so general plans do not fit. People save places on Maps, take screenshots and write notes by hand.",
         },
         {
-          label: "Pay per ride, not monthly",
-          body: "Parents preferred paying per ride (13) over a subscription (7), a prepaid wallet (5) or cash (5).",
+          title: "Easy historical information",
+          body: "History arrives as long articles or information boards. Attention is lost when it is too long or complicated.",
+        },
+        {
+          title: "Interest in AI and AR",
+          body: "People find AI guides and AR experiences engaging, and want to ask questions rather than read.",
+        },
+        {
+          title: "Language problems",
+          body: "Local languages, signs and historical information can be unreadable. Translation apps and asking local people are the current workarounds.",
+        },
+        {
+          title: "Poor internet connection",
+          body: "Connectivity is weak at many heritage sites, so maps and guides have to work offline.",
         },
       ],
+      journey: {
+        label: "From first curiosity to a saved memory",
+        stages: [
+          {
+            stage: "Discover",
+            feeling: "Curious - looking for what is nearby",
+            pain: "Hidden places are difficult to find",
+            opportunity: "Nearby and hidden-place discovery",
+          },
+          {
+            stage: "Plan",
+            feeling: "Excited - building a trip",
+            pain: "Planning takes time",
+            opportunity: "Personalised itinerary",
+          },
+          {
+            stage: "Explore",
+            feeling: "Slightly confused - on the way there",
+            pain: "Navigation and transport can be confusing",
+            opportunity: "Simple landmark-based navigation",
+          },
+          {
+            stage: "Learn",
+            feeling: "Interested - standing in front of it",
+            pain: "Information can be too long",
+            opportunity: "Short, simple storytelling",
+          },
+          {
+            stage: "Experience",
+            feeling: "Engaged - history becomes interesting",
+            pain: "Few interactive experiences",
+            opportunity: "AI, AR, games and quizzes",
+          },
+          {
+            stage: "Complete",
+            feeling: "Satisfied - wanting to remember it",
+            pain: "Information ends up scattered again",
+            opportunity: "Saved trips, badges and photos",
+          },
+        ],
+      },
       features: [
         {
-          title: "Pick by picture",
-          body: "Red cab, auto, bike or van - chosen visually, with the price on the card.",
+          title: "Smart navigation",
+          body: "Routes to historical and cultural sites, planned around the places rather than only the roads.",
         },
         {
-          title: "Security OTP",
-          body: "A four-digit code the parent authorises before the ride can start.",
+          title: "Audio tour guide",
+          body: "Narration starts automatically on arrival, available in multiple languages, so the phone can stay in a pocket.",
         },
         {
-          title: "Live tracking",
-          body: "The route from school to home, visible to both child and parent.",
+          title: "AI tour guide",
+          body: "Answers questions about the landmark in front of you, recommends nearby places, and adapts the explanation for adults, children or enthusiasts.",
         },
         {
-          title: "SOS and call parent",
-          body: "Both reachable on the ride screen without leaving it.",
+          title: "AI Lens and AR",
+          body: "Point the camera at a monument to read it, and see how the same place looked at another point in its history.",
         },
         {
-          title: "Parent-only payment",
-          body: "The fare summary is approved by the parent, never by the child.",
+          title: "Play and learn",
+          body: "Quizzes, games and a heritage passport, so a visit leaves something behind besides photographs.",
+        },
+        {
+          title: "Offline content",
+          body: "Maps and guides saved for the sites where the signal gives out.",
         },
       ],
       outcome: {
         decisions: [
-          "Split the product in two: the child books, the parent authorises.",
-          "Put safety controls on the ride screen itself rather than in a menu.",
-          "Lead the interface with pictures and price, since the audience is eleven.",
+          "Build the high-impact, low-effort corner of the matrix first - nearby discovery, short histories and audio - and treat VR and 3D as later work.",
+          "Lead with one city in depth rather than many thinly, so Ahmedabad's old city carries the first release.",
+          "Set place names in their own scripts, with Noto Sans for Devanagari, Gujarati, Tamil and Bengali alongside the Latin type.",
         ],
         impact: [
-          "Parent-confirmed OTP should close the gap the survey found around trust.",
-          "Live tracking answers the feature parents ranked highest.",
-          "A simplified booking screen should reduce the confusion the personas describe.",
+          "One app covering navigation, history and discovery should remove the app-switching the research found at the centre of the problem.",
+          "Audio narration on arrival should let people look at the place rather than at a screen.",
+          "Offline content should hold up at the sites where connectivity does not.",
         ],
         learnings: [
-          "The child and the parent want opposite things - simplicity and control - and the design has to serve both without compromising either.",
-          "Competitive analysis of YouTube Kids and Netflix Kids showed the pattern: a strong parent setup is what makes a kids mode trustworthy.",
+          "People did not ask for more information. They asked for less of it, at the right moment.",
+          "The impact-effort matrix settled arguments that discussion could not - AR was wanted by everyone and affordable by no one, so it waited.",
         ],
       },
     },
-    liveUrl: "",
-    behanceUrl:
-      "https://www.behance.net/gallery/254733255/A-Safer-Ride-for-Kids-UXUI-Case-Study",
+    liveUrl: "https://virasa-puce.vercel.app/",
+    behanceUrl: "",
   },
+  {
+    slug: "unigo-campus-carpool",
+    title: "UniGo",
+    subtitle: "Campus Carpooling",
+    type: "live",
+    role: "UX Research / UI Design",
+    timeline: "3 months",
+    category: "UX Research • Product Design • MVP App",
+    featured: true,
+    status: "",
+    icon: "bus",
+    cover: "",
+    description:
+      "Carpooling closed to one campus. UniGo connects Indus University students, faculty and staff who already travel the same roads at the same times, using the university's own email domain as the door that keeps strangers out.",
+    points: [
+      "Researched the commute from the driver's side - a faculty member making the same trip five or six days a week with empty seats - through an empathy map and a six-stage journey map.",
+      "Turned the trust problem into the product's first screen: sign-in is gated to @indusuni.ac.in, with a six-digit emailed code or an enrolment / employee ID as the second route in.",
+      "Mapped the full task flow from publishing a ride through pickup, cost split and rating, then built it as a working prototype.",
+    ],
+    stagesLabel: "Flow",
+    stages: [
+      "Verify with university ID",
+      "Offer or find a ride",
+      "Route matching",
+      "Confirm pickup",
+      "Live trip",
+      "Cost split & rating",
+    ],
+    tech: ["User Research", "Empathy Mapping", "Journey Mapping", "Figma", "Prototyping"],
+    contribution: "Research · Flows · UI · Prototype",
+    /**
+     * From the college car-pooling research board and the live prototype.
+     * The problem statement, persona, empathy map, journey map and feature
+     * table are the board's own. The affinity-mapping sections of that board
+     * carry stickies from several named contributors.
+     */
+    caseStudy: {
+      overview: {
+        goal: "Let people who already share a route and a timetable share the car, without either side having to trust a stranger.",
+        role: "UX Research / UI Design",
+        timeline: "3 months",
+        tools: ["Figma", "FigJam", "Affinity Mapping", "Empathy Mapping", "Journey Mapping", "Task Flow"],
+      },
+      chapters: [
+        {
+          kind: "problem",
+          label: "The Problem",
+          title: "The seats are empty and nobody can find each other",
+          body: "University students, faculty, staff, and other members often face difficulties finding people who travel on the same or nearby routes. Since there is no dedicated platform to connect university members who have a vehicle and are willing to share a ride, people may spend more money on transportation, travel alone, or face difficulties finding convenient transport.",
+        },
+        {
+          kind: "quote",
+          label: "What The Driver Said",
+          quote:
+            "I drive to campus every day anyway - why not share the empty seats? I only want to ride with people from our university. I can't take long detours to pick someone up.",
+          tags: ["Affinity Mapping", "Empathy Map", "Persona", "Journey Map", "Task Flow"],
+        },
+        {
+          kind: "personas",
+          label: "Who It Is For",
+          title: "The driver with three empty seats",
+          personas: [
+            {
+              name: "Ketan Mehta",
+              role: "38 - faculty member, drives ISKCON Cross Road to the university",
+              meta: "5-6 days a week - ride provider",
+              pains: [
+                "Uncomfortable letting strangers into his car",
+                "Frustrated when riders are late or cancel at the last minute",
+                "Stressed about reaching class late because of pickups",
+                "Awkward asking students to share costs",
+                "Cannot take long detours to collect someone",
+              ],
+              needs: [
+                "Verified passengers from his own university",
+                "Routes and timings that match his, not approximately",
+                "A cost split that happens without him having to ask",
+                "To know how many minutes a pickup adds before agreeing to it",
+                "Reliability, so the same people can travel together repeatedly",
+              ],
+            },
+          ],
+        },
+        {
+          kind: "solution",
+          label: "The Solution",
+          title: "Verify first, then match on route and timetable",
+          body: "Every pain point in the journey map resolves to the same two questions: is this person really from my university, and are they really going my way? The product answers both before anyone gets in a car.",
+          bullets: [
+            "College ID verification - only a valid university email or ID gets in",
+            "Route matching for overlapping journeys, not identical pickup points",
+            "Class-timetable matching, so rides are suggested around lectures",
+            "A daily routine set once instead of a ride posted every morning",
+            "Automatic fuel and fare splitting, so nobody has to ask",
+          ],
+        },
+      ],
+      journey: {
+        label: "From empty seats to a daily routine",
+        stages: [
+          {
+            stage: "Need a Ride Partner",
+            feeling: "Interested but unsure",
+            pain: "Does not want strangers in his car",
+            opportunity: "Show the benefits of carpooling",
+          },
+          {
+            stage: "Search for Partner",
+            feeling: "Curious",
+            pain: "Difficult to find people with the same route and timing",
+            opportunity: "Match users on route and timing",
+          },
+          {
+            stage: "Check & Compare",
+            feeling: "Concerned",
+            pain: "Lack of trust and unclear passenger information",
+            opportunity: "Verified profiles and clear user information",
+          },
+          {
+            stage: "Confirm Ride",
+            feeling: "Relieved",
+            pain: "Fear of cancellation or late arrival",
+            opportunity: "Confirmation, reminders and a cancellation policy",
+          },
+          {
+            stage: "Daily Travel",
+            feeling: "Comfortable",
+            pain: "Route changes, delays or pickup confusion",
+            opportunity: "Live location, a clear pickup point, easy contact",
+          },
+          {
+            stage: "After the Ride",
+            feeling: "Satisfied",
+            pain: "Repeatedly finding reliable passengers is difficult",
+            opportunity: "Ratings, repeat carpools and trusted-user features",
+          },
+        ],
+      },
+      features: [
+        {
+          title: "College ID verification",
+          body: "Only students, faculty and staff with a valid college email or ID can join.",
+        },
+        {
+          title: "Route matching",
+          body: "Matches people whose routes overlap, instead of requiring the exact same pickup location.",
+        },
+        {
+          title: "Class-timetable matching",
+          body: "Riders enter their college schedule and the app suggests rides around their class and work timings.",
+        },
+        {
+          title: "Daily ride routine",
+          body: "Set a standing trip once rather than creating the same ride every morning.",
+        },
+        {
+          title: "Pickup along my route",
+          body: "The driver sees whether a pickup needs a detour, and how many extra minutes it costs, before accepting.",
+        },
+        {
+          title: "Campus safety and SOS",
+          body: "During an active ride, either side can reach a trusted contact or campus security quickly.",
+        },
+        {
+          title: "Women-preferred pool",
+          body: "Women can choose to see and request rides with women from the college community.",
+        },
+        {
+          title: "Fuel and fare split",
+          body: "The cost is divided automatically at the end of the ride, so nobody has to raise it.",
+        },
+      ],
+      outcome: {
+        decisions: [
+          "Make verification the first screen rather than a setting, because distrust was the pain point blocking every later stage.",
+          "Match on overlapping corridors instead of identical pickup points, since the driver's hard limit was the length of the detour.",
+          "Automate the cost split, because the research found asking for money was socially awkward rather than financially difficult.",
+        ],
+        impact: [
+          "A closed campus pool should remove the stranger problem that stops drivers offering seats at all.",
+          "Timetable-aware matching should turn a one-off ride into a standing arrangement.",
+          "Automatic splitting should keep the money conversation out of a daily shared commute.",
+        ],
+        learnings: [
+          "The blocker was never the seats. It was that neither side could tell who the other person was.",
+          "Designing from the driver's side first surfaced constraints - detour length, lecture times, the awkwardness of asking for fuel money - that a rider-first view would have missed.",
+        ],
+      },
+    },
+    liveUrl: "https://indusunigo.vercel.app/",
+    behanceUrl: "",
+  },
+
 ];
 
 /* -------------------------------------------------------------------------- */
