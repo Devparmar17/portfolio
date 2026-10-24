@@ -75,7 +75,11 @@ export const socials = [
     label: "LinkedIn",
     url: "https://www.linkedin.com/in/devparmar17/",
   },
-  { id: "behance", label: "Behance", url: "https://www.behance.net/devparmar28" },
+  {
+    id: "behance",
+    label: "Behance",
+    url: "https://www.behance.net/devparmar28",
+  },
   { id: "email", label: "Email", url: `mailto:${contact.email}` },
 ];
 
@@ -232,7 +236,8 @@ export const skillGroups = [
   {
     title: "AI Tools",
     icon: "claude",
-    description: "AI woven into research, synthesis, and day-to-day build work.",
+    description:
+      "AI woven into research, synthesis, and day-to-day build work.",
     items: ["Claude", "Vibe Coding"],
     itemIcons: { Claude: "claude", "Vibe Coding": "vibe" },
   },
@@ -316,532 +321,6 @@ export const projectFilters = ["All", "MVP Apps", "Case Studies"];
  */
 export const projects = [
   {
-    slug: "apna-pg",
-    title: "Apna PG",
-    subtitle: "PG-Finding Platform",
-    type: "live",
-    role: "Working Product / Live Application",
-    timeline: "3 months",
-    category: "UX Research • Product Design • MVP App",
-    featured: true,
-    status: "",
-    icon: "home",
-    cover: "",
-    full: "/images/projects/apna-pg-full.jpg",
-    fullWidth: 785,
-    fullHeight: 32768,
-    fullAlt:
-      "APNA PG case study board - project overview, problem statement, stakeholders, design process, timeline, secondary and primary research, personas, empathy map, journey map, card sorting, user flows, design system and final screens.",
-    description:
-      "A transparent way to find paying-guest accommodation. I ran user research to surface the real pain points in the PG search process, then designed flows around verified listings, honest reviews, and clear cost breakdowns.",
-    points: [
-      "Conducted user research and identified key pain points in the PG (paying-guest) accommodation search process.",
-      "Created user flows and wireframes for a transparent PG-finding solution featuring verified listings, reviews, and cost breakdowns.",
-    ],
-    stages: ["User Research", "Pain Points", "User Flows", "Wireframes", "UI"],
-    tech: ["User Research", "User Flows", "Wireframing", "Figma"],
-    contribution: "Research · Flows · Wireframes",
-    /**
-     * Taken from the uploaded APNA PG board: the problem statement, the five
-     * primary-research findings (percentages included), both personas, the
-     * five-stage journey map and the final screens are all the board's own.
-     */
-    caseStudy: {
-      overview: {
-        goal: "Make finding a paying-guest room transparent: real listings, the full cost up front, and enough proof of the place to decide without a broker.",
-        role: "UX Research / UI Design",
-        timeline: "3 months",
-        tools: ["Figma", "Surveys", "Interviews", "Empathy Mapping", "Wireframing"],
-      },
-      chapters: [
-        {
-          kind: "problem",
-          label: "The Problem",
-          title: "Finding a PG in a new city is guesswork",
-          body: "Finding a PG in a new state can be hard due to high rent, poor facilities, safety issues, hidden charges, and sharing problems with strangers who have different habits or food preferences.",
-        },
-        {
-          kind: "quote",
-          label: "What I Set Out To Do",
-          quote:
-            "Truly understanding the everyday struggles of students and professionals, like high rent, unhealthy food, and safety concerns, and creating solutions that directly ease those pain points.",
-          tags: ["Discover", "Empathize", "Define", "Ideate", "Design & Test"],
-        },
-        {
-          kind: "personas",
-          label: "Who It Is For",
-          title: "Two residents, two budgets",
-          personas: [
-            {
-              name: "Avasar Savalia",
-              role: "21 - lives in a 2-sharing PG near Bopal",
-              meta: "Rent around Rs 14,000 - stayed 8 months",
-              pains: [
-                "Wrong rent information",
-                "Lack of transparency about extra charges",
-              ],
-              needs: [
-                "Furnished room",
-                "Reliable Wi-Fi",
-                "Strong security",
-                "24/7 water supply",
-                "Near to office",
-              ],
-            },
-            {
-              name: "Dhruvil",
-              role: "20 - student, found his PG through brokers",
-              meta: "Budget Rs 12,000 - Rs 15,000 a month",
-              pains: [
-                "Often spends more than the planned budget",
-                "Meal timings were not informed clearly",
-                "Food preferences not considered",
-                "Hard to trust a PG without proper visuals or proof",
-              ],
-              needs: [
-                "Clear PG options within budget range",
-                "Offers and discounts to reduce cost",
-                "Proper security system",
-                "360 degree room tour to decide faster",
-                "Nearby transport facilities",
-              ],
-            },
-          ],
-        },
-        {
-          kind: "solution",
-          label: "The Solution",
-          title: "Answer the questions a broker currently answers",
-          body: "Every opportunity in the journey map points the same way: show what is really there, and show what it really costs, before anyone pays a deposit.",
-          bullets: [
-            "Verified listings with real photos and resident reviews",
-            "360 degree room tours, the feature 96% of respondents asked for",
-            "The full cost shown up front, including what is and is not included",
-            "Clear house rules and contracts before the deposit, not after",
-            "Service guarantees and maintenance tracking once moved in",
-            "Fast answers and simple refunds on the way out",
-          ],
-        },
-        {
-          kind: "screens",
-          label: "The Screens",
-          title: "Apna PG",
-          shots: [
-            {
-              src: "/images/projects/apna-ui-onboarding.webp",
-              width: 785,
-              height: 485,
-              tab: "Onboarding",
-              alt: "Apna PG splash screen and two onboarding screens reading 'Find your best stay with Apna PG' with a Let's Explore button.",
-              caption: "Splash and onboarding.",
-            },
-            {
-              src: "/images/projects/apna-ui-auth.webp",
-              width: 785,
-              height: 480,
-              tab: "Sign in",
-              alt: "Login screen with email and password, a four-digit phone verification screen, and a create-account form.",
-              caption: "Login, phone verification, and account creation.",
-            },
-            {
-              src: "/images/projects/apna-ui-browse.webp",
-              width: 785,
-              height: 535,
-              tab: "Browse",
-              alt: "Home screen with featured stays and a map, a notifications screen showing rent and maintenance alerts, and a filtered listing view with prices per month.",
-              caption: "Finding a stay: search, alerts, and filtered listings.",
-            },
-          ],
-        },
-      ],
-      /** Primary research. The percentages are the board's, not estimates. */
-      insights: [
-        {
-          label: "80% live in a PG",
-          body: "Most respondents currently live in a PG, so the survey reflects real residents rather than prospective ones.",
-        },
-        {
-          label: "86% hit fake ads",
-          body: "Fake advertisements and misleading information are the most reported problem when searching for a PG.",
-        },
-        {
-          label: "Rent leads the pain",
-          body: "High rent is the biggest challenge, followed by fake ads, safety, hidden charges, food quality and roommate problems.",
-        },
-        {
-          label: "96% want a 360 tour",
-          body: "A 360 degree room tour would help them trust and choose a PG faster - transparency beats persuasion.",
-        },
-      ],
-      journey: {
-        label: "From arriving in the city to moving out",
-        stages: [
-          {
-            stage: "Arrival in City",
-            feeling: "Confused - searching for a PG",
-            pain: "Misleading information",
-            opportunity: "Verified listings, real photos, user reviews",
-          },
-          {
-            stage: "Viewing / Shortlisting",
-            feeling: "Easy and done fast - visiting PGs",
-            pain: "Hidden charges, false promises",
-            opportunity: "Show all costs up front",
-          },
-          {
-            stage: "Finalizing / Moving In",
-            feeling: "Nervous - paying the deposit",
-            pain: "Unexpected costs, unclear rules",
-            opportunity: "A list of what is included, and clear rules",
-          },
-          {
-            stage: "Daily Living",
-            feeling: "Disappointed, frustrated",
-            pain: "Poor food, unclean rooms, Wi-Fi and safety",
-            opportunity: "Service guarantees and maintenance",
-          },
-          {
-            stage: "Long-Term / Exit",
-            feeling: "Angry, helpless",
-            pain: "No help, and hard to get money back",
-            opportunity: "Fast answers, simple refunds",
-          },
-        ],
-      },
-      features: [
-        {
-          title: "Verified listings",
-          body: "Listings are verified, so what is advertised is what exists.",
-        },
-        {
-          title: "Honest reviews",
-          body: "Reviews from people who actually stayed, rather than marketing copy.",
-        },
-        {
-          title: "Clear cost breakdowns",
-          body: "The full cost is broken down up front, with no charges surfacing later.",
-        },
-        {
-          title: "360 degree room tours",
-          body: "See the actual room before travelling to it, or before paying for it.",
-        },
-        {
-          title: "Support and maintenance",
-          body: "Raise a ticket, track a complaint, and reach emergency contacts from the app.",
-        },
-      ],
-      outcome: {
-        decisions: [
-          "Lead with proof - photos, tours and reviews - because trust is the thing that is missing.",
-          "Put the whole cost on the listing, since hidden charges were the most common complaint.",
-          "Carry the experience past move-in, where the journey map showed the sharpest drop in mood.",
-        ],
-        impact: [
-          "Verified listings should cut the wasted visits caused by fake ads.",
-          "Up-front costs should reduce the budget overruns the secondary research describes.",
-          "A 360 degree tour should shorten the time it takes to commit to a room.",
-        ],
-        learnings: [
-          "Residents did not ask for more listings - they asked to believe the ones they saw.",
-          "The worst moments came after moving in, not while searching.",
-        ],
-      },
-    },
-    liveUrl: "https://pg-finder-booking.vercel.app/",
-    behanceUrl:
-      "https://www.behance.net/gallery/255609371/APNA-PG-UIUX-Case-Study",
-  },  {
-    slug: "nescafe-campus-canteen-kiosk",
-    title: "Nescafé",
-    subtitle: "Redesigning the Nescafé Campus Experience",
-    type: "case-study",
-    role: "UX Research / UX Design",
-    timeline: "3 months",
-    category: "UX Research • UI/UX Design • Case Study",
-    featured: true,
-    status: "",
-    icon: "coffee",
-    // Blank so the vector cover art renders. Point this at a screenshot
-    // (e.g. "/images/projects/nescafe-cover.webp") to override it.
-    cover: "",
-    full: "/images/projects/nescafe-full.jpg",
-    // Dimensions of the optimised board, produced by
-    // `node scripts/prepare-case-studies.mjs`.
-    fullWidth: 1400,
-    fullHeight: 29552,
-    fullAlt:
-      "NESCAFÉ Campus Canteen Kiosk case study board - problem framing, observations, user personas, comparison tables, service blueprint, user flow, wireframes and final UI screens.",
-    description:
-      "A self-service kiosk concept for a campus canteen, worked end to end - from framing the problem and observing real ordering behaviour through to a complete set of UI screens.",
-    points: [
-      "Framed the problem around campus canteen ordering and captured first-hand observations of how people queue and order.",
-      "Built user personas and comparison tables, then mapped the experience as a service blueprint and user flow.",
-      "Translated the flow into wireframes and a final kiosk UI.",
-    ],
-    stages: [
-      "Problem Framing",
-      "Observations",
-      "User Personas",
-      "Comparison Tables",
-      "Service Blueprint",
-      "User Flow",
-      "Wireframes",
-      "Final UI",
-    ],
-    tech: [
-      "User Research",
-      "Personas",
-      "Service Blueprint",
-      "User Flows",
-      "Wireframing",
-      "UI Design",
-      "Figma",
-    ],
-    contribution: "Research · UX · UI",
-    /**
-     * Condensed walkthrough shown by the animated case-study view. Every
-     * string here is taken from the board itself - problem statement,
-     * observation quote, interview findings and both personas are verbatim.
-     * Nothing is written for the portfolio.
-     */
-    caseStudy: {
-      /**
-       * Goal, role and tools come from the board and the project record.
-       * `timeline` is deliberately null: the board does not state one, and a
-       * case study is not the place to guess at dates.
-       */
-      overview: {
-        goal: "Reduce peak-hour queues at a campus Nescafé by moving ordering and pickup onto a self-service kiosk.",
-        role: "UX Research / UX Design",
-        timeline: null,
-        tools: ["Figma", "User Research", "Personas", "Service Blueprint"],
-      },
-      /** The four interview findings, in the board's own shorthand. */
-      insights: [
-        {
-          label: "Lunch break",
-          body: "The rush concentrates into the short break between classes.",
-        },
-        {
-          label: "Order confusion",
-          body: "Orders blur together when many customers order at once.",
-        },
-        {
-          label: "Long queue",
-          body: "Waiting during rush time is what irritates customers most.",
-        },
-        {
-          label: "Out of stock",
-          body: "Maggie, coffee and snacks run out with no warning on the menu.",
-        },
-      ],
-      /**
-       * The eight-stage journey as mapped on the board. (The board's two
-       * tables carry swapped headings - these rows are the student's day,
-       * so they are labelled by their content.)
-       */
-      journey: {
-        label: "The student's journey",
-        stages: [
-          {
-            stage: "Hunger Trigger",
-            feeling: "Feeling hungry - should I go now or later?",
-            pain: "Short break time",
-            opportunity: "Live food-availability alerts at meal times",
-          },
-          {
-            stage: "Decide to Eat",
-            feeling: "Imagining the food; Nescafé is nearby",
-            pain: "Confusion in choosing what to eat",
-            opportunity: "Digital menu, combo offers, price comparison",
-          },
-          {
-            stage: "Travel to Canteen",
-            feeling: "Excited and rushed",
-            pain: "Takes time to reach the canteen",
-            opportunity: "Directional signage with estimated walking time",
-          },
-          {
-            stage: "Arrive & Queue",
-            feeling: "How long will I wait? What should I order?",
-            pain: "No queue system, chaotic ordering",
-            opportunity: "Token system, digital queue display, more counters",
-          },
-          {
-            stage: "Place Order",
-            feeling: "Uncertain - the item I wanted is unavailable",
-            pain: "Unclear menu, staff miscommunication",
-            opportunity: "QR ordering and a kiosk that shows real availability",
-          },
-          {
-            stage: "Pay",
-            feeling: "Relieved, now waiting",
-            pain: "Limited seating, payment delays",
-            opportunity: "Cashless fast payment, seating availability indicator",
-          },
-          {
-            stage: "Wait for Food",
-            feeling: "Impatient, checking phone",
-            pain: "No order tracking, overcrowded and unclear pickup",
-            opportunity: "Order tracking screen, notifications, separate waiting zone",
-          },
-          {
-            stage: "Finish & Leave",
-            feeling: "Satisfied but rushed",
-            pain: "Overflowing dustbins, time pressure, cleanup inconvenience",
-            opportunity: "Smart dustbin placement, loyalty points for repeat users",
-          },
-        ],
-      },
-      /** Drawn from the board's DFV (desirability / feasibility / viability). */
-      features: [
-        {
-          title: "Digital token queue",
-          body: "A token system with a display replaces the single service window.",
-        },
-        {
-          title: "Digital menu board",
-          body: "A clear menu speeds up decisions and shows what is actually available.",
-        },
-        {
-          title: "Popular item tracking",
-          body: "Surfacing popular items builds trust and improves stock planning.",
-        },
-        {
-          title: "Loyalty & coupons",
-          body: "Loyalty points and digital coupons bring repeat customers into slow hours.",
-        },
-        {
-          title: "Inventory tracking",
-          body: "Real-time stock reduces losses and prevents out-of-stock surprises.",
-        },
-      ],
-      /**
-       * Expectations the board itself argues for under viability - written as
-       * expected impact, not measured results. No metrics are claimed.
-       */
-      outcome: {
-        decisions: [
-          "Start small: a digital menu plus a token system first.",
-          "Design for both sides of the counter, not just the customer.",
-          "Keep inventory visible so unavailable items never reach the order screen.",
-        ],
-        impact: [
-          "A loyalty system should increase repeat customers.",
-          "Digital coupons should lift sales in slow hours.",
-          "Popular-item tracking should improve stock planning.",
-          "Inventory tracking should reduce losses.",
-        ],
-        learnings: [
-          "The queue is a service-design problem before it is an interface problem.",
-          "The stall owner's pain points shaped the product as much as the student's.",
-        ],
-      },
-      chapters: [
-        {
-          kind: "problem",
-          label: "The Problem",
-          title: "Peak-hour queues at the campus Nescafé",
-          body: "Students experience long queues and overcrowding at Nescafé outlets during peak campus hours due to slow manual ordering, limited staff handling high demand, and inefficient service flow causing delays and frustration.",
-        },
-        {
-          kind: "quote",
-          label: "What I Observed",
-          quote:
-            "During class breaks, students gather at campus canteens, especially Nescafe, a popular social spot. Its prime location, Maggie, coffee, and shaded space attract groups. Easy menu access and interactive elements enhance experience. However, limited seating, single service window, and stock shortages affect convenience. It serves as a lively student hangout.",
-          tags: ["Lunch break", "Order confusion", "Long queue", "Out of stock"],
-        },
-        {
-          kind: "personas",
-          label: "Who It Is For",
-          title: "Two sides of the same counter",
-          personas: [
-            {
-              name: "Ramila Patel",
-              role: "Stall owner - Nescafe Hut",
-              meta: "Daily estimated ₹3,000 - ₹5,000",
-              pains: [
-                "Sudden crowd rush during lunch break",
-                "No queue management system",
-                "Order confusion when many customers order together",
-                "UPI delays or payment confirmation issues",
-                "Manual inventory checking and end-of-day sales counting",
-              ],
-              needs: [
-                "Digital token system to manage queues",
-                "Live order display screen",
-                "Pre-order system to prepare items earlier",
-                "Real-time inventory tracking",
-                "Automatic payment confirmation",
-              ],
-            },
-            {
-              name: "Rahul Shah",
-              role: "College student",
-              meta: "Budget ₹100 per day",
-              pains: [
-                "Slow serving during rush hours",
-                "Long queues at lunch time",
-                "Order confusion when many people order",
-                "Items often out of stock (Maggie, coffee, snacks)",
-                "Limited space to wait",
-              ],
-              needs: [
-                "Pre-order option to save time",
-                "Token system with display",
-                "Clear digital menu showing what is available",
-                "Fast service during rush hours",
-              ],
-            },
-          ],
-        },
-        {
-          kind: "solution",
-          label: "The Solution",
-          title: "A self-service kiosk on both sides of the counter",
-          body: "A smart self-service kiosk for a campus environment, designed to streamline ordering and pickup so the queue stops forming in the first place.",
-          bullets: [
-            "Digital token queue replaces the single service window",
-            "Live order display so nobody has to ask what is ready",
-            "Pre-ordering lets the stall start preparing before the break",
-            "Real-time inventory hides what is out of stock before it is ordered",
-            "Automatic payment confirmation removes the UPI wait",
-          ],
-        },
-        {
-          kind: "screens",
-          label: "The Screens",
-          title: "Ordering kiosk",
-          shots: [
-            {
-              src: "/images/projects/nescafe-ui-order.webp",
-              width: 1400,
-              height: 700,
-              alt: "Three kiosk ordering screens: coffee, sandwich and Maggie categories with a running order panel and total.",
-              caption: "Browse by category, with the order and total always in view.",
-            },
-            {
-              src: "/images/projects/nescafe-ui-pay.webp",
-              width: 1400,
-              height: 600,
-              alt: "Kiosk checkout screens showing an itemised order, UPI and pay-at-counter options, and a QR confirmation.",
-              caption: "Checkout: itemised order, UPI or pay at counter, QR to confirm.",
-            },
-            {
-              src: "/images/projects/nescafe-ui-shop.webp",
-              width: 1400,
-              height: 1040,
-              alt: "Shopkeeper app screens: live orders queue, sales dashboard with today's total and trend, and inventory management with stock toggles.",
-              caption: "The stall side: live orders, a sales dashboard, and stock control.",
-            },
-          ],
-        },
-      ],
-    },
-    liveUrl: "",
-    behanceUrl:
-      "https://www.behance.net/gallery/252366823/Redesigning-the-Nescaf-Campus-Experience",
-  },  {
     slug: "virasa-heritage-ai",
     title: "Virasa",
     subtitle: "Heritage AI",
@@ -875,7 +354,13 @@ export const projects = [
       "Heritage passport",
       "Saved & offline",
     ],
-    tech: ["User Research", "Affinity Mapping", "Journey Mapping", "Figma", "Prototyping"],
+    tech: [
+      "User Research",
+      "Affinity Mapping",
+      "Journey Mapping",
+      "Figma",
+      "Prototyping",
+    ],
     contribution: "Research · Flows · UI · Prototype",
     /**
      * From the MAP research board and the live prototype. The problem
@@ -887,7 +372,14 @@ export const projects = [
         goal: "Put navigation, nearby discovery, history and culture in one place, so understanding where you are standing does not require four apps.",
         role: "UX Research / UI Design",
         timeline: "3 months",
-        tools: ["Figma", "FigJam", "Survey", "Affinity Mapping", "Empathy Mapping", "Journey Mapping"],
+        tools: [
+          "Figma",
+          "FigJam",
+          "Survey",
+          "Affinity Mapping",
+          "Empathy Mapping",
+          "Journey Mapping",
+        ],
       },
       chapters: [
         {
@@ -901,7 +393,13 @@ export const projects = [
           label: "The Design Opportunity",
           quote:
             "How might we create a simple, location-based travel experience that helps travellers discover hidden cultural places, navigate to them, and learn their history through short, engaging, and personalized content - all in one app?",
-          tags: ["Survey", "Affinity Mapping", "Personas", "Journey Map", "Impact / Effort"],
+          tags: [
+            "Survey",
+            "Affinity Mapping",
+            "Personas",
+            "Journey Map",
+            "Impact / Effort",
+          ],
         },
         {
           kind: "personas",
@@ -1108,7 +606,13 @@ export const projects = [
       "Live trip",
       "Cost split & rating",
     ],
-    tech: ["User Research", "Empathy Mapping", "Journey Mapping", "Figma", "Prototyping"],
+    tech: [
+      "User Research",
+      "Empathy Mapping",
+      "Journey Mapping",
+      "Figma",
+      "Prototyping",
+    ],
     contribution: "Research · Flows · UI · Prototype",
     /**
      * From the college car-pooling research board and the live prototype.
@@ -1121,7 +625,14 @@ export const projects = [
         goal: "Let people who already share a route and a timetable share the car, without either side having to trust a stranger.",
         role: "UX Research / UI Design",
         timeline: "3 months",
-        tools: ["Figma", "FigJam", "Affinity Mapping", "Empathy Mapping", "Journey Mapping", "Task Flow"],
+        tools: [
+          "Figma",
+          "FigJam",
+          "Affinity Mapping",
+          "Empathy Mapping",
+          "Journey Mapping",
+          "Task Flow",
+        ],
       },
       chapters: [
         {
@@ -1135,7 +646,13 @@ export const projects = [
           label: "What The Driver Said",
           quote:
             "I drive to campus every day anyway - why not share the empty seats? I only want to ride with people from our university. I can't take long detours to pick someone up.",
-          tags: ["Affinity Mapping", "Empathy Map", "Persona", "Journey Map", "Task Flow"],
+          tags: [
+            "Affinity Mapping",
+            "Empathy Map",
+            "Persona",
+            "Journey Map",
+            "Task Flow",
+          ],
         },
         {
           kind: "personas",
@@ -1272,7 +789,551 @@ export const projects = [
     liveUrl: "https://indusunigo.vercel.app/",
     behanceUrl: "",
   },
-
+  {
+    slug: "nescafe-campus-canteen-kiosk",
+    title: "Nescafé",
+    subtitle: "Redesigning the Nescafé Campus Experience",
+    type: "case-study",
+    role: "UX Research / UX Design",
+    timeline: "3 months",
+    category: "UX Research • UI/UX Design • Case Study",
+    featured: true,
+    status: "",
+    icon: "coffee",
+    // Blank so the vector cover art renders. Point this at a screenshot
+    // (e.g. "/images/projects/nescafe-cover.webp") to override it.
+    cover: "",
+    full: "/images/projects/nescafe-full.jpg",
+    // Dimensions of the optimised board, produced by
+    // `node scripts/prepare-case-studies.mjs`.
+    fullWidth: 1400,
+    fullHeight: 29552,
+    fullAlt:
+      "NESCAFÉ Campus Canteen Kiosk case study board - problem framing, observations, user personas, comparison tables, service blueprint, user flow, wireframes and final UI screens.",
+    description:
+      "A self-service kiosk concept for a campus canteen, worked end to end - from framing the problem and observing real ordering behaviour through to a complete set of UI screens.",
+    points: [
+      "Framed the problem around campus canteen ordering and captured first-hand observations of how people queue and order.",
+      "Built user personas and comparison tables, then mapped the experience as a service blueprint and user flow.",
+      "Translated the flow into wireframes and a final kiosk UI.",
+    ],
+    stages: [
+      "Problem Framing",
+      "Observations",
+      "User Personas",
+      "Comparison Tables",
+      "Service Blueprint",
+      "User Flow",
+      "Wireframes",
+      "Final UI",
+    ],
+    tech: [
+      "User Research",
+      "Personas",
+      "Service Blueprint",
+      "User Flows",
+      "Wireframing",
+      "UI Design",
+      "Figma",
+    ],
+    contribution: "Research · UX · UI",
+    /**
+     * Condensed walkthrough shown by the animated case-study view. Every
+     * string here is taken from the board itself - problem statement,
+     * observation quote, interview findings and both personas are verbatim.
+     * Nothing is written for the portfolio.
+     */
+    caseStudy: {
+      /**
+       * Goal, role and tools come from the board and the project record.
+       * `timeline` is deliberately null: the board does not state one, and a
+       * case study is not the place to guess at dates.
+       */
+      overview: {
+        goal: "Reduce peak-hour queues at a campus Nescafé by moving ordering and pickup onto a self-service kiosk.",
+        role: "UX Research / UX Design",
+        timeline: null,
+        tools: ["Figma", "User Research", "Personas", "Service Blueprint"],
+      },
+      /** The four interview findings, in the board's own shorthand. */
+      insights: [
+        {
+          label: "Lunch break",
+          body: "The rush concentrates into the short break between classes.",
+        },
+        {
+          label: "Order confusion",
+          body: "Orders blur together when many customers order at once.",
+        },
+        {
+          label: "Long queue",
+          body: "Waiting during rush time is what irritates customers most.",
+        },
+        {
+          label: "Out of stock",
+          body: "Maggie, coffee and snacks run out with no warning on the menu.",
+        },
+      ],
+      /**
+       * The eight-stage journey as mapped on the board. (The board's two
+       * tables carry swapped headings - these rows are the student's day,
+       * so they are labelled by their content.)
+       */
+      journey: {
+        label: "The student's journey",
+        stages: [
+          {
+            stage: "Hunger Trigger",
+            feeling: "Feeling hungry - should I go now or later?",
+            pain: "Short break time",
+            opportunity: "Live food-availability alerts at meal times",
+          },
+          {
+            stage: "Decide to Eat",
+            feeling: "Imagining the food; Nescafé is nearby",
+            pain: "Confusion in choosing what to eat",
+            opportunity: "Digital menu, combo offers, price comparison",
+          },
+          {
+            stage: "Travel to Canteen",
+            feeling: "Excited and rushed",
+            pain: "Takes time to reach the canteen",
+            opportunity: "Directional signage with estimated walking time",
+          },
+          {
+            stage: "Arrive & Queue",
+            feeling: "How long will I wait? What should I order?",
+            pain: "No queue system, chaotic ordering",
+            opportunity: "Token system, digital queue display, more counters",
+          },
+          {
+            stage: "Place Order",
+            feeling: "Uncertain - the item I wanted is unavailable",
+            pain: "Unclear menu, staff miscommunication",
+            opportunity: "QR ordering and a kiosk that shows real availability",
+          },
+          {
+            stage: "Pay",
+            feeling: "Relieved, now waiting",
+            pain: "Limited seating, payment delays",
+            opportunity:
+              "Cashless fast payment, seating availability indicator",
+          },
+          {
+            stage: "Wait for Food",
+            feeling: "Impatient, checking phone",
+            pain: "No order tracking, overcrowded and unclear pickup",
+            opportunity:
+              "Order tracking screen, notifications, separate waiting zone",
+          },
+          {
+            stage: "Finish & Leave",
+            feeling: "Satisfied but rushed",
+            pain: "Overflowing dustbins, time pressure, cleanup inconvenience",
+            opportunity:
+              "Smart dustbin placement, loyalty points for repeat users",
+          },
+        ],
+      },
+      /** Drawn from the board's DFV (desirability / feasibility / viability). */
+      features: [
+        {
+          title: "Digital token queue",
+          body: "A token system with a display replaces the single service window.",
+        },
+        {
+          title: "Digital menu board",
+          body: "A clear menu speeds up decisions and shows what is actually available.",
+        },
+        {
+          title: "Popular item tracking",
+          body: "Surfacing popular items builds trust and improves stock planning.",
+        },
+        {
+          title: "Loyalty & coupons",
+          body: "Loyalty points and digital coupons bring repeat customers into slow hours.",
+        },
+        {
+          title: "Inventory tracking",
+          body: "Real-time stock reduces losses and prevents out-of-stock surprises.",
+        },
+      ],
+      /**
+       * Expectations the board itself argues for under viability - written as
+       * expected impact, not measured results. No metrics are claimed.
+       */
+      outcome: {
+        decisions: [
+          "Start small: a digital menu plus a token system first.",
+          "Design for both sides of the counter, not just the customer.",
+          "Keep inventory visible so unavailable items never reach the order screen.",
+        ],
+        impact: [
+          "A loyalty system should increase repeat customers.",
+          "Digital coupons should lift sales in slow hours.",
+          "Popular-item tracking should improve stock planning.",
+          "Inventory tracking should reduce losses.",
+        ],
+        learnings: [
+          "The queue is a service-design problem before it is an interface problem.",
+          "The stall owner's pain points shaped the product as much as the student's.",
+        ],
+      },
+      chapters: [
+        {
+          kind: "problem",
+          label: "The Problem",
+          title: "Peak-hour queues at the campus Nescafé",
+          body: "Students experience long queues and overcrowding at Nescafé outlets during peak campus hours due to slow manual ordering, limited staff handling high demand, and inefficient service flow causing delays and frustration.",
+        },
+        {
+          kind: "quote",
+          label: "What I Observed",
+          quote:
+            "During class breaks, students gather at campus canteens, especially Nescafe, a popular social spot. Its prime location, Maggie, coffee, and shaded space attract groups. Easy menu access and interactive elements enhance experience. However, limited seating, single service window, and stock shortages affect convenience. It serves as a lively student hangout.",
+          tags: [
+            "Lunch break",
+            "Order confusion",
+            "Long queue",
+            "Out of stock",
+          ],
+        },
+        {
+          kind: "personas",
+          label: "Who It Is For",
+          title: "Two sides of the same counter",
+          personas: [
+            {
+              name: "Ramila Patel",
+              role: "Stall owner - Nescafe Hut",
+              meta: "Daily estimated ₹3,000 - ₹5,000",
+              pains: [
+                "Sudden crowd rush during lunch break",
+                "No queue management system",
+                "Order confusion when many customers order together",
+                "UPI delays or payment confirmation issues",
+                "Manual inventory checking and end-of-day sales counting",
+              ],
+              needs: [
+                "Digital token system to manage queues",
+                "Live order display screen",
+                "Pre-order system to prepare items earlier",
+                "Real-time inventory tracking",
+                "Automatic payment confirmation",
+              ],
+            },
+            {
+              name: "Rahul Shah",
+              role: "College student",
+              meta: "Budget ₹100 per day",
+              pains: [
+                "Slow serving during rush hours",
+                "Long queues at lunch time",
+                "Order confusion when many people order",
+                "Items often out of stock (Maggie, coffee, snacks)",
+                "Limited space to wait",
+              ],
+              needs: [
+                "Pre-order option to save time",
+                "Token system with display",
+                "Clear digital menu showing what is available",
+                "Fast service during rush hours",
+              ],
+            },
+          ],
+        },
+        {
+          kind: "solution",
+          label: "The Solution",
+          title: "A self-service kiosk on both sides of the counter",
+          body: "A smart self-service kiosk for a campus environment, designed to streamline ordering and pickup so the queue stops forming in the first place.",
+          bullets: [
+            "Digital token queue replaces the single service window",
+            "Live order display so nobody has to ask what is ready",
+            "Pre-ordering lets the stall start preparing before the break",
+            "Real-time inventory hides what is out of stock before it is ordered",
+            "Automatic payment confirmation removes the UPI wait",
+          ],
+        },
+        {
+          kind: "screens",
+          label: "The Screens",
+          title: "Ordering kiosk",
+          shots: [
+            {
+              src: "/images/projects/nescafe-ui-order.webp",
+              width: 1400,
+              height: 700,
+              alt: "Three kiosk ordering screens: coffee, sandwich and Maggie categories with a running order panel and total.",
+              caption:
+                "Browse by category, with the order and total always in view.",
+            },
+            {
+              src: "/images/projects/nescafe-ui-pay.webp",
+              width: 1400,
+              height: 600,
+              alt: "Kiosk checkout screens showing an itemised order, UPI and pay-at-counter options, and a QR confirmation.",
+              caption:
+                "Checkout: itemised order, UPI or pay at counter, QR to confirm.",
+            },
+            {
+              src: "/images/projects/nescafe-ui-shop.webp",
+              width: 1400,
+              height: 1040,
+              alt: "Shopkeeper app screens: live orders queue, sales dashboard with today's total and trend, and inventory management with stock toggles.",
+              caption:
+                "The stall side: live orders, a sales dashboard, and stock control.",
+            },
+          ],
+        },
+      ],
+    },
+    liveUrl: "",
+    behanceUrl:
+      "https://www.behance.net/gallery/252366823/Redesigning-the-Nescaf-Campus-Experience",
+  },
+  {
+    slug: "apna-pg",
+    title: "Apna PG",
+    subtitle: "PG-Finding Platform",
+    type: "live",
+    role: "Working Product / Live Application",
+    timeline: "3 months",
+    category: "UX Research • Product Design • MVP App",
+    featured: true,
+    status: "",
+    icon: "home",
+    cover: "",
+    full: "/images/projects/apna-pg-full.jpg",
+    fullWidth: 785,
+    fullHeight: 32768,
+    fullAlt:
+      "APNA PG case study board - project overview, problem statement, stakeholders, design process, timeline, secondary and primary research, personas, empathy map, journey map, card sorting, user flows, design system and final screens.",
+    description:
+      "A transparent way to find paying-guest accommodation. I ran user research to surface the real pain points in the PG search process, then designed flows around verified listings, honest reviews, and clear cost breakdowns.",
+    points: [
+      "Conducted user research and identified key pain points in the PG (paying-guest) accommodation search process.",
+      "Created user flows and wireframes for a transparent PG-finding solution featuring verified listings, reviews, and cost breakdowns.",
+    ],
+    stages: ["User Research", "Pain Points", "User Flows", "Wireframes", "UI"],
+    tech: ["User Research", "User Flows", "Wireframing", "Figma"],
+    contribution: "Research · Flows · Wireframes",
+    /**
+     * Taken from the uploaded APNA PG board: the problem statement, the five
+     * primary-research findings (percentages included), both personas, the
+     * five-stage journey map and the final screens are all the board's own.
+     */
+    caseStudy: {
+      overview: {
+        goal: "Make finding a paying-guest room transparent: real listings, the full cost up front, and enough proof of the place to decide without a broker.",
+        role: "UX Research / UI Design",
+        timeline: "3 months",
+        tools: [
+          "Figma",
+          "Surveys",
+          "Interviews",
+          "Empathy Mapping",
+          "Wireframing",
+        ],
+      },
+      chapters: [
+        {
+          kind: "problem",
+          label: "The Problem",
+          title: "Finding a PG in a new city is guesswork",
+          body: "Finding a PG in a new state can be hard due to high rent, poor facilities, safety issues, hidden charges, and sharing problems with strangers who have different habits or food preferences.",
+        },
+        {
+          kind: "quote",
+          label: "What I Set Out To Do",
+          quote:
+            "Truly understanding the everyday struggles of students and professionals, like high rent, unhealthy food, and safety concerns, and creating solutions that directly ease those pain points.",
+          tags: ["Discover", "Empathize", "Define", "Ideate", "Design & Test"],
+        },
+        {
+          kind: "personas",
+          label: "Who It Is For",
+          title: "Two residents, two budgets",
+          personas: [
+            {
+              name: "Avasar Savalia",
+              role: "21 - lives in a 2-sharing PG near Bopal",
+              meta: "Rent around Rs 14,000 - stayed 8 months",
+              pains: [
+                "Wrong rent information",
+                "Lack of transparency about extra charges",
+              ],
+              needs: [
+                "Furnished room",
+                "Reliable Wi-Fi",
+                "Strong security",
+                "24/7 water supply",
+                "Near to office",
+              ],
+            },
+            {
+              name: "Dhruvil",
+              role: "20 - student, found his PG through brokers",
+              meta: "Budget Rs 12,000 - Rs 15,000 a month",
+              pains: [
+                "Often spends more than the planned budget",
+                "Meal timings were not informed clearly",
+                "Food preferences not considered",
+                "Hard to trust a PG without proper visuals or proof",
+              ],
+              needs: [
+                "Clear PG options within budget range",
+                "Offers and discounts to reduce cost",
+                "Proper security system",
+                "360 degree room tour to decide faster",
+                "Nearby transport facilities",
+              ],
+            },
+          ],
+        },
+        {
+          kind: "solution",
+          label: "The Solution",
+          title: "Answer the questions a broker currently answers",
+          body: "Every opportunity in the journey map points the same way: show what is really there, and show what it really costs, before anyone pays a deposit.",
+          bullets: [
+            "Verified listings with real photos and resident reviews",
+            "360 degree room tours, the feature 96% of respondents asked for",
+            "The full cost shown up front, including what is and is not included",
+            "Clear house rules and contracts before the deposit, not after",
+            "Service guarantees and maintenance tracking once moved in",
+            "Fast answers and simple refunds on the way out",
+          ],
+        },
+        {
+          kind: "screens",
+          label: "The Screens",
+          title: "Apna PG",
+          shots: [
+            {
+              src: "/images/projects/apna-ui-onboarding.webp",
+              width: 785,
+              height: 485,
+              tab: "Onboarding",
+              alt: "Apna PG splash screen and two onboarding screens reading 'Find your best stay with Apna PG' with a Let's Explore button.",
+              caption: "Splash and onboarding.",
+            },
+            {
+              src: "/images/projects/apna-ui-auth.webp",
+              width: 785,
+              height: 480,
+              tab: "Sign in",
+              alt: "Login screen with email and password, a four-digit phone verification screen, and a create-account form.",
+              caption: "Login, phone verification, and account creation.",
+            },
+            {
+              src: "/images/projects/apna-ui-browse.webp",
+              width: 785,
+              height: 535,
+              tab: "Browse",
+              alt: "Home screen with featured stays and a map, a notifications screen showing rent and maintenance alerts, and a filtered listing view with prices per month.",
+              caption: "Finding a stay: search, alerts, and filtered listings.",
+            },
+          ],
+        },
+      ],
+      /** Primary research. The percentages are the board's, not estimates. */
+      insights: [
+        {
+          label: "80% live in a PG",
+          body: "Most respondents currently live in a PG, so the survey reflects real residents rather than prospective ones.",
+        },
+        {
+          label: "86% hit fake ads",
+          body: "Fake advertisements and misleading information are the most reported problem when searching for a PG.",
+        },
+        {
+          label: "Rent leads the pain",
+          body: "High rent is the biggest challenge, followed by fake ads, safety, hidden charges, food quality and roommate problems.",
+        },
+        {
+          label: "96% want a 360 tour",
+          body: "A 360 degree room tour would help them trust and choose a PG faster - transparency beats persuasion.",
+        },
+      ],
+      journey: {
+        label: "From arriving in the city to moving out",
+        stages: [
+          {
+            stage: "Arrival in City",
+            feeling: "Confused - searching for a PG",
+            pain: "Misleading information",
+            opportunity: "Verified listings, real photos, user reviews",
+          },
+          {
+            stage: "Viewing / Shortlisting",
+            feeling: "Easy and done fast - visiting PGs",
+            pain: "Hidden charges, false promises",
+            opportunity: "Show all costs up front",
+          },
+          {
+            stage: "Finalizing / Moving In",
+            feeling: "Nervous - paying the deposit",
+            pain: "Unexpected costs, unclear rules",
+            opportunity: "A list of what is included, and clear rules",
+          },
+          {
+            stage: "Daily Living",
+            feeling: "Disappointed, frustrated",
+            pain: "Poor food, unclean rooms, Wi-Fi and safety",
+            opportunity: "Service guarantees and maintenance",
+          },
+          {
+            stage: "Long-Term / Exit",
+            feeling: "Angry, helpless",
+            pain: "No help, and hard to get money back",
+            opportunity: "Fast answers, simple refunds",
+          },
+        ],
+      },
+      features: [
+        {
+          title: "Verified listings",
+          body: "Listings are verified, so what is advertised is what exists.",
+        },
+        {
+          title: "Honest reviews",
+          body: "Reviews from people who actually stayed, rather than marketing copy.",
+        },
+        {
+          title: "Clear cost breakdowns",
+          body: "The full cost is broken down up front, with no charges surfacing later.",
+        },
+        {
+          title: "360 degree room tours",
+          body: "See the actual room before travelling to it, or before paying for it.",
+        },
+        {
+          title: "Support and maintenance",
+          body: "Raise a ticket, track a complaint, and reach emergency contacts from the app.",
+        },
+      ],
+      outcome: {
+        decisions: [
+          "Lead with proof - photos, tours and reviews - because trust is the thing that is missing.",
+          "Put the whole cost on the listing, since hidden charges were the most common complaint.",
+          "Carry the experience past move-in, where the journey map showed the sharpest drop in mood.",
+        ],
+        impact: [
+          "Verified listings should cut the wasted visits caused by fake ads.",
+          "Up-front costs should reduce the budget overruns the secondary research describes.",
+          "A 360 degree tour should shorten the time it takes to commit to a room.",
+        ],
+        learnings: [
+          "Residents did not ask for more listings - they asked to believe the ones they saw.",
+          "The worst moments came after moving in, not while searching.",
+        ],
+      },
+    },
+    liveUrl: "https://pg-finder-booking.vercel.app/",
+    behanceUrl:
+      "https://www.behance.net/gallery/255609371/APNA-PG-UIUX-Case-Study",
+  },
 ];
 
 /* -------------------------------------------------------------------------- */
