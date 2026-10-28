@@ -105,16 +105,16 @@ export const aboutHeading = {
 
 /** `icon` maps to a glyph in components/ui/TechIcon.jsx */
 export const coreTools = [
-  { name: "Figma", icon: "figma" },
   { name: "User Research", icon: "research" },
+  { name: "User Flows", icon: "flow" },
   { name: "Wireframing", icon: "wireframe" },
   { name: "Prototyping", icon: "prototype" },
+  { name: "Usability Testing", icon: "usability" },
+  { name: "Figma", icon: "figma" },
   { name: "HTML", icon: "html" },
   { name: "CSS", icon: "css" },
   { name: "JavaScript", icon: "javascript" },
-  { name: "Python", icon: "python" },
   { name: "VS Code", icon: "vscode" },
-  { name: "Visual Studio", icon: "visualstudio" },
   { name: "Claude", icon: "claude" },
   { name: "Vibe Coding", icon: "vibe" },
 ];
