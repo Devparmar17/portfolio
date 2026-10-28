@@ -333,11 +333,12 @@ export const projects = [
     icon: "map",
     cover: "",
     description:
-      "A heritage guide for Indian cities, built on the finding that travellers juggle Google Maps, Search, YouTube and Instagram to understand one place. Thirty-four screens carry someone from discovery to an audio story, an AI guide and a walking route, in one app.",
+      "An AI travel companion for Indian heritage. It plans the trip around the person - a family with two days or someone travelling alone - finds the places and food stalls nobody writes about, and explains what you are standing in front of, in your own language, in a few sentences rather than an article.",
     points: [
       "Ran a fifteen-question bilingual survey, then built affinity maps, two personas, empathy maps and a six-stage journey map to locate where the travel experience actually breaks.",
       "Plotted every idea on an impact-effort matrix and shipped the high-impact, low-effort end first: nearby discovery, short histories and audio stories ahead of AR and VR.",
       "Designed and built a working 34-screen prototype, starting with Ahmedabad's old city and opening out to Jaipur, Varanasi, Hampi and Kolkata.",
+      "Set two constraints over the whole interface: it has to read in any major Indian language, and it has to be usable by a five-year-old and a seventy-five-year-old without instruction.",
     ],
     stagesLabel: "Screens in the flow",
     stages: [
@@ -369,7 +370,7 @@ export const projects = [
      */
     caseStudy: {
       overview: {
-        goal: "Put navigation, nearby discovery, history and culture in one place, so understanding where you are standing does not require four apps.",
+        goal: "Let anyone arrive in an unfamiliar city and know where to go, what to eat and what they are looking at - with a trip the AI plans around who they actually are, whether that is a family of four or one person on a weekend.",
         role: "UX Research / UI Design",
         timeline: "3 months",
         tools: [
@@ -450,13 +451,14 @@ export const projects = [
         {
           kind: "solution",
           label: "The Solution",
-          title: "One place that answers where, how and why",
-          body: "Every insight pointed at the same gap: people do not lack information, they lack it in one place, in a form short enough to read while standing in front of the thing it describes.",
+          title: "A guide that plans around you, then explains what you find",
+          body: "People do not lack information. They lack it in one place, shaped to the trip they are actually taking, in a form short enough to read while standing in front of the thing it describes. So the AI does two jobs: it builds the plan, and then it narrates the place.",
           bullets: [
-            "Smart navigation to the site, then short histories once you arrive",
-            "An audio tour that starts narrating on arrival, hands-free",
-            "An AI guide that answers questions in conversation, in multiple languages",
-            "Nearby and hidden-place discovery, so nothing is missed by accident",
+            "A trip planned around the traveller - who is coming, how long they have, what they care about - so a family itinerary and a solo weekend are not the same list",
+            "Hidden places over famous ones: the lane, the stepwell and the food stall that are worth the detour but never make the guidebook",
+            "An AI guide that answers questions in conversation and explains a monument in a few sentences, not an article",
+            "Every major Indian language, in its own script, so the guide speaks the way the traveller does",
+            "Simple enough for a child and an elderly traveller on the same screen - large targets, audio first, no menu to learn",
             "Offline maps and content, because connectivity fails at the sites themselves",
           ],
         },
@@ -485,6 +487,14 @@ export const projects = [
         {
           title: "Language problems",
           body: "Local languages, signs and historical information can be unreadable. Translation apps and asking local people are the current workarounds.",
+        },
+        {
+          title: "Local food discovery",
+          body: "Authentic local food and trusted stalls are hard to identify from reviews alone, so people fall back on asking whoever is standing nearby.",
+        },
+        {
+          title: "Transportation problems",
+          body: "Routes, fares and timings in an unfamiliar city are confusing, and the choice of how to get somewhere is rarely obvious.",
         },
         {
           title: "Poor internet connection",
@@ -534,6 +544,18 @@ export const projects = [
       },
       features: [
         {
+          title: "Personalised trip planning",
+          body: "The AI builds an itinerary from who is travelling, how much time they have and what they are interested in - history, architecture, food, spirituality or nature - rather than handing everyone the same list.",
+        },
+        {
+          title: "Hidden places and local secrets",
+          body: "Surfaces the lanes, stepwells and food stalls that are genuinely good but not famous, and says why each one is worth the detour.",
+        },
+        {
+          title: "Any Indian language",
+          body: "Information, narration and translation in the traveller's own language, set in its own script rather than transliterated.",
+        },
+        {
           title: "Smart navigation",
           body: "Routes to historical and cultural sites, planned around the places rather than only the roads.",
         },
@@ -563,8 +585,10 @@ export const projects = [
           "Build the high-impact, low-effort corner of the matrix first - nearby discovery, short histories and audio - and treat VR and 3D as later work.",
           "Lead with one city in depth rather than many thinly, so Ahmedabad's old city carries the first release.",
           "Set place names in their own scripts, with Noto Sans for Devanagari, Gujarati, Tamil and Bengali alongside the Latin type.",
+          "Make audio the primary way information arrives, so the app works for a child, for an elderly traveller, and for anyone walking with their eyes on the building rather than the screen.",
         ],
         impact: [
+          "A plan built around the traveller should replace the manual work the research described - screenshots, saved pins and hand-written itineraries.",
           "One app covering navigation, history and discovery should remove the app-switching the research found at the centre of the problem.",
           "Audio narration on arrival should let people look at the place rather than at a screen.",
           "Offline content should hold up at the sites where connectivity does not.",
