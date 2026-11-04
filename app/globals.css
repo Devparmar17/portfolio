@@ -57,10 +57,11 @@
 
 @theme inline {
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-poppins), var(--font-geist-sans), ui-sans-serif,
-    system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo,
-    monospace;
+  --font-display:
+    var(--font-poppins), var(--font-geist-sans), ui-sans-serif, system-ui,
+    sans-serif;
+  --font-mono:
+    var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -526,6 +527,424 @@ a:hover .logo-mark {
     var(--cert-brand, var(--muted-foreground)) 22%,
     transparent
   );
+}
+
+/* -------------------------------------------------------------------------- */
+/* INTRO                                                                       */
+/* -------------------------------------------------------------------------- */
+
+/*
+ * A four-act title sequence: the engineering era, the transformation, the
+ * design era, the signature. The acts themselves are animated in the
+ * component with Framer Motion; this file sets the stage they play on.
+ *
+ * The palette is fixed - charcoal, off-white, a blue accent - rather than
+ * following the site's theme. A title sequence that changes colour with a
+ * setting is a component, not a film.
+ *
+ * Hidden unless the layout's inline script says the intro is due, which it
+ * decides before first paint, so on every other render this costs nothing
+ * but the markup.
+ */
+.preloader {
+  display: none;
+}
+
+html[data-intro="1"] .preloader {
+  --intro-bg: #0b0c0e;
+  --intro-ink: #f4f4f2;
+  --intro-blue: #5b8def;
+  --intro-dim: rgb(244 244 242 / 48%);
+  --intro-ease: cubic-bezier(0.76, 0, 0.24, 1);
+
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.25rem, 4vw, 3rem);
+  overflow: hidden;
+  color: var(--intro-ink);
+  background: var(--intro-bg);
+  /* Uncovered upward, so the page reads as having been there all along. */
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 900ms var(--intro-ease);
+}
+
+/* The page is already behind the panel, so hold it still until it is gone. */
+html[data-intro="1"] body {
+  overflow: hidden;
+}
+
+html[data-intro="1"] .preloader[data-done="true"] {
+  clip-path: inset(0 0 100% 0);
+}
+
+html[data-intro="1"] .preloader[data-done="true"] .intro-scene,
+html[data-intro="1"] .preloader[data-done="true"] .intro-readout {
+  opacity: 0;
+  transition: opacity 360ms var(--intro-ease);
+}
+
+/* ---- grain ---- */
+
+/* Fine grain, so the flat panel reads as a surface rather than a fill. */
+.intro-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+/* ---- the stage ---- */
+
+.intro-scene {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  flex: 1;
+  place-items: center;
+}
+
+.intro-act {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 2.75rem);
+  width: 100%;
+  max-width: 72rem;
+  text-align: center;
+}
+
+.intro-stage-art {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: clamp(200px, 42vh, 420px);
+  /* Set by the component on pointer move; the transition does the easing. */
+  transform: translate3d(
+    calc(var(--px, 0) * 26px),
+    calc(var(--py, 0) * 17px),
+    0
+  );
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Nearer the viewer, so it drifts the other way and by less. */
+.intro-copy,
+.intro-signature {
+  transform: translate3d(
+    calc(var(--px, 0) * -7px),
+    calc(var(--py, 0) * -5px),
+    0
+  );
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---- type ---- */
+
+.intro-mask {
+  display: block;
+  overflow: hidden;
+}
+
+.intro-kicker {
+  display: block;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: clamp(0.75rem, 1.9vw, 1.0625rem);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--intro-dim);
+}
+
+.intro-title {
+  display: block;
+  font-size: clamp(2rem, 8.5vw, 6rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 0.98;
+  /* Opens slightly wide and closes, so the word arrives rather than appears. */
+  animation: intro-track 1100ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes intro-track {
+  from {
+    letter-spacing: 0.14em;
+    opacity: 0.55;
+  }
+  to {
+    letter-spacing: -0.02em;
+    opacity: 1;
+  }
+}
+
+.intro-sub {
+  display: block;
+  font-size: clamp(0.9375rem, 2.4vw, 1.375rem);
+  color: var(--intro-dim);
+}
+
+.intro-sub-dim {
+  color: rgb(244 244 242 / 30%);
+}
+
+.intro-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.intro-copy-centre {
+  margin-top: 1.25rem;
+}
+
+/* ---- act 1: engineering ---- */
+
+.intro-circuit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150vw;
+  max-width: none;
+  height: auto;
+  translate: -50% -50%;
+  opacity: 0.85;
+}
+
+.intro-chip {
+  position: absolute;
+  width: clamp(190px, 38vw, 340px);
+  opacity: 0.9;
+}
+
+.intro-binary {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: clamp(0.5rem, 1.2vw, 0.6875rem);
+  letter-spacing: 0.3em;
+  color: var(--intro-dim);
+  pointer-events: none;
+}
+
+.intro-binary span {
+  writing-mode: vertical-rl;
+}
+
+.intro-terminal {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 30rem);
+  padding: 1.125rem 1.25rem 1.25rem;
+  text-align: left;
+  border: 1px solid rgb(244 244 242 / 12%);
+  border-radius: 10px;
+  background: rgb(255 255 255 / 3%);
+  backdrop-filter: blur(2px);
+}
+
+.intro-terminal-bar {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 0.75rem;
+}
+
+.intro-terminal-bar i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgb(244 244 242 / 22%);
+}
+
+.intro-terminal code {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: clamp(0.75rem, 1.7vw, 1rem);
+  line-height: 1.7;
+  color: var(--intro-ink);
+}
+
+.intro-code-line {
+  display: block;
+  white-space: pre;
+}
+
+/* ---- act 2: the transformation ---- */
+
+.intro-morph {
+  width: min(100%, 46rem);
+  height: auto;
+}
+
+.intro-palette {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  gap: 6px;
+}
+
+.intro-palette span {
+  display: block;
+  width: clamp(44px, 10vw, 76px);
+  height: 12px;
+  border-radius: 999px;
+  transform-origin: bottom center;
+}
+
+/* ---- act 3: the design era ---- */
+
+.intro-screens {
+  position: relative;
+  display: flex;
+  gap: clamp(0.75rem, 3vw, 1.75rem);
+  align-items: center;
+  justify-content: center;
+}
+
+.intro-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  width: clamp(92px, 20vw, 150px);
+  padding: 12px;
+  border: 1px solid rgb(244 244 242 / 14%);
+  border-radius: 10px;
+  background: rgb(255 255 255 / 4%);
+}
+
+.intro-screen-hero {
+  display: block;
+  height: clamp(56px, 13vw, 94px);
+  border-radius: 8px;
+  opacity: 0.85;
+}
+
+.intro-screen-line {
+  display: block;
+  height: 5px;
+  border-radius: 3px;
+  background: rgb(244 244 242 / 30%);
+}
+
+.intro-screen-line.short {
+  width: 60%;
+}
+
+.intro-screen-row {
+  display: flex;
+  gap: 4px;
+}
+
+.intro-screen-row i {
+  flex: 1;
+  height: 22px;
+  border-radius: 4px;
+  background: rgb(244 244 242 / 12%);
+}
+
+.intro-flow {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* ---- act 4: the signature ---- */
+
+.intro-act-signature {
+  gap: 0;
+}
+
+.intro-signature {
+  display: flex;
+  margin: 0;
+  font-size: clamp(2.75rem, 13vw, 9rem);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+}
+
+.intro-signature-letter {
+  display: block;
+}
+
+/* ---- the readout and the skip ---- */
+
+.intro-readout {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.intro-progress {
+  display: block;
+  flex: 1;
+  height: 1px;
+  overflow: hidden;
+  background: rgb(244 244 242 / 14%);
+}
+
+.intro-progress-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--intro-ink);
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: intro-progress var(--intro-run, 6700ms) linear forwards;
+}
+
+@keyframes intro-progress {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.intro-count {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: clamp(0.6875rem, 1.6vw, 0.8125rem);
+  letter-spacing: 0.1em;
+  font-variant-numeric: tabular-nums;
+  color: var(--intro-dim);
+}
+
+.intro-skip {
+  position: absolute;
+  top: clamp(1.25rem, 4vw, 3rem);
+  right: clamp(1.25rem, 4vw, 3rem);
+  z-index: 2;
+  padding: 0.5rem 0.875rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--intro-dim);
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid rgb(244 244 242 / 16%);
+  border-radius: 999px;
+  transition:
+    color 220ms var(--intro-ease),
+    border-color 220ms var(--intro-ease);
+}
+
+.intro-skip:hover,
+.intro-skip:focus-visible {
+  color: var(--intro-ink);
+  border-color: rgb(244 244 242 / 40%);
+  outline: none;
 }
 
 /* -------------------------------------------------------------------------- */

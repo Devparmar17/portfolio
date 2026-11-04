@@ -3,6 +3,7 @@ import { GeistMono } from "geist/font/mono";
 import { Poppins } from "next/font/google";
 
 import ThemeProvider from "@/components/providers/ThemeProvider";
+import Preloader from "@/components/ui/Preloader";
 import { contact, profile, siteUrl, socials } from "@/data/portfolio";
 import "./globals.css";
 
@@ -72,9 +73,7 @@ const personSchema = {
   email: `mailto:${contact.email}`,
   telephone: contact.phoneHref,
   url: siteUrl,
-  sameAs: socials
-    .filter((s) => s.url && s.id !== "email")
-    .map((s) => s.url),
+  sameAs: socials.filter((s) => s.url && s.id !== "email").map((s) => s.url),
 };
 
 /* Case-study pages are set in Poppins; the rest of the site keeps Geist. */
@@ -93,6 +92,25 @@ export default function RootLayout({ children }) {
       className={`${GeistSans.variable} ${GeistMono.variable} ${poppins.variable}`}
     >
       <body className="font-sans antialiased">
+        {/*
+          Runs before first paint so the page never flashes behind the intro,
+          and only on the first visit of a session.
+
+          The timeout is a failsafe: if this script runs but React never
+          hydrates, the attribute would otherwise keep the overlay up and the
+          body locked. It is longer than the sequence it guards.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "var r=document.documentElement;" +
+              "try{if(!sessionStorage.getItem('intro-seen'))r.setAttribute('data-intro','1')}catch(e){}" +
+              "setTimeout(function(){r.removeAttribute('data-intro')},9000);",
+          }}
+        />
+
+        <Preloader />
+
         {/*
           Scroll-reveal elements are server-rendered at opacity 0 and animated
           in by Framer Motion. Without JS they would stay invisible, so force
