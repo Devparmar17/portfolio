@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, BadgeCheck, Download } from "lucide-react";
+import { ArrowRight, BadgeCheck, ExternalLink } from "lucide-react";
 
 import { profile } from "@/data/portfolio";
 import { scrollToSection } from "@/lib/utils";
@@ -110,13 +110,14 @@ export default function Hero() {
                   href={profile.resume}
                   variant="outline"
                   className="group"
-                  download
+                  external
                 >
-                  <Download
-                    className="w-4 h-4 transition-transform group-hover:translate-y-0.5"
+                  <ExternalLink
+                    className="w-4 h-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                     aria-hidden="true"
                   />
-                  Download Resume
+                  View Resume
+                  <span className="sr-only">- opens in a new tab</span>
                 </Button>
 
                 <SocialLinks className="ml-1" />

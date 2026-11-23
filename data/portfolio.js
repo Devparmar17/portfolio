@@ -50,7 +50,9 @@ export const profile = {
    * `node scripts/prepare-photo.mjs "<photo.png>"`.
    */
   photo: "/images/profile.png",
-  resume: "/Dev-Parmar-Resume.pdf",
+  /** Opens in Google Drive's viewer, in a new tab - not a download. */
+  resume:
+    "https://drive.google.com/file/d/1AwKpcIB3sahZTQiPbwbfWBUESOmhs1gW/view?usp=sharing",
 };
 
 /* -------------------------------------------------------------------------- */
