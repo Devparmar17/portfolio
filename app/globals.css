@@ -569,7 +569,7 @@ html[data-intro="1"] .preloader {
   background: var(--intro-bg);
   /* Uncovered upward, so the page reads as having been there all along. */
   clip-path: inset(0 0 0 0);
-  transition: clip-path 900ms var(--intro-ease);
+  transition: clip-path 620ms var(--intro-ease);
 }
 
 /* The page is already behind the panel, so hold it still until it is gone. */
@@ -635,8 +635,7 @@ html[data-intro="1"] .preloader[data-done="true"] .intro-readout {
 }
 
 /* Nearer the viewer, so it drifts the other way and by less. */
-.intro-copy,
-.intro-signature {
+.intro-copy {
   transform: translate3d(
     calc(var(--px, 0) * -7px),
     calc(var(--py, 0) * -5px),
@@ -650,15 +649,6 @@ html[data-intro="1"] .preloader[data-done="true"] .intro-readout {
 .intro-mask {
   display: block;
   overflow: hidden;
-}
-
-.intro-kicker {
-  display: block;
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: clamp(0.75rem, 1.9vw, 1.0625rem);
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--intro-dim);
 }
 
 .intro-title {
@@ -688,10 +678,6 @@ html[data-intro="1"] .preloader[data-done="true"] .intro-readout {
   color: var(--intro-dim);
 }
 
-.intro-sub-dim {
-  color: rgb(244 244 242 / 30%);
-}
-
 .intro-copy {
   display: flex;
   flex-direction: column;
@@ -703,72 +689,64 @@ html[data-intro="1"] .preloader[data-done="true"] .intro-readout {
   margin-top: 1.25rem;
 }
 
-/* ---- act 1: engineering ---- */
+/* ---- act 1: the machine ---- */
 
-.intro-circuit {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 150vw;
-  max-width: none;
-  height: auto;
-  translate: -50% -50%;
-  opacity: 0.85;
+/*
+ * A desktop computer, drawn in CSS rather than shipped as an image so it
+ * follows the panel's own ink and needs nothing downloaded. The camera
+ * leaves this act by flying into the screen, so the fly-through's origin
+ * sits on the glass rather than in the middle of the element.
+ */
+.intro-act-fly {
+  transform-origin: 50% 38%;
 }
 
-.intro-chip {
-  position: absolute;
-  width: clamp(190px, 38vw, 340px);
-  opacity: 0.9;
-}
-
-.intro-binary {
-  position: absolute;
-  inset: 0;
+.intro-pc {
   display: flex;
-  justify-content: space-between;
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: clamp(0.5rem, 1.2vw, 0.6875rem);
-  letter-spacing: 0.3em;
-  color: var(--intro-dim);
-  pointer-events: none;
-}
-
-.intro-binary span {
-  writing-mode: vertical-rl;
-}
-
-.intro-terminal {
-  position: relative;
-  z-index: 1;
+  flex-direction: column;
+  align-items: center;
   width: min(100%, 30rem);
-  padding: 1.125rem 1.25rem 1.25rem;
-  text-align: left;
-  border: 1px solid rgb(244 244 242 / 12%);
-  border-radius: 10px;
-  background: rgb(255 255 255 / 3%);
-  backdrop-filter: blur(2px);
 }
 
-.intro-terminal-bar {
+.intro-pc-monitor {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid rgb(244 244 242 / 22%);
+  border-radius: 14px;
+  background: rgb(255 255 255 / 4%);
+}
+
+.intro-pc-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  aspect-ratio: 16 / 10;
+  padding: 0.875rem 1rem;
+  overflow: hidden;
+  text-align: left;
+  border: 1px solid rgb(244 244 242 / 10%);
+  border-radius: 7px;
+  background: #07080a;
+}
+
+.intro-pc-bar {
   display: flex;
   gap: 6px;
-  margin-bottom: 0.75rem;
 }
 
-.intro-terminal-bar i {
-  width: 8px;
-  height: 8px;
+.intro-pc-bar i {
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: rgb(244 244 242 / 22%);
 }
 
-.intro-terminal code {
+.intro-pc-screen code {
   display: flex;
   flex-direction: column;
   gap: 2px;
   font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: clamp(0.75rem, 1.7vw, 1rem);
+  font-size: clamp(0.5rem, 1.5vw, 0.8125rem);
   line-height: 1.7;
   color: var(--intro-ink);
 }
@@ -776,6 +754,46 @@ html[data-intro="1"] .preloader[data-done="true"] .intro-readout {
 .intro-code-line {
   display: block;
   white-space: pre;
+}
+
+.intro-caret {
+  display: block;
+  width: 0.55em;
+  height: 1em;
+  margin-top: 2px;
+  background: var(--intro-blue);
+}
+
+/* Neck, foot and keyboard: enough of a machine to read as one. */
+.intro-pc-neck {
+  width: clamp(44px, 9vw, 64px);
+  height: clamp(14px, 3vw, 22px);
+  background: rgb(244 244 242 / 14%);
+}
+
+.intro-pc-base {
+  width: clamp(110px, 24vw, 170px);
+  height: 6px;
+  border-radius: 3px;
+  background: rgb(244 244 242 / 18%);
+}
+
+.intro-pc-keyboard {
+  display: flex;
+  gap: 3px;
+  justify-content: center;
+  width: clamp(150px, 32vw, 230px);
+  margin-top: clamp(10px, 2.4vw, 18px);
+  padding: 5px 7px;
+  border: 1px solid rgb(244 244 242 / 12%);
+  border-radius: 5px;
+}
+
+.intro-pc-keyboard i {
+  flex: 1;
+  height: 5px;
+  border-radius: 1.5px;
+  background: rgb(244 244 242 / 14%);
 }
 
 /* ---- act 2: the transformation ---- */
@@ -859,22 +877,19 @@ html[data-intro="1"] .preloader[data-done="true"] .intro-readout {
   pointer-events: none;
 }
 
-/* ---- act 4: the signature ---- */
+/* ---- act 4: the hand-off ---- */
 
-.intro-act-signature {
-  gap: 0;
-}
-
-.intro-signature {
+.intro-dev {
   display: flex;
   margin: 0;
-  font-size: clamp(2.75rem, 13vw, 9rem);
+  font-size: clamp(3rem, 16vw, 11rem);
   font-weight: 700;
-  line-height: 0.92;
-  letter-spacing: -0.04em;
+  line-height: 0.9;
+  letter-spacing: -0.045em;
+  color: var(--intro-ink);
 }
 
-.intro-signature-letter {
+.intro-dev-letter {
   display: block;
 }
 
@@ -903,7 +918,7 @@ html[data-intro="1"] .preloader[data-done="true"] .intro-readout {
   background: var(--intro-ink);
   transform: scaleX(0);
   transform-origin: left center;
-  animation: intro-progress var(--intro-run, 6700ms) linear forwards;
+  animation: intro-progress var(--intro-run, 4000ms) linear forwards;
 }
 
 @keyframes intro-progress {

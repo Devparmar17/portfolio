@@ -3,18 +3,22 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { profile } from "@/data/portfolio";
-
 /**
- * The intro: from Computer Engineering to UI/UX Design, in four acts.
+ * The intro, shot as one camera move.
  *
- *   1. The engineering era - a terminal types, circuits draw, a processor
- *      is sketched in wireframe, and COMPUTER ENGINEERING lands.
- *   2. The transformation - those code lines collapse into wireframe
- *      blocks, a design grid rules itself over them, and a palette appears.
- *   3. The design era - screens float in with parallax, connected by a user
- *      flow, and UI/UX DESIGN lands.
- *   4. The signature - the name, the two lines, and 100%.
+ *   1. A desktop computer, small on a dark stage, with code typing itself
+ *      across its screen.
+ *   2. The camera flies into that screen - the machine scales past the
+ *      edges of the frame and we come out the other side, inside it.
+ *   3. Inside: the code stops being code. Lines snap into UI blocks, a
+ *      design grid rules itself over them, a palette arrives.
+ *   4. UI/UX DESIGN.
+ *   5. DEV, and then the page.
+ *
+ * The zoom is the whole idea, so it is built as a real move rather than a
+ * cut: act one leaves by scaling up from the middle of the monitor's screen
+ * while act two arrives already large and settles back. Those two halves
+ * meet in the middle and read as one continuous push through the glass.
  *
  * It plays once per session and can be skipped at any point, by the button,
  * by a key, or by clicking anywhere. Reduced motion skips it outright.
@@ -29,28 +33,42 @@ import { profile } from "@/data/portfolio";
  * the skip control is a real, focusable button and is not.
  */
 
-/** Each act, and how long it holds. Total sits inside the 5-7s brief. */
+/** The rhythm every delay in this file is tuned against. */
+const BASE_MS = [1500, 1000, 800, 700];
+
+/** What the whole thing has to fit inside. */
+const TARGET_MS = 4000;
+
+const SPEED = TARGET_MS / BASE_MS.reduce((sum, ms) => sum + ms, 0);
+
+/**
+ * Scales a tuned value. Every delay and duration goes through this, so the
+ * sequence keeps its proportions at any total length - change TARGET_MS and
+ * nothing else needs touching.
+ */
+const t = (seconds) => seconds * SPEED;
+
+/** Each act, and how long it holds. */
 const ACTS = [
-  { id: "engineering", ms: 2000 },
-  { id: "transform", ms: 1500 },
-  { id: "design", ms: 1700 },
-  { id: "signature", ms: 1500 },
+  { id: "machine", ms: Math.round(BASE_MS[0] * SPEED) },
+  { id: "inside", ms: Math.round(BASE_MS[1] * SPEED) },
+  { id: "design", ms: Math.round(BASE_MS[2] * SPEED) },
+  { id: "name", ms: Math.round(BASE_MS[3] * SPEED) },
 ];
 
 const TOTAL_MS = ACTS.reduce((sum, act) => sum + act.ms, 0);
 
-/** Long enough for the curtain to clear. */
-const EXIT_MS = 900;
+/** Long enough for the curtain to clear; matches the clip in globals.css. */
+const EXIT_MS = 620;
 
 const EASE = [0.22, 1, 0.36, 1];
 const EASE_IN_OUT = [0.76, 0, 0.24, 1];
 
-/** The code that types itself in the first act. */
+/** What is on the screen before the camera goes through it. */
 const CODE = [
-  "class Engineer {",
-  "  build(logic) {",
-  "    return system(logic);",
-  "  }",
+  "function build() {",
+  "  const logic = compile();",
+  "  return ship(logic);",
   "}",
 ];
 
@@ -59,7 +77,7 @@ const CODE = [
 /* -------------------------------------------------------------------------- */
 
 /** A line of type revealed left to right, the way a line is typed. */
-function TypeLine({ children, delay = 0, className, duration = 0.5 }) {
+function TypeLine({ children, delay = 0, className, duration = t(0.5) }) {
   return (
     <motion.span
       className={className}
@@ -81,7 +99,7 @@ function RiseLine({ children, delay = 0, className }) {
         initial={{ y: "110%" }}
         animate={{ y: "0%" }}
         exit={{ y: "-110%" }}
-        transition={{ duration: 0.62, delay, ease: EASE }}
+        transition={{ duration: t(0.62), delay, ease: EASE }}
       >
         {children}
       </motion.span>
@@ -89,177 +107,111 @@ function RiseLine({ children, delay = 0, className }) {
   );
 }
 
-/*
- * Acts arrive and leave like camera moves: a touch of scale and defocus
- * either side of the cut, so one act gives way to the next instead of two
- * of them cross-fading in place.
- */
+/** The ordinary cut: a touch of scale either side, no dissolve in place. */
 const actFade = {
   initial: { opacity: 0, scale: 0.97 },
-  animate: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: EASE } },
-  exit: { opacity: 0, scale: 1.04, transition: { duration: 0.45, ease: EASE } },
+  animate: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: t(0.6), ease: EASE },
+  },
+  exit: {
+    opacity: 0,
+    scale: 1.04,
+    transition: { duration: t(0.45), ease: EASE },
+  },
 };
 
 /* -------------------------------------------------------------------------- */
-/* Act 1 - the engineering era                                                 */
+/* Act 1 - the machine, and the push through its screen                        */
 /* -------------------------------------------------------------------------- */
 
-function ActEngineering() {
+/**
+ * Leaves by flying into the monitor. The origin sits on the screen rather
+ * than the middle of the element, so the glass is what the camera aims at.
+ */
+const flyThrough = {
+  initial: { opacity: 0, scale: 0.86 },
+  animate: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: t(0.8), ease: EASE },
+  },
+  exit: {
+    opacity: 0,
+    scale: 9,
+    transition: { duration: t(0.75), ease: EASE_IN_OUT },
+  },
+};
+
+function ActMachine() {
   return (
-    <motion.div className="intro-act" {...actFade}>
-      <div className="intro-stage-art" aria-hidden="true">
-        {/* Circuit lines finding their way across the plate. */}
-        <svg className="intro-circuit" viewBox="0 0 600 320" fill="none">
-          {[
-            "M0 60h120l28 28h96",
-            "M600 96H470l-26 26H330",
-            "M0 250h86l30-30h120",
-            "M600 224H486l-24-24H352",
-          ].map((d, i) => (
-            <motion.path
-              key={d}
-              d={d}
-              stroke="var(--intro-blue)"
-              strokeWidth="1"
-              strokeOpacity="0.5"
-              pathLength={1}
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 1.1, delay: 0.1 + i * 0.09, ease: EASE }}
-            />
-          ))}
-          {[
-            [148, 88],
-            [444, 122],
-            [116, 220],
-            [462, 200],
-          ].map(([cx, cy], i) => (
-            <motion.circle
-              key={`${cx}-${cy}`}
-              cx={cx}
-              cy={cy}
-              r="3"
-              fill="var(--intro-blue)"
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.3, delay: 0.7 + i * 0.08, ease: EASE }}
-            />
-          ))}
-        </svg>
-
-        {/* The processor, in wireframe. */}
-        <motion.svg
-          className="intro-chip"
-          viewBox="0 0 160 160"
-          fill="none"
-          initial={{ opacity: 0, rotateX: 28, scale: 0.92 }}
-          animate={{ opacity: 1, rotateX: 0, scale: 1 }}
-          transition={{ duration: 1.1, delay: 0.25, ease: EASE }}
-        >
-          <rect
-            x="34"
-            y="34"
-            width="92"
-            height="92"
-            rx="8"
-            stroke="var(--intro-ink)"
-            strokeOpacity="0.35"
-          />
-          <rect
-            x="58"
-            y="58"
-            width="44"
-            height="44"
-            rx="4"
-            stroke="var(--intro-blue)"
-            strokeOpacity="0.85"
-          />
-          {Array.from({ length: 4 }, (_, i) => 50 + i * 20).map((p) => (
-            <g key={p} stroke="var(--intro-ink)" strokeOpacity="0.28">
-              <path d={`M${p} 34V16`} />
-              <path d={`M${p} 126v18`} />
-              <path d={`M34 ${p}H16`} />
-              <path d={`M126 ${p}h18`} />
-            </g>
-          ))}
-        </motion.svg>
-
-        {/* Binary, drifting. */}
-        <div className="intro-binary">
-          {Array.from({ length: 7 }, (_, col) => (
-            <motion.span
-              key={col}
-              initial={{ opacity: 0, y: -12 }}
-              animate={{ opacity: [0, 0.5, 0.18], y: 0 }}
-              transition={{
-                duration: 1.6,
-                delay: col * 0.11,
-                ease: "linear",
-              }}
-            >
-              {/* Fixed, not random, so the server and client agree. */}
-              {
-                ["01001", "10110", "00101", "11010", "01110", "10011", "00110"][
-                  col
-                ]
-              }
-            </motion.span>
-          ))}
+    <motion.div className="intro-act intro-act-fly" {...flyThrough}>
+      <div className="intro-pc">
+        <div className="intro-pc-monitor">
+          <div className="intro-pc-screen">
+            <span className="intro-pc-bar">
+              <i />
+              <i />
+              <i />
+            </span>
+            <code>
+              {CODE.map((line, i) => (
+                <TypeLine
+                  key={line}
+                  className="intro-code-line"
+                  delay={t(0.3 + i * 0.17)}
+                  duration={t(0.32)}
+                >
+                  {line}
+                </TypeLine>
+              ))}
+              <motion.span
+                className="intro-caret"
+                animate={{ opacity: [1, 0, 1] }}
+                transition={{ duration: t(0.6), repeat: Infinity }}
+              />
+            </code>
+          </div>
         </div>
-
-        {/* The terminal. */}
-        <motion.div
-          className="intro-terminal"
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3, ease: EASE }}
-        >
-          <span className="intro-terminal-bar">
-            <i />
-            <i />
-            <i />
-          </span>
-          <code>
-            {CODE.map((line, i) => (
-              <TypeLine
-                key={line}
-                className="intro-code-line"
-                delay={0.45 + i * 0.16}
-                duration={0.34}
-              >
-                {line}
-              </TypeLine>
-            ))}
-          </code>
-        </motion.div>
-      </div>
-
-      <div className="intro-copy">
-        <RiseLine className="intro-kicker" delay={0.05}>
-          It all started with code.
-        </RiseLine>
-        <RiseLine className="intro-title" delay={1.15}>
-          COMPUTER ENGINEERING
-        </RiseLine>
-        <RiseLine className="intro-sub" delay={1.32}>
-          Understanding how technology works.
-        </RiseLine>
+        <span className="intro-pc-neck" />
+        <span className="intro-pc-base" />
+        <span className="intro-pc-keyboard">
+          {Array.from({ length: 14 }, (_, i) => (
+            <i key={i} />
+          ))}
+        </span>
       </div>
     </motion.div>
   );
 }
 
 /* -------------------------------------------------------------------------- */
-/* Act 2 - the transformation                                                  */
+/* Act 2 - inside the screen: code becoming interface                          */
 /* -------------------------------------------------------------------------- */
 
+/** Arrives already large, as if the camera is still travelling. */
+const arrive = {
+  initial: { opacity: 0, scale: 1.7 },
+  animate: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: t(0.85), ease: EASE },
+  },
+  exit: {
+    opacity: 0,
+    scale: 1.06,
+    transition: { duration: t(0.4), ease: EASE },
+  },
+};
+
 /** Where each code line ends up once it stops being code. */
-const MORPH = [
-  { x: 10, y: 8, w: 150, h: 18, r: 4 },
-  { x: 10, y: 34, w: 104, h: 10, r: 3 },
-  { x: 10, y: 54, w: 62, h: 20, r: 10 },
-  { x: 178, y: 8, w: 92, h: 66, r: 6 },
-  { x: 10, y: 86, w: 260, h: 30, r: 6 },
+const BLOCKS = [
+  { x: 10, y: 8, w: 150, h: 18, r: 4, accent: null },
+  { x: 10, y: 34, w: 104, h: 10, r: 3, accent: null },
+  { x: 10, y: 54, w: 62, h: 20, r: 10, accent: "var(--intro-blue)" },
+  { x: 178, y: 8, w: 92, h: 66, r: 6, accent: "var(--brand-figma)" },
+  { x: 10, y: 86, w: 260, h: 30, r: 6, accent: null },
 ];
 
 const PALETTE = [
@@ -269,10 +221,10 @@ const PALETTE = [
   "var(--brand-javascript)",
 ];
 
-function ActTransform() {
+function ActInside() {
   return (
-    <motion.div className="intro-act" {...actFade}>
-      <div className="intro-stage-art" aria-hidden="true">
+    <motion.div className="intro-act" {...arrive}>
+      <div className="intro-stage-art">
         <svg className="intro-morph" viewBox="0 0 280 126" fill="none">
           {/* The grid rules itself over the top. */}
           {Array.from({ length: 7 }, (_, i) => (
@@ -283,11 +235,15 @@ function ActTransform() {
               strokeOpacity="0.1"
               initial={{ pathLength: 0 }}
               animate={{ pathLength: 1 }}
-              transition={{ duration: 0.5, delay: 0.1 + i * 0.04, ease: EASE }}
+              transition={{
+                duration: t(0.5),
+                delay: t(0.05 + i * 0.035),
+                ease: EASE,
+              }}
             />
           ))}
 
-          {MORPH.map((box, i) => (
+          {BLOCKS.map((box, i) => (
             <motion.rect
               key={i}
               x={box.x}
@@ -295,20 +251,19 @@ function ActTransform() {
               width={box.w}
               height={box.h}
               rx={box.r}
-              fill={i === 2 ? "var(--intro-blue)" : "var(--intro-ink)"}
-              initial={{ opacity: 0, scaleX: 0.2 }}
-              animate={{ opacity: i === 2 ? 0.9 : 0.16, scaleX: 1 }}
+              fill={box.accent ?? "var(--intro-ink)"}
+              initial={{ opacity: 0, scaleX: 0.15 }}
+              animate={{ opacity: box.accent ? 0.9 : 0.18, scaleX: 1 }}
               style={{ originX: 0 }}
               transition={{
-                duration: 0.55,
-                delay: 0.22 + i * 0.09,
+                duration: t(0.5),
+                delay: t(0.14 + i * 0.08),
                 ease: EASE,
               }}
             />
           ))}
         </svg>
 
-        {/* The palette arriving. */}
         <div className="intro-palette">
           {PALETTE.map((colour, i) => (
             <motion.span
@@ -316,35 +271,33 @@ function ActTransform() {
               style={{ background: colour }}
               initial={{ scaleY: 0, opacity: 0 }}
               animate={{ scaleY: 1, opacity: 1 }}
-              transition={{ duration: 0.4, delay: 0.7 + i * 0.07, ease: EASE }}
+              transition={{
+                duration: t(0.4),
+                delay: t(0.45 + i * 0.07),
+                ease: EASE,
+              }}
             />
           ))}
         </div>
-      </div>
-
-      <div className="intro-copy">
-        <RiseLine className="intro-kicker" delay={0.05}>
-          Then I discovered the art of design.
-        </RiseLine>
       </div>
     </motion.div>
   );
 }
 
 /* -------------------------------------------------------------------------- */
-/* Act 3 - the design era                                                      */
+/* Act 3 - UI/UX                                                               */
 /* -------------------------------------------------------------------------- */
 
 const SCREENS = [
-  { lift: -16, delay: 0.1, tint: "var(--brand-figma)" },
-  { lift: 10, delay: 0.2, tint: "var(--intro-blue)" },
-  { lift: -8, delay: 0.3, tint: "var(--brand-visualstudio)" },
+  { lift: -16, delay: 0.06, tint: "var(--brand-figma)" },
+  { lift: 10, delay: 0.14, tint: "var(--intro-blue)" },
+  { lift: -8, delay: 0.22, tint: "var(--brand-visualstudio)" },
 ];
 
 function ActDesign() {
   return (
     <motion.div className="intro-act" {...actFade}>
-      <div className="intro-stage-art" aria-hidden="true">
+      <div className="intro-stage-art">
         <div className="intro-screens">
           {SCREENS.map((screen, i) => (
             <motion.div
@@ -352,7 +305,11 @@ function ActDesign() {
               className="intro-screen"
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: screen.lift }}
-              transition={{ duration: 0.8, delay: screen.delay, ease: EASE }}
+              transition={{
+                duration: t(0.7),
+                delay: t(screen.delay),
+                ease: EASE,
+              }}
             >
               <span
                 className="intro-screen-hero"
@@ -367,7 +324,6 @@ function ActDesign() {
             </motion.div>
           ))}
 
-          {/* The flow between them. */}
           <svg className="intro-flow" viewBox="0 0 320 120" fill="none">
             {["M66 60h58", "M196 60h58"].map((d, i) => (
               <motion.path
@@ -379,8 +335,8 @@ function ActDesign() {
                 initial={{ pathLength: 0 }}
                 animate={{ pathLength: 1 }}
                 transition={{
-                  duration: 0.5,
-                  delay: 0.55 + i * 0.12,
+                  duration: t(0.45),
+                  delay: t(0.3 + i * 0.1),
                   ease: EASE,
                 }}
               />
@@ -390,11 +346,8 @@ function ActDesign() {
       </div>
 
       <div className="intro-copy">
-        <RiseLine className="intro-title" delay={0.5}>
+        <RiseLine className="intro-title" delay={t(0.28)}>
           UI/UX DESIGN
-        </RiseLine>
-        <RiseLine className="intro-sub" delay={0.66}>
-          Turning ideas into meaningful experiences.
         </RiseLine>
       </div>
     </motion.div>
@@ -402,33 +355,32 @@ function ActDesign() {
 }
 
 /* -------------------------------------------------------------------------- */
-/* Act 4 - the signature                                                       */
+/* Act 4 - the hand-off                                                        */
 /* -------------------------------------------------------------------------- */
 
-function ActSignature({ letters }) {
+const DEV = [..."DEV"];
+
+function ActName() {
   return (
-    <motion.div className="intro-act intro-act-signature" {...actFade}>
-      <h1 className="intro-signature">
-        {letters.map((char, i) => (
+    <motion.div className="intro-act" {...actFade}>
+      <h1 className="intro-dev">
+        {DEV.map((char, i) => (
           <span key={i} className="intro-mask">
             <motion.span
-              className="intro-signature-letter"
+              className="intro-dev-letter"
               initial={{ y: "108%" }}
               animate={{ y: "0%" }}
-              transition={{ duration: 0.7, delay: i * 0.04, ease: EASE }}
+              transition={{ duration: t(0.6), delay: t(i * 0.07), ease: EASE }}
             >
-              {char === " " ? " " : char}
+              {char}
             </motion.span>
           </span>
         ))}
       </h1>
 
       <div className="intro-copy intro-copy-centre">
-        <RiseLine className="intro-sub" delay={0.52}>
+        <RiseLine className="intro-sub" delay={t(0.34)}>
           From code to creativity.
-        </RiseLine>
-        <RiseLine className="intro-sub intro-sub-dim" delay={0.62}>
-          Designing digital experiences.
         </RiseLine>
       </div>
     </motion.div>
@@ -441,8 +393,6 @@ export default function Preloader() {
   const rootRef = useRef(null);
   const countRef = useRef(null);
   const [act, setAct] = useState(-1);
-
-  const letters = [...profile.nameUpper];
 
   useEffect(() => {
     const root = document.documentElement;
@@ -513,14 +463,13 @@ export default function Preloader() {
     // One readout across the whole sequence.
     const start = performance.now();
     const tick = (now) => {
-      const t = Math.min(1, (now - start) / TOTAL_MS);
+      const progress = Math.min(1, (now - start) / TOTAL_MS);
       if (countRef.current) {
-        countRef.current.textContent = String(Math.round(t * 100)).padStart(
-          3,
-          "0",
-        );
+        countRef.current.textContent = String(
+          Math.round(progress * 100),
+        ).padStart(3, "0");
       }
-      if (t < 1) frame = requestAnimationFrame(tick);
+      if (progress < 1) frame = requestAnimationFrame(tick);
     };
     frame = requestAnimationFrame(tick);
 
@@ -567,12 +516,10 @@ export default function Preloader() {
 
       <div className="intro-scene" aria-hidden="true">
         <AnimatePresence mode="wait">
-          {act === 0 ? <ActEngineering key="engineering" /> : null}
-          {act === 1 ? <ActTransform key="transform" /> : null}
+          {act === 0 ? <ActMachine key="machine" /> : null}
+          {act === 1 ? <ActInside key="inside" /> : null}
           {act === 2 ? <ActDesign key="design" /> : null}
-          {act === 3 ? (
-            <ActSignature key="signature" letters={letters} />
-          ) : null}
+          {act === 3 ? <ActName key="name" /> : null}
         </AnimatePresence>
       </div>
 
